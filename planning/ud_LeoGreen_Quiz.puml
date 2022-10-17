@@ -1,0 +1,49 @@
+@startuml LeoGreen_Quiz
+
+skinparam actorStyle awesome
+package ud_LeoGreen_Quiz {
+    package "Unterrichtseinheit" {
+        
+        usecase UC1 as "Lerneinheit mit Website durchführen
+        ---
+        **Erweiterungspunkte**
+        Inhalte aktualisieren"
+        usecase UC2 as "Quiz durchführen"
+        usecase UC3 as "Lehrinhalte anpassen falls sie nicht aktuell sind"
+        usecase UC4 as "Auswertung des Quizes ansehen (Statistik)
+        ---
+        **Erweiterungspunkte**
+        Wissen ausbauen"
+        usecase UC5 as "Ausbauen des Wissens aufgrund der Statistik"
+
+        UC1 <.. UC3: <<extends>>
+        UC1 ..> UC2: <<includes>>
+        UC2 ..> UC4: <<includes>>
+        UC4 <.. UC5: <<extends>>
+    }
+
+    package "Quiz" {
+        usecase UC6 as "Quiz durchführen"
+        usecase UC7 as "Quiz mit Code beitreten"
+        usecase UC8 as "Fragen beantworten"
+
+        UC6 ..> UC7: <<includes>>
+        UC6 ..> UC8: <<includes>>
+    }
+
+    actor Lehrer as L
+    actor Schüler as S
+    actor Admin as A
+
+    A --|> L: ist ein
+
+    L --- UC1
+    L --- UC2
+    S --- UC2
+    A --- UC3
+    L --- UC4
+    L --- UC6
+    S --- UC7
+    S --- UC8
+}
+@enduml
