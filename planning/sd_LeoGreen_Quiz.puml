@@ -3,19 +3,19 @@ skinparam actorStyle awesome
 
 header sd_LeoGreen_Quiz_LorenzLitzlbauer_6.11.2022
 
-actor Schüler as sü
-actor Lehrer as l
-entity Server as se
+actor student as sü
+actor teacher as l
+entity server as se
 
-l -> se : Start Requister-Quiz-Phase 
+l -> se : start register-Quiz-Phase 
 se -> l : Give Quiz-Id
 l -> sü : Give Quiz-Id
-sü -> se : Requister with Idd
+sü -> se : register with Id
 l -> se : Start Quiz
 se -> l : Give Quiz-Questions
 se -> sü : Give Quiz-Answer-Options
 sü -> se : Give Quiz-Answer-Options
 se -> sü : Give Results
-se -> l : Give Summery of Results
+se -> l : Give summary of Results
 
 @enduml
