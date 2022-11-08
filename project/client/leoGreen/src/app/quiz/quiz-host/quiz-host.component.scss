@@ -1,14 +1,46 @@
 .main {
   display: grid;
   grid-template-areas:
-    "header" "header" "side" /
-    "players" "players" "side";
+    "header side"
+    "players side"
+    "bottom bottom";
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr;
+  max-height: 80vh;
 }
 
 header {
-  grid-template: "header";
+  grid-area: header;
 }
 
 .players {
-  grid-template: "players";
+  grid-area: players;
+  overflow: hidden;
+}
+
+.p-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.p-list > .player {
+  padding-left: 1rem;
+}
+
+.qr-code {
+  grid-area: side;
+}
+
+.start {
+  grid-area: bottom;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.start > button {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem 5rem;
+  border-radius: .75rem;
 }
