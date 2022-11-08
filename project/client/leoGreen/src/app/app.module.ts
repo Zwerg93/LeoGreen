@@ -11,6 +11,7 @@ import { QuizHostComponent } from './quiz/quiz-host/quiz-host.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
+import {QRCodeModule} from "angular2-qrcode";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatButtonModule} from "@angular/material/button";
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
