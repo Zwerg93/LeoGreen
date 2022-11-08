@@ -7,6 +7,10 @@ import { QuizComponent } from './quiz/quiz.component';
 import { HomeComponent } from './home/home.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { LessonComponent } from './lesson/lesson.component';
+import { QuizHostComponent } from './quiz/quiz-host/quiz-host.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -14,11 +18,15 @@ import { LessonComponent } from './lesson/lesson.component';
     QuizComponent,
     HomeComponent,
     StatisticComponent,
-    LessonComponent
+    LessonComponent,
+    QuizHostComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
