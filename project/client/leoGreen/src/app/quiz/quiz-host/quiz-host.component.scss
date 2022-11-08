@@ -1,0 +1,14 @@
+.main {
+  display: grid;
+  grid-template-areas:
+    "header" "header" "side" /
+    "players" "players" "side";
+}
+
+header {
+  grid-template: "header";
+}
+
+.players {
+  grid-template: "players";
+}

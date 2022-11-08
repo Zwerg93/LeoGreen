@@ -1,0 +1,12 @@
+<div class="main" xmlns="http://www.w3.org/1999/html">
+  <header>
+    <h1>Quiz beitreten</h1>
+    <h3 id="gamecode"> {{game.code}} </h3>
+  </header>
+  <section class="players">
+    <h2>Spieler:</h2>
+    <div class="player" *ngFor="let player of game.players">
+      <p class="p-name"> {{player.name}} </p>
+    </div>
+  </section>
+</div>
