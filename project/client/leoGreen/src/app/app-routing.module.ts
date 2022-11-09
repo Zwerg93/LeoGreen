@@ -5,14 +5,15 @@ import {QuizComponent} from "./quiz/quiz.component";
 import {QuizHostComponent} from "./quiz/quiz-host/quiz-host.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {QuizClientAnswerPageComponent} from "./quiz/quiz-client-answer-page/quiz-client-answer-page.component";
+import {QuizClientJoinPageComponent} from "./quiz/quiz-client/quiz-client-join-page/quiz-client-join-page.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
   {path: 'home', component: HomeComponent},
   {path: 'quiz', component: QuizComponent},
   {path: 'quiz/host', component: QuizHostComponent},
+  {path: 'quiz/client', component: QuizClientJoinPageComponent},
   {path: 'quiz/client-answer', component: QuizClientAnswerPageComponent},
-
   {path: '*', component: NotFoundComponent}
 ];
 

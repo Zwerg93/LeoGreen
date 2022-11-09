@@ -13,6 +13,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {QRCodeModule} from "angular2-qrcode";
 import { QuizClientAnswerPageComponent } from './quiz/quiz-client-answer-page/quiz-client-answer-page.component';
+import { QuizClientJoinPageComponent } from './quiz/quiz-client/quiz-client-join-page/quiz-client-join-page.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { QuizClientAnswerPageComponent } from './quiz/quiz-client-answer-page/qu
     QuizHostComponent,
     NotFoundComponent,
     QuizClientAnswerPageComponent,
-
+    QuizClientJoinPageComponent
   ],
   imports: [
     BrowserModule,
