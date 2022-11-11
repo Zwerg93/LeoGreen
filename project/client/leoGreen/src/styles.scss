@@ -35,7 +35,24 @@ $leoGreen-theme: mat.define-light-theme((
 @include mat.all-component-themes($leoGreen-theme);
 
 /* You can add global styles to this file, and also import other style files */
+$leogreen-background: #8EA4D2;
+$leogreen-color: #fff;
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-$leogreen-background: #8EA4D2;
+
+.container{
+  background-color: $leogreen-background;
+  color: $leogreen-color;
+  width: 100%;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  container-type: inline-size;
+}
+
+@container (min-width: 500px) {
+  .container {
+    background: lightgreen;
+  }
+}
