@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quiz-client-answer-page.component.scss']
 })
 export class QuizClientAnswerPageComponent implements OnInit {
+  score: number = 10;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  checkAnswer() {
+    this.score +=100;
+
+  }
 }

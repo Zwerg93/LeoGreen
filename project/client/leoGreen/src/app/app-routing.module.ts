@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'quiz', component: QuizComponent},
   {path: 'quiz/host', component: QuizHostComponent},
   {path: 'quiz/client', component: QuizClientJoinPageComponent},
-  {path: 'quiz/client-answer', component: QuizClientAnswerPageComponent},
+    {path: 'quiz/client-answer', component: QuizClientAnswerPageComponent},
   {path: '*', component: NotFoundComponent}
 ];
 

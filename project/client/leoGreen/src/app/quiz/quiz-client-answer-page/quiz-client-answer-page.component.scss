@@ -1,24 +1,54 @@
 @import "src/styles";
 
+p {
+  font-size: 4vh;
+  color: #fff;
+}
+
 .main {
   background-color: $leogreen-background;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
 }
 
 .elemets {
-  display: flex;
+  margin-top: 20vh;
+
+}
+
+.score {
+  text-align: right;
+  margin-right: 5vw;
+
+}
+
+.score p {
+  font-size: 2.5vh;
+}
+
+.twocolumns {
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 50vh;
-}
-
-.elemets.twocolumns {
+  width: 100%;
   display: flex;
+
 }
 
-.elemets.twocolumns.rectangle {
+.rectangle {
+  margin: 2vh;
+  height: 15vh;
+  width: 15vh;
+  background-color: $leoGreen-button;
+  padding: 2vh;
 
-  color: $leoGreen-button;
-  width: 20vh;
-  height: 20vh;
+  border-radius: 2vh;
+}
+
+.rectangle p {
+  text-align: center;
+  justify-content: center;
+
+
 }

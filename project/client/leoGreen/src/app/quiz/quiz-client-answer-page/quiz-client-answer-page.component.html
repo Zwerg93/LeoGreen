@@ -1,16 +1,19 @@
 <div class="main" xmlns="http://www.w3.org/1999/html">
+  <section class="score">
+    <p>Your score: {{score}}</p>
+  </section>
 
-<section class="elemets">
-  <div class="twocolumns">
-    <div class="rectangle">A</div>
-    <div class="rectangle">B</div>
-  </div>
+  <section class="elemets">
+    <div class="twocolumns">
+      <div (click)="checkAnswer()" class="rectangle"><p>A</p></div>
+      <div (click)="checkAnswer()" class="rectangle"><p>B</p></div>
+    </div>
 
-  <div class="twocolumns">
-    <div class="rectangle">C</div>
-    <div class="rectangle">D</div>
-  </div>
+    <div class="twocolumns">
+      <div (click)="checkAnswer()" class="rectangle"><p>C</p></div>
+      <div (click)="checkAnswer()" class="rectangle"><p>D</p></div>
+    </div>
 
 
-</section>
+  </section>
 </div>
