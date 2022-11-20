@@ -1,0 +1,24 @@
+@import "src/styles";
+
+h1{
+  font-weight: bold;
+  font-size: calc(3vw + 3rem);
+  padding-right: 10vw;
+}
+
+h2{
+  font-weight: lighter;
+  font-size: calc(1vw + 1rem);
+}
+
+.btn-join{
+  position: absolute;
+  bottom: $container-margin-size;
+  width: calc(100% - $container-margin-size * 2);
+  transform: translateX(-50%);
+  left: 50%;
+  height: 10vh;
+  font-size: calc(1vw + 1.5rem);
+}
+
+

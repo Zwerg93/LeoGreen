@@ -9,7 +9,7 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// Define the palettes for your thseme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $leoGreen-primary: mat.define-palette(mat.$indigo-palette);
@@ -36,7 +36,46 @@ $leoGreen-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 $leogreen-background: #8EA4D2;
+$leogreen-color: #f8eae0;
 $leoGreen-button: #323478;
+
+$navbar-height: 10vh;
+$container-margin-size: calc(2vw + 2rem);
+
+
+
+
+//custom class
+.main-container {
+  background-color: $leogreen-background;
+  color: $leogreen-color;
+  height: 100vh - $navbar-height;
+  position: relative;
+  overflow: hidden;
+  padding-left: $container-margin-size;
+  padding-right: $container-margin-size;
+}
+
+.center{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.center-inner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-disabled{
+  filter: grayscale(.7);
+}
+
+// Override AngularMaterial
+.mat-form-field-appearance-outline .mat-form-field-outline{
+  color: $leogreen-color;
+}

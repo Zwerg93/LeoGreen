@@ -1,0 +1,13 @@
+@import "src/styles";
+
+.nav-container{
+  height: $navbar-height;
+  background-color: $leoGreen-button;
+  color: $leogreen-color;
+
+
+
+  * {
+    margin: 0;
+  }
+}

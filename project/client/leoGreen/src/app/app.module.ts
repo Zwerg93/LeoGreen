@@ -15,6 +15,10 @@ import {QRCodeModule} from "angular2-qrcode";
 import { QuizClientAnswerPageComponent } from './quiz/quiz-client-answer-page/quiz-client-answer-page.component';
 import { QuizClientJoinPageComponent } from './quiz/quiz-client/quiz-client-join-page/quiz-client-join-page.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
+import { NavbarComponent } from './navbar/navbar.component';
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     QuizHostComponent,
     NotFoundComponent,
     QuizClientAnswerPageComponent,
-    QuizClientJoinPageComponent
+    QuizClientJoinPageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,10 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     NoopAnimationsModule,
     MatButtonModule,
     QRCodeModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
