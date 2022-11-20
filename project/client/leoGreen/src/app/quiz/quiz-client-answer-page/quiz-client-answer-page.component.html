@@ -5,15 +5,16 @@
 
   <section class="elemets">
     <div class="twocolumns">
-      <div (click)="checkAnswer()" class="rectangle"><p>A</p></div>
-      <div (click)="checkAnswer()" class="rectangle"><p>B</p></div>
+      <div (click)="checkAnswer('A')" class="rectangle"><p>A</p></div>
+      <div (click)="checkAnswer('B')" class="rectangle"><p>B</p></div>
     </div>
 
     <div class="twocolumns">
-      <div (click)="checkAnswer()" class="rectangle"><p>C</p></div>
-      <div (click)="checkAnswer()" class="rectangle"><p>D</p></div>
+      <div (click)="checkAnswer('C')" class="rectangle"><p>C</p></div>
+      <div (click)="checkAnswer('D')" class="rectangle"><p>D</p></div>
     </div>
-
-
+  </section>
+  <section class="username">
+    <p>Logged ins as {{username}}</p>
   </section>
 </div>

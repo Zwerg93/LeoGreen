@@ -49,6 +49,14 @@ p {
 .rectangle p {
   text-align: center;
   justify-content: center;
+}
+.username {
 
-
+}
+.username p{
+  position: absolute;
+  bottom: 1%;
+  font-size: 2vh;
+  text-align: left;
+  margin-left: 1vh;
 }
