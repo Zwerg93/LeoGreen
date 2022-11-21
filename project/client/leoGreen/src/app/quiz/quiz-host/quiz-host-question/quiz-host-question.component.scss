@@ -1,0 +1,28 @@
+@import "src/styles";
+
+.question {
+  display: grid;
+  grid-template-areas:
+    "text button"
+    "answers answers";
+  grid-template-columns: auto 1fr;
+}
+
+.text {
+  grid-area: text;
+}
+
+.answers {
+  grid-area: answers;
+}
+
+.next-button {
+  grid-area: button;
+  display: block;
+  width: 15vw;
+  height: 5rem;
+  padding: 2vh 3vw;
+  align-items: center;
+  background-color: $leoGreen-button;
+  color: $leogreen-color;
+}
