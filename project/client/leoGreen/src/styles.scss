@@ -37,10 +37,11 @@ $leoGreen-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 $leogreen-background: #8EA4D2;
 $leogreen-color: #f8eae0;
 $leoGreen-button: #323478;
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $leogreen-background; color: $leogreen-color;}
 
 $navbar-height: 10vh;
 $container-margin-size: calc(2vw + 2rem);

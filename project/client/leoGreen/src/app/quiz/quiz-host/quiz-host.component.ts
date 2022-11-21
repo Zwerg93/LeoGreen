@@ -9,6 +9,7 @@ export class QuizHostComponent implements OnInit {
 
   game = {
     code: '123456',
+    started: false,
     players: [
       {
         name: 'Fabian'
@@ -30,4 +31,7 @@ export class QuizHostComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  startGame() {
+    this.game.started = true;
+  }
 }
