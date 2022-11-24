@@ -44,10 +44,7 @@ $leoGreen-button: #323478;
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $leogreen-background; color: $leogreen-color;}
 
 $navbar-height: 10vh;
-$container-margin-size: calc(2vw + 2rem);
-
-
-
+$container-margin-size: calc(4vw + 4rem);
 
 //custom class
 .main-container {
@@ -58,6 +55,13 @@ $container-margin-size: calc(2vw + 2rem);
   overflow: hidden;
   padding-left: $container-margin-size;
   padding-right: $container-margin-size;
+}
+
+@media only screen and (min-width: 768px) {
+  .main-container {
+    padding-left: calc($container-margin-size * 2);
+    padding-right: calc($container-margin-size * 2);
+  }
 }
 
 .center{

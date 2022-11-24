@@ -15,7 +15,8 @@
         no value
       </mat-error>
     </mat-form-field>
+
+    <button class="btn-join" mat-raised-button color="primary" [disabled]="beitretenForm.invalid" [ngClass]="{'btn-disabled': beitretenForm.invalid}"  (click)="join()">Beitreten</button>
   </form>
 
-  <button class="btn-join" mat-raised-button color="primary" [disabled]="beitretenForm.invalid" [ngClass]="{'btn-disabled': beitretenForm.invalid}"  (click)="join()">Beitreten</button>
 </div>
