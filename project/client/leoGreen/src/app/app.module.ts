@@ -21,6 +21,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { QuizHostQuestionComponent } from './quiz/quiz-host/quiz-host-question/quiz-host-question.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LessonCardComponent } from './lesson/lesson-card/lesson-card.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     QuizClientJoinPageComponent,
     NavbarComponent,
     QuizHostQuestionComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    LessonCardComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
