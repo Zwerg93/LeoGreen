@@ -61,6 +61,10 @@ $container-margin-size: calc(4vw + 4rem);
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
 }
 
+.display-none{
+  display: none;
+}
+
 .hideIfSmall{
   display: none;
 }

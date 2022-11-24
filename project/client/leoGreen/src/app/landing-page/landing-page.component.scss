@@ -1,0 +1,89 @@
+@import "src/styles";
+
+.landing-page-container{
+  background-color: $leoGreen-button;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.landing-page-nav{
+  display: flex;
+  justify-content: space-between;
+
+  > p{
+    margin: 0;
+    font-size: calc(.7vw + 1rem);
+  }
+
+  > img{
+    height: 10vh;
+  }
+}
+
+.leogreen-main-header{
+  align-self: center;
+  > div{
+    display: flex;
+    align-items: baseline;
+    > * {
+      font-size: 10vh;
+      height: 6.5vh;
+      margin-right: 2vw;
+    }
+  }
+
+  h2{
+    font-size: 3vh;
+  }
+}
+
+.landing-page-footer{
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  > h5{
+    font-size: 4vh;
+    margin: 0;
+  }
+
+  > .landing-page-statistics{
+    display: flex;
+    align-items: center;
+    > *{
+      margin: 0;
+      font-size: 5vh;
+      height: 5vh;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .landing-page-footer{
+    flex-direction: column;
+  }
+
+  .landing-page-nav > p{
+      font-size: calc(.5vw + .7rem);
+    }
+
+  .leogreen-main-header > div > * {
+    font-size: 5vh;
+    height: 3.75vh;
+  }
+
+  .landing-page-footer {
+    h5{
+      font-size: 2vh;
+      margin-bottom: 1vh;
+    }
+    > .landing-page-statistics > * {
+      font-size: 2.5vh;
+      height: 2.5vh;
+    }
+  }
+}

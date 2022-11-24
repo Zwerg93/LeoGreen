@@ -20,6 +20,7 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { QuizHostQuestionComponent } from './quiz/quiz-host/quiz-host-question/quiz-host-question.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { QuizHostQuestionComponent } from './quiz/quiz-host/quiz-host-question/q
     QuizClientAnswerPageComponent,
     QuizClientJoinPageComponent,
     NavbarComponent,
-    QuizHostQuestionComponent
+    QuizHostQuestionComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
