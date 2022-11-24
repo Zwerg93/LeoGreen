@@ -57,10 +57,22 @@ $container-margin-size: calc(4vw + 4rem);
   padding-right: $container-margin-size;
 }
 
+.drop-shadow{
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+}
+
+.hideIfSmall{
+  display: none;
+}
+
 @media only screen and (min-width: 768px) {
   .main-container {
     padding-left: calc($container-margin-size * 2);
     padding-right: calc($container-margin-size * 2);
+  }
+
+  .hideIfSmall{
+    display: inherit;
   }
 }
 
@@ -78,6 +90,20 @@ $container-margin-size: calc(4vw + 4rem);
 
 .btn-disabled{
   filter: grayscale(.7);
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 // Override AngularMaterial

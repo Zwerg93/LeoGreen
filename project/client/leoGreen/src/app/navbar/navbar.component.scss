@@ -10,6 +10,9 @@
 
   .inside-nav-container{
     display: flex; align-items: baseline;margin: auto 0;
+    * {
+      margin-right: calc(2rem + 2vw)
+    }
   }
   #leogreenLogo{
     margin-left: auto;
@@ -19,5 +22,13 @@
 
   * {
     margin: 0;
+  }
+
+  .active{
+    @extend .drop-shadow;
+
+    background: linear-gradient(180deg, #33FF00 0%, #00E0FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
