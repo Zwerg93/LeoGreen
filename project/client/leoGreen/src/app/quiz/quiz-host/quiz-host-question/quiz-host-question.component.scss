@@ -1,11 +1,16 @@
 @import "src/styles";
 
+:host {
+  width: 100%;
+}
+
 .question {
+  width: 100%;
   display: grid;
   grid-template-areas:
-    "text button"
+    "text btn"
     "answers answers";
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 75% 25%;
 }
 
 .text {
@@ -17,12 +22,28 @@
 }
 
 .next-button {
-  grid-area: button;
+  grid-area: btn;
+  justify-self: end;
+  align-self: center;
   display: block;
-  width: 15vw;
-  height: 5rem;
-  padding: 2vh 3vw;
+  padding: 1vh 2vw;
   align-items: center;
   background-color: $leoGreen-button;
   color: $leogreen-color;
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.answer {
+  flex: 1 0 25%;
+  border-radius: 1vh;
+  padding: 2vh 3vw;
+  margin: 3vh 4vw;
+  background: $leoGreen-button;
+  > .text {
+    display: inline-block;
+  }
 }

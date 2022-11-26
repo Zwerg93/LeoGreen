@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GameService} from "../../services/game.service";
 
 @Component({
   selector: 'app-quiz-host',
@@ -7,31 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizHostComponent implements OnInit {
 
-  game = {
-    code: '123456',
-    started: false,
-    players: [
-      {
-        name: 'Fabian'
-      },
-      {
-        name: 'Lorenz'
-      },
-      {
-        name: 'Dominik'
-      },
-      {
-        name: 'Marcel'
-      }
-    ]
+  game: any;
+
+  constructor(private quizService: GameService) {
+    quizService.game.subscribe(value => this.game = value);
   }
 
-  constructor() { }
-
   ngOnInit(): void {
+    console.log(this.game)
   }
 
   startGame() {
-    this.game.started = true;
+    this.quizService.game.next({
+      ...this.quizService.game.value,
+      started: true
+    });
   }
 }
