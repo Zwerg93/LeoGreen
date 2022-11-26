@@ -1,6 +1,25 @@
 <div class="main-container home-container">
   <div class="topic-selection-container">
-
+    <section>
+      <span>
+        <mat-checkbox
+          [checked]=""
+          [color]=""
+        >
+          All
+        </mat-checkbox>
+      </span>
+      <span>
+        <ul>
+          <li *ngFor="let topic of this.getTopics()">
+            <mat-checkbox
+            >
+              {{topic}}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </section>
   </div>
   <div class="lesson-container">
     <app-lesson-card></app-lesson-card>

@@ -1,9 +1,14 @@
 .main-container{
-  height: inherit;
   overflow: inherit;
+  padding-top: 3rem;
 }
 
 .home-container{
   display: grid;
   grid-template-columns: 1fr 2fr;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
 }
