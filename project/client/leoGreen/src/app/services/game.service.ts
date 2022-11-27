@@ -49,6 +49,7 @@ export class GameService {
 
 
     ],
+    sections: [{name: "CO2 Ausstoß", id: 1}],
     questions: [
       {
         header: "Wie viel CO2 Ausstoss entsteht in einem Jahr auf der ganzen Welt?",

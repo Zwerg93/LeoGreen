@@ -19,7 +19,7 @@ export class QuizHostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.game.started = false;
+    //this.game.started = false;
     console.log(this.game)
   }
 
