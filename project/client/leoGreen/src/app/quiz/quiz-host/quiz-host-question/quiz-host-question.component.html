@@ -5,7 +5,8 @@
     <h2>{{game.questions[game.currentQuestion].header}}</h2>
   </section>
   <section class="answers">
-    <div class="answer" *ngFor="let answer of game.questions[game.currentQuestion].answers">
+    <div class="answer" *ngFor="let answer of game.questions[game.currentQuestion].answers; let i = index">
+      <img [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape">
       <div class="text">{{answer.text}}</div>
     </div>
   </section>

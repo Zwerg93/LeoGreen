@@ -10,6 +10,12 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class QuizHostQuestionComponent implements OnInit {
 
   game: any;
+  shapes = [
+    "triangle",
+    "square",
+    "circle",
+    "diamond"
+  ];
 
   constructor(private quizService: GameService, private snackbar: MatSnackBar) {
     quizService.game.subscribe(value => this.game = value);
