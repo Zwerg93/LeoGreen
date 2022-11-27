@@ -21,7 +21,33 @@ export class GameService {
       },
       {
         name: 'Marcel'
-      }
+      },
+      {
+        name: 'Thisisaverylongusername'
+      },
+      {
+        name: 'Marcel'
+      },
+      {
+        name: 'Marcel'
+      },
+      {
+        name: 'Marcel'
+      },
+      {
+        name: 'Marcel'
+      },
+      {
+        name: 'Marcel'
+      },
+      {
+        name: 'Marcel'
+      },
+      {
+        name: 'Marcel'
+      },
+
+
     ],
     questions: [
       {

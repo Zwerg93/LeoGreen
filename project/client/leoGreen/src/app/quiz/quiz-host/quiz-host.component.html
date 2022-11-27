@@ -1,11 +1,11 @@
 <div class="main" xmlns="http://www.w3.org/1999/html">
   <ng-container *ngIf="!game.started">
     <header>
-      <h1>Quiz beitreten</h1>
-      <h3 id="gamecode"> {{game.code}} </h3>
+
+      <h1 id="gamecode">Pin: {{game.code}} </h1>
     </header>
     <section class="players">
-      <h2>Spieler:</h2>
+      <h2>Spieler: {{game.players.length}}</h2>
       <div class="p-list">
         <div class="player" *ngFor="let player of game.players">
           <p class="p-name"> {{player.name}} </p>
@@ -13,12 +13,16 @@
       </div>
     </section>
     <section class="qr-code">
-      <qr-code [value]="'www.wikipedia.com'"></qr-code>
+      <qr-code [size]="qrCodeSize" [value]="'www.wikipedia.com'"></qr-code>
     </section>
     <section class="start">
-      <button mat-raised-button color="primary" (click)="startGame()">Quiz starten</button>
+      <button id="startbutton" mat-raised-button color="primary" (click)="startGame()">Quiz starten</button>
     </section>
+    <div class="footer">
+      <p>Waiting for Players...</p>
+    </div>
   </ng-container>
 
   <app-quiz-host-question *ngIf="game.started"></app-quiz-host-question>
+
 </div>
