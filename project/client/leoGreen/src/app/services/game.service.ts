@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +41,66 @@ export class GameService {
           {
             text: "165000 kg",
             validAnswer: true
+          }
+        ]
+      },
+      {
+        header: "Wie viele Autos waren 2021 in privaten Besitz?",
+        answers: [{
+          text: "3.4 Millionen",
+          validAnswer: false
+        },
+          {
+            text: "6.4 Millionen",
+            validAnswer: false
+          },
+          {
+            text: "5.1 Millionen",
+            validAnswer: true
+          },
+          {
+            text: "7 Millionen",
+            validAnswer: false
+          }
+        ]
+      },
+      {
+        header: "Wie viele Flüge flogen 2021 von Österreichs Flunghäfen ab?",
+        answers: [{
+          text: "62000",
+          validAnswer: true
+        },
+          {
+            text: "160000",
+            validAnswer: false
+          },
+          {
+            text: "64000",
+            validAnswer: true
+          },
+          {
+            text: "140000",
+            validAnswer: false
+          }
+        ]
+      },
+      {
+        header: "Was ist die coolste Umweltquiz App?",
+        answers: [{
+          text: "Leogreen",
+          validAnswer: true
+        },
+          {
+            text: "Qumwelt",
+            validAnswer: false
+          },
+          {
+            text: "Leotopia",
+            validAnswer: true
+          },
+          {
+            text: "Kahoot",
+            validAnswer: false
           }
         ]
       }
