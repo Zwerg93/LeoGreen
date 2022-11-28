@@ -18,4 +18,7 @@ export class HomeComponent implements OnInit {
     return [...this.serviceLesson.TopicSelected.getValue().keys()];
   }
 
+  createRange(number: number) {
+    return new Array(number).fill(0).map((n,index)=> index +1);
+  }
 }
