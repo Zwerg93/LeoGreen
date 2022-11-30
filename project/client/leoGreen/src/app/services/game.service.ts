@@ -58,7 +58,7 @@ export class GameService {
           validAnswer: false
         },
           {
-            text: "4000 kg",
+            text: "4.000 kg",
             validAnswer: false
           },
           {
@@ -66,7 +66,7 @@ export class GameService {
             validAnswer: false
           },
           {
-            text: "165000 kg",
+            text: "165.000 kg",
             validAnswer: true
           }
         ]
@@ -94,19 +94,19 @@ export class GameService {
       {
         header: "Wie viele Flüge flogen 2021 von Österreichs Flunghäfen ab?",
         answers: [{
-          text: "62000",
+          text: "62.000",
           validAnswer: true
         },
           {
-            text: "160000",
+            text: "16.0000",
             validAnswer: false
           },
           {
-            text: "64000",
+            text: "64.000",
             validAnswer: true
           },
           {
-            text: "140000",
+            text: "140.000",
             validAnswer: false
           }
         ]
