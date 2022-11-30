@@ -40,6 +40,7 @@ html, body { height: 100%;}
 $leogreen-background: #8EA4D2;
 $leogreen-color: #f8eae0;
 $leoGreen-button: #323478;
+$mobileWidth: 768px;
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $leogreen-background; color: $leogreen-color;}
 
@@ -72,7 +73,7 @@ $container-margin-size: calc(4vw + 4rem);
   display: inherit;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: $mobileWidth) {
   .main-container {
     padding-left: calc($container-margin-size * 2);
     padding-right: calc($container-margin-size * 2);
@@ -114,7 +115,28 @@ $container-margin-size: calc(4vw + 4rem);
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.custom-navbar{
+  &::-webkit-scrollbar {
+    width: .5rem;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #00000000;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #88888880;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #55555550;
+  }
 }
 
 // Override AngularMaterial
