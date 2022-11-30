@@ -9,6 +9,13 @@ export class QuizClientAnswerPageComponent implements OnInit {
   score: number = 10;
   username: String = "Marcekl";
 
+  shapes = [
+    "triangle",
+    "square",
+    "circle",
+    "diamond"
+  ];
+
   constructor() {
   }
 

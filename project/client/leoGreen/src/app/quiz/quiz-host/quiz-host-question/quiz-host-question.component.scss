@@ -28,9 +28,8 @@
   display: block;
   padding: 1vh 5vw;
   margin-left: 10vw;
-  align-items: center;
-  background-color: $leoGreen-button;
-  color: $leogreen-color;
+  background-color: $leoGreen-button !important;
+  color: $leogreen-color !important;
 }
 
 .answers {

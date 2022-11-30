@@ -7,7 +7,7 @@ p {
 
 
 
-.elemets {
+.elements {
   margin-top: 20vh;
 
 }
@@ -39,9 +39,10 @@ p {
   border-radius: 2vh;
 }
 
-.rectangle p {
-  text-align: center;
-  justify-content: center;
+.rectangle img {
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: contain;
 }
 .username {
 

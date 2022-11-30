@@ -3,15 +3,15 @@
     <p>Your score: {{score}}</p>
   </section>
 
-  <section class="elemets">
+  <section class="elements">
     <div class="twocolumns">
-      <div (click)="checkAnswer('A')" class="rectangle"><p>A</p></div>
-      <div (click)="checkAnswer('B')" class="rectangle"><p>B</p></div>
+      <div (click)="checkAnswer('A')" class="rectangle"><img [src]="'assets/' + shapes[0] + '.svg'" [alt]="shapes[0]" class="shape"></div>
+      <div (click)="checkAnswer('B')" class="rectangle"><img [src]="'assets/' + shapes[1] + '.svg'" [alt]="shapes[1]" class="shape"></div>
     </div>
 
     <div class="twocolumns">
-      <div (click)="checkAnswer('C')" class="rectangle"><p>C</p></div>
-      <div (click)="checkAnswer('D')" class="rectangle"><p>D</p></div>
+      <div (click)="checkAnswer('C')" class="rectangle"><img [src]="'assets/' + shapes[2] + '.svg'" [alt]="shapes[2]" class="shape"></div>
+      <div (click)="checkAnswer('D')" class="rectangle"><img [src]="'assets/' + shapes[3] + '.svg'" [alt]="shapes[3]" class="shape"></div>
     </div>
   </section>
   <section class="username">
