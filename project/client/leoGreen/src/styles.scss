@@ -68,6 +68,9 @@ $container-margin-size: calc(4vw + 4rem);
 .hideIfSmall{
   display: none;
 }
+.showIfBig{
+  display: inherit;
+}
 
 @media only screen and (min-width: 768px) {
   .main-container {
@@ -77,6 +80,10 @@ $container-margin-size: calc(4vw + 4rem);
 
   .hideIfSmall{
     display: inherit;
+  }
+
+  .showIfBig{
+    display: none;
   }
 }
 

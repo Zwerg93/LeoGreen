@@ -23,6 +23,8 @@ import { QuizHostQuestionComponent } from './quiz/quiz-host/quiz-host-question/q
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LessonCardComponent } from './lesson/lesson-card/lesson-card.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
