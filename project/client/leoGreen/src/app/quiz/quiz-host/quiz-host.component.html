@@ -1,28 +1,30 @@
 <div class="main" xmlns="http://www.w3.org/1999/html">
-  <ng-container *ngIf="!game.started">
-    <header>
-
-      <h1 id="gamecode">Pin: {{game.code}} </h1>
-    </header>
-    <section class="players">
-      <h2>Spieler: {{game.players.length}}</h2>
-      <div class="p-list">
-        <div class="player" *ngFor="let player of game.players">
-          <p class="p-name"> {{player.name}} </p>
+  <ng-container *ngIf="!game.started; else Question">
+    <div id="WaitPlayer-Container">
+      <header>
+        <h1 id="gamecode">Pin: {{game.code}} </h1>
+      </header>
+      <section class="players">
+        <h2>Spieler: {{game.players.length}}</h2>
+        <div class="p-list">
+          <div class="player" *ngFor="let player of game.players">
+            <p class="p-name"> {{player.name}} </p>
+          </div>
         </div>
+      </section>
+      <section class="qr-code">
+        <qr-code [size]="qrCodeSize" [value]="'www.wikipedia.com'"></qr-code>
+      </section>
+      <section class="start">
+        <button id="startbutton" mat-raised-button color="primary" (click)="startGame()">Quiz starten</button>
+      </section>
+      <div class="footer">
+        <p>Waiting for Players...</p>
       </div>
-    </section>
-    <section class="qr-code">
-      <qr-code [size]="qrCodeSize" [value]="'www.wikipedia.com'"></qr-code>
-    </section>
-    <section class="start">
-      <button id="startbutton" mat-raised-button color="primary" (click)="startGame()">Quiz starten</button>
-    </section>
-    <div class="footer">
-      <p>Waiting for Players...</p>
     </div>
   </ng-container>
 
-  <app-quiz-host-question *ngIf="game.started"></app-quiz-host-question>
-
+  <ng-template #Question>
+    <app-quiz-host-question style="width: 100%"></app-quiz-host-question>
+  </ng-template>
 </div>
