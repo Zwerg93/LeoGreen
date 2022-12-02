@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install node modules
+        run: npm i 
+        working-directory: ./project/client/leoGreen/
+
+      - name: Build Angular project and zip it
+        run: |
+          ng build
+          tar -czf leoGreen.tgz dist/leoGreen
+        working-directory: ./project/client/leoGreen/
+
+      - name: install ssh key
+        uses: caberger/install-ssh-key@v1.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+          user: ${{ secrets.SERVER_USER }}
+          server: ${{ secrets.SERVER_IP }}
+          alias: server
+
+      - name: copy built files to server
+        run: |
+          scp *.tgz server:
+        working-directory: ./project/client/leoGreen/
