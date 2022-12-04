@@ -1,14 +1,21 @@
-<div class="question">
-  <section class="text">
-    <h1>Frage {{game.currentQuestion + 1}} - {{game.sections[0].name}}</h1>
+<section class="btnsection">
+  <button (click)="nextQuestion()" class="next-button" color="primary" mat-raised-button>Weiter</button>
 
-    <h2>{{game.questions[game.currentQuestion].header}}</h2>
-  </section>
+</section>
+<div class="question">
+  <div class="qheader">
+    <section class="text">
+      <h1>Frage {{game.currentQuestion + 1}} - {{game.sections[0].name}}</h1>
+
+      <h2>{{game.questions[game.currentQuestion].header}}</h2>
+    </section>
+  </div>
+
   <section class="answers">
     <div class="answer pointer" *ngFor="let answer of game.questions[game.currentQuestion].answers; let i = index">
       <img [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape">
       <div class="text">{{answer.text}}</div>
     </div>
   </section>
-  <button (click)="nextQuestion()" class="next-button" color="primary" mat-raised-button>Weiter</button>
+
 </div>
