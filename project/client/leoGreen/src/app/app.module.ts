@@ -25,6 +25,7 @@ import { LessonCardComponent } from './lesson/lesson-card/lesson-card.component'
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
+import { NavOverlayPointsComponent } from './navbar/nav-overlay-points/nav-overlay-points.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {MatIconModule} from "@angular/material/icon";
     NavbarComponent,
     QuizHostQuestionComponent,
     LandingPageComponent,
-    LessonCardComponent
+    LessonCardComponent,
+    NavOverlayPointsComponent
   ],
   imports: [
     BrowserModule,

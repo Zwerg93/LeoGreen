@@ -1,0 +1,17 @@
+.overlay-points-container{
+  z-index: 1;
+  position: fixed;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+a {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  border: 0;
+  background-color: white;
+  cursor: pointer;
+}
