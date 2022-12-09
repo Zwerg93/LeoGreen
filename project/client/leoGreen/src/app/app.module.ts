@@ -26,6 +26,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 import { NavOverlayPointsComponent } from './navbar/nav-overlay-points/nav-overlay-points.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { NavOverlayPointsComponent } from './navbar/nav-overlay-points/nav-overl
     MatSnackBarModule,
     MatCheckboxModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

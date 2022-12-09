@@ -12,4 +12,7 @@ export class NavOverlayPointsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getLastTopicId() : string{
+    return localStorage.getItem('last_topic_id') ?? "0"
+  }
 }

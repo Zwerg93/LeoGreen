@@ -7,10 +7,12 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import {QuizClientAnswerPageComponent} from "./quiz/quiz-client-answer-page/quiz-client-answer-page.component";
 import {QuizClientJoinPageComponent} from "./quiz/quiz-client/quiz-client-join-page/quiz-client-join-page.component";
 import {StatisticComponent} from "./statistic/statistic.component";
+import {LessonComponent} from "./lesson/lesson.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
   {path: 'home', component: HomeComponent},
+  {path: 'lesson/:id', component: LessonComponent},
   {path: 'quiz', component: QuizComponent},
   {path: 'statistic', component: StatisticComponent},
   {path: 'quiz/host', component: QuizHostComponent},

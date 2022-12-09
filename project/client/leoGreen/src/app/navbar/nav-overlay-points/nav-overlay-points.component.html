@@ -1,9 +1,9 @@
 <div class="overlay-points-container">
   <div [routerLink]="['home']" fragment="landing-page">
-    <a href="#landing-page"></a>
+    <a id="landing-page" href="#landing-page" matTooltip="Navigates to home page at landingpage selection"></a>
   </div>
-  <div [routerLink]="['home']" fragment="home" fragment="home">
-    <a href="#home" ></a>
+  <div [routerLink]="['home']" fragment="home">
+    <a id="home" href="#home" matTooltip="Navigates to home page at home selection"></a>
   </div>
-  <a [routerLink]=""></a>
+  <a id="lesson" [routerLink]="['lesson/'.concat(getLastTopicId())]" matTooltip="Navigates to recent lesson"></a>
 </div>
