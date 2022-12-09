@@ -8,10 +8,12 @@ import {ActivatedRoute, Route, Router} from "@angular/router";
 })
 export class LessonComponent implements OnInit {
 
+  id = ""
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id')
-    if (id) localStorage.setItem('last_topic_id', id)
+    this.id = this.route.snapshot.paramMap.get('id') ?? "0"
+    if (this.id) localStorage.setItem('last_topic_id', this.id)
   }
 }

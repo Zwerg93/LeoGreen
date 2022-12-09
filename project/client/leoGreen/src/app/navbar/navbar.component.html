@@ -2,8 +2,8 @@
 <div class="nav-container">
   <div class="pointer inside-nav-container">
     <h1 routerLink="/home" #HeaderLeogreen class="pointer noselect" routerLinkActive="active">Leogreen Quizes</h1>
-    <p routerLink="/quiz" class="pointer noselect hideIfSmall" routerLinkActive="active">Quizes</p>
     <p routerLink="/statistic" class="pointer noselect hideIfSmall" routerLinkActive="active">Statistics</p>
+    <p routerLink="/quiz/client" class="pointer noselect hideIfSmall" routerLinkActive="active">Join Quiz</p>
   </div>
   <img routerLink="/home" class="pointer hideIfSmall right-aligned" id="leogreenLogo" src="assets/leogreen_logo.svg">
   <button class="showIfBig right-aligned" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
@@ -14,14 +14,13 @@
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </button>
-    <button mat-menu-item routerLink="/quiz">
-      <mat-icon>check_box</mat-icon>
-      <span>Quiz</span>
-    </button>
     <button mat-menu-item routerLink="/statistic">
       <mat-icon>poll</mat-icon>
       <span>Statistik</span>
     </button>
-
+    <button mat-menu-item routerLink="/quiz/client">
+      <mat-icon>add</mat-icon>
+      <span>Join Quiz</span>
+    </button>
   </mat-menu>
 </div>
