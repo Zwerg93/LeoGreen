@@ -1,6 +1,5 @@
 <div class="main" xmlns="http://www.w3.org/1999/html">
   <ng-container *ngIf="!game.started; else Question">
-    <div id="WaitPlayer-Container">
       <header>
         <h1 id="gamecode">Pin: {{game.code}} </h1>
       </header>
@@ -13,15 +12,14 @@
         </div>
       </section>
       <section class="qr-code">
-        <qr-code [size]="qrCodeSize" [value]="'www.wikipedia.com'"></qr-code>
-      </section>
-      <section class="start">
-        <button id="startbutton" mat-raised-button color="primary" (click)="startGame()">Quiz starten</button>
+        <qr-code [size]="qrCodeSize" [value]="'http://localhost:4200/quiz/client?code=' + game.code"></qr-code>
       </section>
       <div class="footer">
         <p>Waiting for Players...</p>
       </div>
-    </div>
+      <section class="start">
+        <button id="startbutton" mat-raised-button color="primary" (click)="startGame()">Quiz starten</button>
+      </section>
   </ng-container>
 
   <ng-template #Question>

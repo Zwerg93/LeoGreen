@@ -24,7 +24,7 @@ export class GameService {
         name: 'Marcel'
       },
       {
-        name: 'Thisisaverylongusername'
+        name: 'Thisisaverylongname'
       },
       {
         name: 'Marcel'

@@ -6,10 +6,6 @@
 
 .question {
   width: 65vw;
-  display: grid;
-  grid-template-areas:
-    "text btn"
-    "answers answers";
   grid-template-columns: 100% 25%;
 }
 
@@ -30,18 +26,14 @@
   margin-top: 7vh;
 }
 .next-button {
-
-  height: 5.3vh;
   margin-left: 75vw;
   display: block;
-  padding: 1vh 5vw;
+  padding: 0.3vh 0.5vw;
+  border-radius: 0.9rem;
   background-color: $leoGreen-button !important;
   color: $leogreen-color !important;
   position: fixed;
-
-}
-.next-button p{
-  font-size: 2vh;
+  font-size: 1.2rem;
 }
 
 .answers {
@@ -62,12 +54,11 @@
 
   > .text {
     display: inline-block;
-
     font-size: 1.9vw;
     min-font-size: 1.6rem;
     font-weight: bold;
-    position: absolute;
-    right: 25%;
+    position: absolute;right: 15%;
+    max-width: 80%;
   }
 
   > .shape {
@@ -75,7 +66,7 @@
     display: inline-block;
     height: 5rem;
     position: absolute;
-    left: 10%;
+    left: 0;
   }
 }
 h1{

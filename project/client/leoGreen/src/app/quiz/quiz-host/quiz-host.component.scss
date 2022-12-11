@@ -3,9 +3,10 @@
   grid-template-areas:
     "header side"
     "players side"
+    "footer footer"
     "bottom bottom";
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1fr 4fr 1fr;
+  grid-template-rows: 1fr 5fr 1fr 1fr;
   max-height: 80vh;
   padding: 5vh 10vw;
 }
@@ -20,31 +21,31 @@ header {
 }
 
 .p-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .p-list > .player {
+  flex: 1 0 calc(33% - 1rem);
   padding-left: 1rem;
 }
 .p-name {
   font-size: 1.8rem;
 }
-#startbutton{
-  margin-top: 1rem;
-}
 
 .qr-code {
   grid-area: side;
+}
 
+.footer {
+  grid-area: footer;
 }
 
 .start {
+  display: flex;
   grid-area: bottom;
-  position: fixed;
-  bottom: 1rem;
   width: 100%;
-  margin-left: 30vw;
   align-items: center;
   justify-content: center;
 }
@@ -54,6 +55,4 @@ header {
   font-weight: bold;
   padding: 1rem 5rem;
   border-radius: .75rem;
-}
-.footer {
 }
