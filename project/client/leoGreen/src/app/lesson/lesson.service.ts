@@ -11,7 +11,7 @@ export class LessonService {
     ["Temperatur", false],
     ["Klima", false]
   ])
-  TopicSelected : BehaviorSubject<Map<String, Boolean>> = new BehaviorSubject<Map<String, Boolean>>(this.topicMap)
+  topicSelected$: BehaviorSubject<Map<String, Boolean>> = new BehaviorSubject<Map<String, Boolean>>(this.topicMap);
 
   constructor() {
   }

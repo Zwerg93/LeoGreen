@@ -1,5 +1,9 @@
 @import "src/styles";
 
+body {
+  overflow: hidden;
+}
+
 .main-container{
   overflow: inherit;
   padding-top: 3rem;

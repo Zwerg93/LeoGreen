@@ -18,7 +18,7 @@ export class QuizHostQuestionComponent implements OnInit {
   ];
 
   constructor(private quizService: GameService, private snackbar: MatSnackBar) {
-    quizService.game.subscribe(value => this.game = value);
+    quizService.game$.subscribe(value => this.game = value);
   }
 
   ngOnInit(): void {

@@ -15,7 +15,7 @@ export class QuizHostComponent implements OnInit {
 
 
   constructor(private quizService: GameService) {
-    quizService.game.subscribe(value => this.game = value);
+    quizService.game$.subscribe(value => this.game = value);
   }
 
   ngOnInit(): void {
@@ -24,8 +24,8 @@ export class QuizHostComponent implements OnInit {
   }
 
   startGame() {
-    this.quizService.game.next({
-      ...this.quizService.game.value,
+    this.quizService.game$.next({
+      ...this.quizService.game$.value,
       started: true
     });
   }

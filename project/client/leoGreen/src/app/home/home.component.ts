@@ -13,9 +13,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   getTopics() : String[]{
-    return [...this.serviceLesson.TopicSelected.getValue().keys()];
+    return [...this.serviceLesson.topicSelected$.getValue().keys()];
   }
 
   createRange(number: number) {

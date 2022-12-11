@@ -12,7 +12,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {QRCodeModule} from "angular2-qrcode";
-import { QuizClientAnswerPageComponent } from './quiz/quiz-client-answer-page/quiz-client-answer-page.component';
+import { QuizClientAnswerPageComponent } from './quiz/quiz-client/quiz-client-answer-page/quiz-client-answer-page.component';
 import { QuizClientJoinPageComponent } from './quiz/quiz-client/quiz-client-join-page/quiz-client-join-page.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { NavbarComponent } from './navbar/navbar.component';

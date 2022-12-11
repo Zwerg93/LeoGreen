@@ -1,3 +1,61 @@
 .main-container{
   height: auto;
+  margin-top: 5vh;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 1vh 0;
+}
+
+.text {
+  font-size: 1.45rem;
+}
+
+img {
+  border-radius: 1.5rem;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4vh;
+
+  > .col {
+    flex: 1 0 auto;
+    height: 100%;
+    $mr: 2vw;
+    margin-right: $mr;
+
+    &.col-img {
+      height: 40vh;
+    }
+
+    &.col-25 {
+      flex-basis: calc(25% - $mr);
+    }
+
+    &.col-75 {
+      flex-basis: calc(75% - $mr);
+    }
+
+    &.col-50 {
+      flex-basis: calc(50% - $mr);
+    }
+
+    &.col-20 {
+      flex-basis: calc(20% - $mr);
+    }
+
+    &.col-80 {
+      flex-basis: calc(80% - $mr);
+    }
+  }
+
 }

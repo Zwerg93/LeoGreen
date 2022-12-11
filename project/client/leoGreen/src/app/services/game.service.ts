@@ -6,7 +6,7 @@ import {BehaviorSubject} from "rxjs";
 })
 export class GameService {
 
-  game: BehaviorSubject<any> = new BehaviorSubject<any>({
+  private initialState: any = {
     name: 'Starterquiz',
     code: '123456',
     started: false,
@@ -24,7 +24,7 @@ export class GameService {
         name: 'Marcel'
       },
       {
-        name: 'Thisisaverylongname'
+        name: 'ThisIsAVeryLongName'
       },
       {
         name: 'Marcel'
@@ -134,7 +134,9 @@ export class GameService {
       }
     ],
     currentQuestion: 0
-  });
+  };
+
+  game$: BehaviorSubject<any> = new BehaviorSubject<any>(this.initialState);
 
   constructor() {
   }
