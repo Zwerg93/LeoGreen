@@ -19,6 +19,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '17'
+      
+      - name: Install Node.JS
+        uses: actions/setup-node@v1
+        with:
+          node-version: '15.x'
 
       - name: Install node modules
         run: npm i 
