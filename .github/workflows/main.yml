@@ -27,11 +27,11 @@ jobs:
 
       - name: Install node modules
         run: npm i 
-        working-directory: ./project/client/leoGreen/
+        working-directory: ./project/leogreen_server/
 
       - name: Build Angular project and zip it
         run: |
-          ng build
+          npm run build:prod
           tar -czf leoGreen.tgz dist/leoGreen
         working-directory: ./project/client/leoGreen/
 
