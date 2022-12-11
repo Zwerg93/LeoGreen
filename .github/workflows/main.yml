@@ -27,7 +27,7 @@ jobs:
 
       - name: Install node modules
         run: npm i 
-        working-directory: ./project/leogreen_server/
+        working-directory: ./project/client/leoGreen/
         
       - name: Install Angular CLI manually
         run: npm i @angular/cli
