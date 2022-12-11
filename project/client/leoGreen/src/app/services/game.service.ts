@@ -7,6 +7,7 @@ import {BehaviorSubject} from "rxjs";
 export class GameService {
 
   game: BehaviorSubject<any> = new BehaviorSubject<any>({
+    name: 'Starterquiz',
     code: '123456',
     started: false,
     players: [

@@ -11,7 +11,7 @@ export class QuizHostComponent implements OnInit {
 
 
   game: any;
-  qrCodeSize: number = window.innerWidth/6;
+  qrCodeSize: number = window.innerWidth/7;
 
 
   constructor(private quizService: GameService) {
