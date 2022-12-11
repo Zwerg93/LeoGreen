@@ -17,8 +17,17 @@
 
   > div{
     padding: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
+
+    > p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
   }
 }
 
