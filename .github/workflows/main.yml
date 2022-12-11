@@ -33,11 +33,23 @@ jobs:
         run: npm run build:prod
         working-directory: ./project/client/leoGreen/
         
-      - name: Zip Angular bundle
-        run: |
-          touch dist/
-          tar -czf leoGreen.tgz dist/leoGreen
-        working-directory: ./project/client/leoGreen/
+      - name: Archive Frontend build
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+            name: angular_dist
+            path: dist
+      
+      - name: Build image for Backend
+        run: mvn package -D quarkus.package.type=uber-jar
+        working-directory: ./project/leogreen_server
+        
+      - name: Archive Backend build
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: quarkus_dist
+          path: dist
 
       - name: install ssh key
         uses: caberger/install-ssh-key@v1.0
