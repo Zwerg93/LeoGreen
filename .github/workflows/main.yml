@@ -28,13 +28,14 @@ jobs:
       - name: Install node modules
         run: npm i 
         working-directory: ./project/client/leoGreen/
-        
-      - name: Install Angular CLI manually
-        run: npm i @angular/cli
 
-      - name: Build Angular project and zip it
+      - name: Build Angular project
+        run: npm run build:prod
+        working-directory: ./project/client/leoGreen/
+        
+      - name: Zip Angular bundle
         run: |
-          npm run build:prod
+          touch dist/
           tar -czf leoGreen.tgz dist/leoGreen
         working-directory: ./project/client/leoGreen/
 
