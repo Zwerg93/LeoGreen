@@ -24,6 +24,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
+          
+      - name: Create Artifact directory
+        run: mkdir -p dist/
 
       - name: Install node modules
         run: npm i 
