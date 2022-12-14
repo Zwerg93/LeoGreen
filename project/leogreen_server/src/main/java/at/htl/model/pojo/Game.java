@@ -1,4 +1,4 @@
-package com.module.pojo;
+package at.htl.model.pojo;
 
 import java.io.Serializable;
 
