@@ -7,15 +7,16 @@ actor student as sü
 actor teacher as l
 entity server as se
 
-l -> se : start register-Quiz-Phase 
-se -> l : Give Quiz-Id
-l -> sü : Give Quiz-Id
-sü -> se : register with Id
-l -> se : Start Quiz
-se -> l : Give Quiz-Questions
-se -> sü : Give Quiz-Answer-Options
-sü -> se : Give Quiz-Answer-Options
-se -> sü : Give Results
-se -> l : Give summary of Results
+l -> se : start register-Quiz-Phase (1#WebsocketConnect : Gamesockets starts and let students requistern)
+se -> l : Give Quiz-Id (1#WebsocketOnMessage - Id)
+l -> sü : Give Quiz-Id (1#WebsocketOnMessage - Id)
+sü -> se : register with Id (2#WebsocketConnect : Student requister at Gamesocket and gives an indentification with name)
+se -> l : Gives requistered Schüler Ids (2# -> 1#WebsocketOnMessage - StudentName)
+l -> se : Start Quiz (1#WebsocketOnMessage - StartQuizBoolean)
+se -> l : Give Quiz-Questions (1# -> 1#WOM - QuestionAnswers, 2# Question, Type, AnswerCount)
+sü -> se : Give Quiz-Answer-Options (2#WOM - Answer)
+se -> sü : Give Results (2# -> 2#WOM - Points)
+l -> se : Next Question (1#WOM NewQustionKeyWord)
+se -> l : (If there is no new question) Give summary of Results (1#WOM -> Results{students: Points + where too improve}) 
 
 @enduml
