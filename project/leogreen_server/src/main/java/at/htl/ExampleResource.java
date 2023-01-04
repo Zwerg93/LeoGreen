@@ -11,9 +11,7 @@ import javax.ws.rs.core.Response;
 public class ExampleResource {
 
     @Inject
-    StartWebSocket webSocket;
-    @Inject
-    GameRoomController gameRoomController;
+    GameWebSocket webSocket;
 
     @GET
     @Path("/start/{quiz_type}")
