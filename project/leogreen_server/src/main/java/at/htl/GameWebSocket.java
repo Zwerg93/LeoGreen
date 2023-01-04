@@ -20,8 +20,29 @@ import static java.util.Objects.requireNonNull;
 @ApplicationScoped
 public class GameWebSocket {
 
+    /** TODO List
+     *  - Rollensystem
+     *  - Auf Keywords horchen (z.B. "Start Game", "Next Question")
+     *  - Variable
+     *      - State: Number of Question
+     *      - Students: Points, Name
+     *      - Questions: Header, Answers, right Answer, typeIdentifier?, tags? (maybe important for analysing)
+     *  - DTO's:
+     *      - To Client:
+     *          Students #T (List of Student Name)
+     *          QuestionAnswer #T (Head, Questions, Image?)
+     *          Answers (Id, Type?)
+     *          Results (Points)
+     *      - To Server:
+     *          Keywords #T (z.B. "Start Game", "Next Question")
+     *          Answers #S (answer id)
+     */
 
+
+    // TODO - has to be exchanged with database
     Map<Long, Map<String, Session>> sessionByNameAndGameRoomId = new ConcurrentHashMap<>();
+    Map<Long, Long> stateByGameRoom = new ConcurrentHashMap<>();
+
 
     public Long startGame(Long quiz_type){
         Long newGameRoomId = sessionByNameAndGameRoomId.keySet().stream().mapToLong(Long::longValue).max().orElse(-1) + 1L;
@@ -29,11 +50,18 @@ public class GameWebSocket {
     }
 
     public void removeGame(Long quizId){
+        //remove Player
+        sessionByNameAndGameRoomId.get(quizId).values().stream().forEach(value -> {
+            try {
+                value.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
+        sessionByNameAndGameRoomId.remove(quizId);
     }
 
-    private void removePlayerOfGame(Long quizId) {
-    }
 
     @OnOpen
     public void onOpen(Session session,@PathParam("quiz_id") Long quiz_id , @PathParam("name") String name) {
