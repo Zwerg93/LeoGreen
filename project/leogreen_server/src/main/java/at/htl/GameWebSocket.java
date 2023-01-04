@@ -24,7 +24,8 @@ public class GameWebSocket {
     Map<Long, Map<String, Session>> sessionByNameAndGameRoomId = new ConcurrentHashMap<>();
 
     public Long startGame(Long quiz_type){
-
+        Long newGameRoomId = sessionByNameAndGameRoomId.keySet().stream().mapToLong(Long::longValue).max().orElse(-1) + 1L;
+        return newGameRoomId;
     }
 
     public void removeGame(Long quizId){
