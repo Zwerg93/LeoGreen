@@ -5,14 +5,12 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "`Users`")
 @Data
-public class User {
+public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
-    Long points;
     @ManyToOne
-    Game game;
+    Question question;
+    String answer;
 }

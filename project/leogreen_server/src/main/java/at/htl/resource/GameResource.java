@@ -1,14 +1,16 @@
-package at.htl;
+package at.htl.resource;
+
+import at.htl.GameWebSocket;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/quiz")
+@Path("/game")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ExampleResource {
+public class GameResource {
 
     @Inject
     GameWebSocket webSocket;

@@ -1,17 +1,20 @@
 package at.htl.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table
+@Entity
+@Data
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     Integer state;
-    @ManyToOne
+    @OneToMany(mappedBy = "game")
     List<User> userList = new ArrayList<>();
-    @OneToMany(mappedBy = "userList")
+    @ManyToOne
     Quiz quiz;
 }

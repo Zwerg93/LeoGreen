@@ -8,11 +8,15 @@ import java.util.List;
 
 @Entity
 @Data
-public class Quiz {
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String topic;
-    @OneToMany(mappedBy = "quiz")
-    List<Question> questionList = new ArrayList<>();
+    @ManyToOne
+    Quiz quiz;
+    String title;
+    @OneToMany(mappedBy = "question")
+    List<Answer> answerList = new ArrayList<>();
+    @OneToOne
+    Answer rightAnswer;
 }
