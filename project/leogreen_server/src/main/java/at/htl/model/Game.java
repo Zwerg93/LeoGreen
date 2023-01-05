@@ -17,4 +17,15 @@ public class Game {
     List<User> userList = new ArrayList<>();
     @ManyToOne
     Quiz quiz;
+
+    public static Game create(int status, Quiz quiz) {
+        Game game = new Game();
+        game.setState(status);
+        game.setQuiz(quiz);
+        return game;
+    }
+
+    public void addToUserList(User newUser){
+        this.userList.add(newUser);
+    }
 }

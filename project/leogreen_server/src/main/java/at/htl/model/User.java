@@ -15,4 +15,15 @@ public class User {
     Long points;
     @ManyToOne
     Game game;
+
+    public static User create(String name, Long points, Game game) {
+        User user = new User();
+        user.setName(name);
+        user.setPoints(points);
+        user.setGame(game);
+
+        game.addToUserList(user);
+
+        return user;
+    }
 }

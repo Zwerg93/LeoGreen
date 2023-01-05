@@ -1,5 +1,10 @@
 package at.htl;
 
+import at.htl.model.Game;
+import at.htl.model.User;
+import at.htl.repo.GameRepo;
+import at.htl.repo.UserRepo;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
@@ -10,13 +15,15 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
-@ServerEndpoint("/quiz-game-websocket/{quiz_id}/{name}")
+@ServerEndpoint(value = "/quiz-game-websocket/{game_id}/{name}")
 @ApplicationScoped
 public class GameWebSocket {
 
@@ -38,20 +45,19 @@ public class GameWebSocket {
      *          Answers #S (answer id)
      */
 
+    @Inject
+    GameRepo gameRepo;
+    @Inject
+    UserRepo userRepo;
+    
+    Map<Long, Map<String, Session>> sessionByNameAndGameId = new ConcurrentHashMap<>();
 
-    // TODO - has to be exchanged with database
-    Map<Long, Map<String, Session>> sessionByNameAndGameRoomId = new ConcurrentHashMap<>();
-    Map<Long, Long> stateByGameRoom = new ConcurrentHashMap<>();
-
-
-    public Long startGame(Long quiz_type){
-        Long newGameRoomId = sessionByNameAndGameRoomId.keySet().stream().mapToLong(Long::longValue).max().orElse(-1) + 1L;
-        return newGameRoomId;
+    public void startGame(Long game_id){
+        sessionByNameAndGameId.put(game_id, new ConcurrentHashMap<>());
     }
-
-    public void removeGame(Long quizId){
+    public void removeGame(Long game_id){
         //remove Player
-        sessionByNameAndGameRoomId.get(quizId).values().stream().forEach(value -> {
+        sessionByNameAndGameId.get(game_id).values().stream().forEach(value -> {
             try {
                 value.close();
             } catch (IOException e) {
@@ -59,24 +65,67 @@ public class GameWebSocket {
             }
         });
 
-        sessionByNameAndGameRoomId.remove(quizId);
+        sessionByNameAndGameId.remove(game_id);
+    }
+
+    private void closeGame(Long game_id){
+        this.removeGame(game_id);
+        this.gameRepo.deleteById(game_id);
     }
 
 
     @OnOpen
-    public void onOpen(Session session,@PathParam("quiz_id") Long quiz_id , @PathParam("name") String name) {
+    public void onOpen(Session session,@PathParam("game_id") Long game_id , @PathParam("name") String name) {
+        Game game = this.gameRepo.findById(game_id);
+
+        if (game == null
+                || !this.sessionByNameAndGameId.containsKey(game_id)
+                || !this.sessionByNameAndGameId.get(game_id).containsKey(name)){
+            try {
+                session.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        print(String.format("onOpen> %s has connected to game#%o", name, game_id));
+        this.sessionByNameAndGameId.get(game_id).put(name, session);
+
+        User user = User.create("name", 0L, game);
+        this.userRepo.persist(user);
+
+        this.sendAdminUserList(game_id);
+    }
+
+    private void sendAdminUserList(Long game_id) {
+        Session adminSession = this.sessionByNameAndGameId.get(game_id).get("Admin");
+
+        if (adminSession == null){
+            this.printErr("No admin present in the game");
+            this.closeGame(game_id);
+        }
+
+        List<String> playerNameList = this.userRepo.list("game_id", game_id).stream().map(User::getName).toList();
+        adminSession.getAsyncRemote().sendText(playerNameList.toString());
     }
 
     @OnClose
-    public void onClose(Session session,@PathParam("quiz_id") Long quiz_id , @PathParam("name") String name) {
+    public void onClose(Session session,@PathParam("game_id") Long game_id , @PathParam("name") String name) {
+        try {
+            session.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }finally {
+            printErr(String.format("onClose> %s has disconnected the game#%o", name, game_id));
+        }
     }
 
     @OnError
-    public void onError(Session session,@PathParam("quiz_id") Long quiz_id , @PathParam("name") String name, Throwable throwable) {
+    public void onError(Session session,@PathParam("game_id") Long game_id , @PathParam("name") String name, Throwable throwable) {
     }
 
     @OnMessage
-    public void onMessage(String message, @PathParam("quiz_id") Long quiz_id , @PathParam("name") String name) {
+    public void onMessage(String message, @PathParam("game_id") Long game_id , @PathParam("name") String name) {
     }
 
 
