@@ -52,6 +52,10 @@ public class GameWebSocket {
     
     Map<Long, Map<String, Session>> sessionByNameAndGameId = new ConcurrentHashMap<>();
 
+    public GameWebSocket() {
+        //Testing
+        sessionByNameAndGameId.put(1L, new ConcurrentHashMap<>());
+    }
     public void startGame(Long game_id){
         sessionByNameAndGameId.put(game_id, new ConcurrentHashMap<>());
     }
@@ -122,10 +126,12 @@ public class GameWebSocket {
 
     @OnError
     public void onError(Session session,@PathParam("game_id") Long game_id , @PathParam("name") String name, Throwable throwable) {
+        printErr(String.format("onError> User#%s in game#%o thrown error: "+throwable, name, game_id));
     }
 
     @OnMessage
     public void onMessage(String message, @PathParam("game_id") Long game_id , @PathParam("name") String name) {
+        print(String.format("onMessage> User#%s in game#%o has send: %s", name, game_id, message));
     }
 
 
