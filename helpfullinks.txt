@@ -1,2 +1,3 @@
 https://javascript-conference.com/blog/real-time-in-angular-a-journey-into-websocket-and-rxjs/
 https://blog.idrsolutions.com/2013/12/websocket-multiple-users-encoders-decoders-dogs/
+https://quarkus.io/blog/resteasy-reactive-smart-dispatch/
