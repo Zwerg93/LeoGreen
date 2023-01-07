@@ -1,10 +1,11 @@
-package at.htl.model;
+package at.htl.model.Lesson;
 
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class Lesson extends PanacheEntity {
@@ -16,7 +17,10 @@ public class Lesson extends PanacheEntity {
     public String summary;
     @Column(length = 1000000)
     public String content;
-    @Column(length = 1000)
-    public String picturename;
+
+    @OneToMany
+
+    public List<Picture> pictureList = new LinkedList<>();
+
 
 }

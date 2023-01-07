@@ -1,4 +1,4 @@
-package at.htl.model;
+package at.htl.model.Lesson;
 
 public class CardDTO {
     public String title, description;

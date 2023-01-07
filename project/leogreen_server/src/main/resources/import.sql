@@ -26,6 +26,7 @@ values (3,
         'Klima');
 
 
+insert into picture (name, altText) values ('img_1.png', 'Placeholder');
 
 
 update question
