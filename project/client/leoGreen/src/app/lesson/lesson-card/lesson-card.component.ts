@@ -11,12 +11,19 @@ export class LessonCardComponent implements OnInit {
   public cards?: Card[]
 
   @Input('id') id?: number;
+  title?: String;
+  description?: String;
 
   constructor(private data: DataService) {
     this.cards = data.cards;
   }
 
   ngOnInit(): void {
+
+    // @ts-ignore
+    this.title = this.cards[this.id-1].title;
+    // @ts-ignore
+    this.description = this.cards[this.id-1].description;
   }
 
 }

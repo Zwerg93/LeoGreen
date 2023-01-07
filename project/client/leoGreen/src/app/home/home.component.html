@@ -22,7 +22,8 @@
       </span>
     </section>
   </div>
-  <div class="lesson-container" >
-    <app-lesson-card *ngFor="let i of this.cards"></app-lesson-card>
+  <div class="lesson-container">
+    <app-lesson-card *ngFor="let i of this.cards" [id]="i.id"></app-lesson-card>
+
   </div>
 </div>

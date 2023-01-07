@@ -50,7 +50,7 @@ values (7,
         'Klima');
 
 
-insert into picture (name, altText) values ('img_1.png', 'Placeholder');
+insert into picture (name, altText) values ('http://localhost:8080/picture/get/img_1.png', 'Placeholder');
 
 
 update question

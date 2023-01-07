@@ -89,7 +89,7 @@ public class PictureResource {
 
                 postURL = "http://localhost:8080/picture/get/" + fileName;
                 System.out.println(postURL);
-                Picture picture = new Picture(fileName, "");
+                Picture picture = new Picture(postURL, "");
                 pictureRepo.persist(picture);
 
                 byte[] bytes = IOUtils.toByteArray(inputStream);
