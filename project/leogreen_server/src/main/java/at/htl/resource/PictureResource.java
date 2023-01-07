@@ -31,6 +31,12 @@ public class PictureResource {
     @Inject
     LessonRepo lessonRepo;
 
+    @GET
+    @Path("/getAll")
+    public List<Picture> getAllPictures() {
+        return this.pictureRepo.findAll().stream().toList();
+    }
+
 
     @PUT
     @Path("/addPictureToLesson/{pictureName}/{lessonid}")
