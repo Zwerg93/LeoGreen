@@ -1,5 +1,6 @@
 package at.htl.resource;
 
+import at.htl.model.CardDTO;
 import at.htl.model.Lesson;
 import at.htl.repo.LessenRepo;
 
@@ -34,6 +35,12 @@ public class LessonResource {
     @Path("/search/{text}")
     public List<Lesson> searchforLessen(@PathParam("text") String text) {
         return this.lessenRepo.search(text);
+    }
+
+    @GET
+    @Path("/card/all")
+    public List<CardDTO> getAllCards(){
+        return this.lessenRepo.getCards();
     }
 
     @GET
