@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {DataService} from "./data.service";
 import {Observable} from "rxjs";
 import {Card} from "../model/card.model";
-import {ImgModel} from "../model/img.model";
-import {LessonModel} from "../model/lesson.model";
+import {Image} from "../model/img.model";
+import {Lesson} from "../model/lesson.model";
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +18,12 @@ export class HttpService {
     return this.http.get<Card[]>(this.SERVERURL + 'lesson/card/all')
   }
 
-  getAllIMGS(): Observable<ImgModel[]> {
-    return this.http.get<ImgModel[]>(this.SERVERURL + 'picture/getAll')
+  getAllIMGS(): Observable<Image[]> {
+    return this.http.get<Image[]>(this.SERVERURL + 'picture/getAll')
   }
 
-  getAllLessons():Observable<LessonModel[]>{
-    return this.http.get<LessonModel[]>(this.SERVERURL + 'lesson/getAll')
+  getAllLessons():Observable<Lesson[]>{
+    return this.http.get<Lesson[]>(this.SERVERURL + 'lesson/getAll')
   }
 
 }

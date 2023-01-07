@@ -1,11 +1,10 @@
-import {ImgModel} from "./img.model";
+import {Image} from "./img.model";
 
-export interface LessonModel {
+export interface Lesson {
   id: number,
   title : string,
   description: string,
   summary: string,
   content: String,
-  pictureList: ImgModel[]
-
+  pictureList: Image[]
 }

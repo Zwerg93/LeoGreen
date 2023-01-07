@@ -22,9 +22,7 @@ export class HomeComponent implements OnInit {
       console.log(this.data.cards.length)
 
     })
-
   }
-
 
   getTopics(): String[] {
     return [...this.serviceLesson.topicSelected$.getValue().keys()];

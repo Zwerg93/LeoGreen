@@ -1,4 +1,4 @@
-export interface ImgModel {
+export interface Image {
   name : string,
   altText: string
 }

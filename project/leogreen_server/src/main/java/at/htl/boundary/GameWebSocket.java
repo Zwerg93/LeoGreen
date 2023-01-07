@@ -59,9 +59,9 @@ public class GameWebSocket {
     }
     public void removeGame(Long gameId){
         //remove Player
-        sessionByNameAndGameId.get(gameId).values().forEach(value -> {
+        sessionByNameAndGameId.get(gameId).values().forEach(session -> {
             try {
-                value.close();
+                session.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -82,12 +82,14 @@ public class GameWebSocket {
 
         if (game == null
                 || !this.sessionByNameAndGameId.containsKey(gameId)
-                || !this.sessionByNameAndGameId.get(gameId).containsKey(name)){
+                || this.sessionByNameAndGameId.get(gameId).containsKey(name)) {
             try {
+                session.getAsyncRemote().sendText("User with name already exists");
                 session.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            return;
         }
 
         print(String.format("onOpen> %s has connected to game#%o", name, gameId));

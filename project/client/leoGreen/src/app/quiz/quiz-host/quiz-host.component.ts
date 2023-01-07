@@ -9,10 +9,8 @@ import { fromEvent, Observable, Subscription } from "rxjs";
 })
 export class QuizHostComponent implements OnInit {
 
-
   game: any;
   qrCodeSize: number = window.innerWidth/7;
-
 
   constructor(private quizService: GameService) {
     quizService.game$.subscribe(value => this.game = value);
@@ -29,7 +27,4 @@ export class QuizHostComponent implements OnInit {
       started: true
     });
   }
-
-
-
 }
