@@ -1,17 +1,17 @@
-package at.htl.resource;
+package at.htl.boundary;
 
-import at.htl.GameWebSocket;
-import at.htl.model.Game;
-import at.htl.model.Quiz;
-import at.htl.repo.GameRepo;
-import at.htl.repo.QuizRepo;
-import org.hibernate.engine.spi.Status;
+import at.htl.model.entity.GameEntity;
+import at.htl.model.entity.QuizEntity;
+import at.htl.game.GameRepo;
+import at.htl.quiz.QuizRepo;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 @Path("/game")
 @Produces(MediaType.APPLICATION_JSON)
@@ -25,29 +25,29 @@ public class GameResource {
     @Inject
     QuizRepo quizRepo;
 
-    @GET
+    @POST
     @Transactional
-    @Path("/start/{quiz_id}")
-    public Response getStartQuiz(@PathParam("quiz_id") Long quiz_id){
-        Quiz quiz = this.quizRepo.findById(quiz_id);
+    @Path("/start/{quizId}")
+    public Response startQuiz(@PathParam("quizId") Long quizId, @Context UriInfo context){
+        QuizEntity quiz = this.quizRepo.findById(quizId);
 
         if (quiz == null){
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
-        Game game = Game.create(0, quiz);
+        GameEntity game = GameEntity.create(0, quiz);
         this.gameRepo.persist(game);
         this.webSocket.startGame(game.getId());
 
-        return Response.ok().entity(game.getId()).build();
+        return Response.ok(game.getId()).build();
     }
-    @GET
-    @Path("/end/{game_id}")
-    public Response getEndQuiz(@PathParam("game_id") Long game_id){
-        if (!this.gameRepo.deleteById(game_id)){
+    @POST
+    @Path("/end/{gameId}")
+    public Response endQuiz(@PathParam("gameId") Long gameId){
+        if (!this.gameRepo.deleteById(gameId)){
             return Response.status(Response.Status.NO_CONTENT).build();
         }
-        this.webSocket.removeGame(game_id);
+        this.webSocket.removeGame(gameId);
         return Response.status(Response.Status.ACCEPTED).build();
     }
 }

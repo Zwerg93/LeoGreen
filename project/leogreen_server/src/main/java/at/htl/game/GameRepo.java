@@ -1,10 +1,12 @@
-package at.htl.repo;
+package at.htl.game;
 
-import at.htl.model.User;
+import at.htl.model.entity.GameEntity;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class UserRepo implements PanacheRepository<User> {
+public class GameRepo implements PanacheRepository<GameEntity> {
+
+
 }

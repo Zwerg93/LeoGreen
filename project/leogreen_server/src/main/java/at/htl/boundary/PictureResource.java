@@ -1,4 +1,4 @@
-package at.htl.resource;
+package at.htl.boundary;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -13,10 +13,10 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import at.htl.model.Lesson.Lesson;
-import at.htl.model.Lesson.Picture;
-import at.htl.repo.LessonRepo;
-import at.htl.repo.PictureRepo;
+import at.htl.model.entity.LessonEntity;
+import at.htl.model.entity.PictureEntity;
+import at.htl.lesson.LessonRepo;
+import at.htl.picture.PictureRepo;
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
@@ -33,18 +33,18 @@ public class PictureResource {
 
     @GET
     @Path("/getAll")
-    public List<Picture> getAllPictures() {
+    public List<PictureEntity> getAllPictures() {
         return this.pictureRepo.findAll().stream().toList();
     }
 
 
     @PUT
-    @Path("/addPictureToLesson/{pictureName}/{lessonid}")
+    @Path("/addPictureToLesson/{pictureName}/{lessonId}")
     @Transactional
-    public Response addPic(@PathParam("pictureName") String picturename, @PathParam("lessonid") long id) {
-        Lesson lesson = lessonRepo.findById(id);
-        Picture picture = pictureRepo.findById(picturename);
-        lesson.pictureList.add(picture);
+    public Response addPic(@PathParam("pictureName") String pictureName, @PathParam("lessonId") long id) {
+        LessonEntity lesson = lessonRepo.findById(id);
+        PictureEntity picture = pictureRepo.findById(pictureName);
+        lesson.getPictureList().add(picture);
         return Response.ok().build();
     }
 
@@ -89,7 +89,7 @@ public class PictureResource {
 
                 postURL = "http://localhost:8080/picture/get/" + fileName;
                 System.out.println(postURL);
-                Picture picture = new Picture(postURL, "");
+                PictureEntity picture = new PictureEntity(postURL, "");
                 pictureRepo.persist(picture);
 
                 byte[] bytes = IOUtils.toByteArray(inputStream);
@@ -126,14 +126,11 @@ public class PictureResource {
 
         if (!file.exists()) {
             file.createNewFile();
-            System.out.println("succes");
+            System.out.println("success");
         }
-        FileOutputStream fop = new FileOutputStream(file);
-        fop.write(content);
-        fop.flush();
-        fop.close();
-
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(content);
+        fos.flush();
+        fos.close();
     }
-
-
 }

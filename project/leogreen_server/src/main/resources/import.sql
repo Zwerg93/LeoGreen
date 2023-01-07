@@ -54,7 +54,7 @@ insert into picture (name, altText) values ('http://localhost:8080/picture/get/i
 
 
 update question
-set rightanswer_id = 1
+set correct_answer = 1
 where id = 1;
 
 alter sequence quiz_id_seq restart with 2;

@@ -8,15 +8,11 @@ import java.util.stream.Collectors;
 public class Game implements Serializable {
     Integer code;
     Boolean started;
-    public ArrayList<Player> players;
-    Question[] questions;
     Integer currentQuestion;
 
-    public Game(Integer code, Boolean started, Player[] players, Question[] questions, Integer currentQuestion) {
+    public Game(Integer code, Boolean started, Integer currentQuestion) {
         this.code = code;
         this.started = started;
-        this.players.addAll(Arrays.stream(players).toList());
-        this.questions = questions;
         this.currentQuestion = currentQuestion;
     }
 }

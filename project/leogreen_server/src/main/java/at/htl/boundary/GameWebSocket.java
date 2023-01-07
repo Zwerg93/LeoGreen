@@ -1,5 +1,10 @@
 package at.htl.boundary;
 
+import at.htl.model.entity.GameEntity;
+import at.htl.model.entity.UserEntity;
+import at.htl.game.GameRepo;
+import at.htl.user.UserRepo;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
@@ -10,59 +15,116 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Objects.requireNonNull;
 
-@ServerEndpoint("/quiz-game-websocket/{quizId}/{name}")
+@ServerEndpoint(value = "/quiz-game-websocket/{gameId}/{name}")
 @ApplicationScoped
 public class GameWebSocket {
 
+    /** TODO List
+     *  - Rollensystem
+     *  - Auf Keywords horchen (z.B. "Start Game", "Next Question")
+     *  - Variable
+     *      - State: Number of Question
+     *      - Students: Points, Name
+     *      - Questions: Header, Answers, right Answer, typeIdentifier?, tags? (maybe important for analysing)
+     *  - DTO's:
+     *      - To Client:
+     *          Students #T (List of Student Name)
+     *          QuestionAnswer #T (Head, Questions, Image?)
+     *          Answers (Id, Type?)
+     *          Results (Points)
+     *      - To Server:
+     *          Keywords #T (z.B. "Start Game", "Next Question")
+     *          Answers #S (answer id)
+     */
 
-    Map<Long, Map<String, Session>> sessionByNameAndGameRoomId = new ConcurrentHashMap<>();
+    @Inject
+    GameRepo gameRepo;
+    @Inject
+    UserRepo userRepo;
+    
+    Map<Long, Map<String, Session>> sessionByNameAndGameId = new ConcurrentHashMap<>();
 
-    public Long startGame(Long quizType){
-        Long newGameRoomId = sessionByNameAndGameRoomId.keySet().stream().mapToLong(Long::longValue).max().orElse(-1) + 1L;
-        sessionByNameAndGameRoomId.put(newGameRoomId, new ConcurrentHashMap<>());
-        return newGameRoomId;
+    public GameWebSocket() {
+        //Testing
+        sessionByNameAndGameId.put(1L, new ConcurrentHashMap<>());
+    }
+    public void startGame(Long gameId){
+        sessionByNameAndGameId.put(gameId, new ConcurrentHashMap<>());
+    }
+    public void removeGame(Long gameId){
+        //remove Player
+        sessionByNameAndGameId.get(gameId).values().forEach(value -> {
+            try {
+                value.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        sessionByNameAndGameId.remove(gameId);
     }
 
-    public void removeGame(Long quizId){
-        sessionByNameAndGameRoomId.remove(quizId);
+    private void closeGame(Long gameId){
+        this.removeGame(gameId);
+        this.gameRepo.deleteById(gameId);
     }
 
-    private void removePlayerOfGame(Long quizId, String name) {
-        sessionByNameAndGameRoomId.get(quizId).remove(name);
-    }
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("quizId") Long quizId , @PathParam("name") String name) throws IOException {
-        var gameRoom = sessionByNameAndGameRoomId.get(quizId);
-        if (gameRoom == null) {
-            session.getAsyncRemote().sendText("Game not started");
-            session.close();
-            return;
+    public void onOpen(Session session,@PathParam("gameId") Long gameId , @PathParam("name") String name) {
+        GameEntity game = this.gameRepo.findById(gameId);
+
+        if (game == null
+                || !this.sessionByNameAndGameId.containsKey(gameId)
+                || !this.sessionByNameAndGameId.get(gameId).containsKey(name)){
+            try {
+                session.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        if (gameRoom.get(name) != null) {
-            session.getAsyncRemote().sendText("Username already exists");
-            return;
+
+        print(String.format("onOpen> %s has connected to game#%o", name, gameId));
+        this.sessionByNameAndGameId.get(gameId).put(name, session);
+
+        UserEntity user = UserEntity.create("name", 0L, game);
+        this.userRepo.persist(user);
+
+        this.sendAdminUserList(gameId);
+    }
+
+    private void sendAdminUserList(Long gameId) {
+        Session adminSession = this.sessionByNameAndGameId.get(gameId).get("Admin");
+
+        if (adminSession == null){
+            this.printErr("No admin present in the game");
+            this.closeGame(gameId);
         }
-        gameRoom.put(name, session);
+        List<String> playerNameList = this.userRepo.list("gameId", gameId).stream().map(UserEntity::getName).toList();
+
+        adminSession.getAsyncRemote().sendText(playerNameList.toString());
     }
 
     @OnClose
-    public void onClose(Session session, @PathParam("quizId") Long quizId , @PathParam("name") String name) {
-        sessionByNameAndGameRoomId.get(quizId).remove(name, session);
+    public void onClose(Session session, @PathParam("gameId") Long gameId , @PathParam("name") String name) {
+        sessionByNameAndGameId.get(gameId).remove(name, session);
+        print(String.format("onClose> %s has disconnected the game#%o", name, gameId));
     }
 
     @OnError
-    public void onError(Session session, @PathParam("quizId") Long quizId , @PathParam("name") String name, Throwable throwable) {
+    public void onError(Session session,@PathParam("gameId") Long gameId , @PathParam("name") String name, Throwable throwable) {
+        printErr(String.format("onError> User#%s in game#%o thrown error: "+throwable, name, gameId));
     }
 
     @OnMessage
-    public void onMessage(String message, @PathParam("quizId") Long quizId , @PathParam("name") String name) {
+    public void onMessage(String message, @PathParam("gameId") Long gameId , @PathParam("name") String name) {
+        print(String.format("onMessage> User#%s in game#%o has send: %s", name, gameId, message));
     }
 
 
