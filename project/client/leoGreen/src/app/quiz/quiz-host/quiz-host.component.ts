@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
-import { fromEvent, Observable, Subscription } from "rxjs";
 @Component({
   selector: 'app-quiz-host',
   templateUrl: './quiz-host.component.html',
@@ -22,9 +21,6 @@ export class QuizHostComponent implements OnInit {
   }
 
   startGame() {
-    this.quizService.game$.next({
-      ...this.quizService.game$.value,
-      started: true
-    });
+    this.quizService.updateGameState({started: true});
   }
 }

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {webSocket, WebSocketSubject} from "rxjs/webSocket";
 
 @Injectable({
   providedIn: 'root'
@@ -136,8 +137,22 @@ export class GameService {
     currentQuestion: 0
   };
 
+  socket$: WebSocketSubject<any> = webSocket("ws://localhost:8080/quiz-game-websocket/{gameId}/{name}")
   game$: BehaviorSubject<any> = new BehaviorSubject<any>(this.initialState);
 
   constructor() {
+    //TODO this.socket$.subscribe(this.onMessage)
+  }
+
+  private onMessage(value: any) {
+    this.game$.next(value);
+  }
+
+  public updateGameState(changes: any) {
+    this.game$.next({
+      ...this.game$.value,
+      ...changes
+    });
+    //TODO this.socket$.next(this.game$.value);
   }
 }

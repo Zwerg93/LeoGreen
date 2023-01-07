@@ -25,16 +25,13 @@ export class QuizHostQuestionComponent implements OnInit {
     console.log(this.game, this.game.currentQuestion)
   }
 
-
   nextQuestion() {
     if (this.game.questions.length > this.game.currentQuestion + 1) {
-      this.game.currentQuestion += 1;
+      this.quizService.updateGameState({currentQuestion: this.game.currentQuestion + 1});
       console.log(this.game.currentQuestion)
       console.log(this.game.questions.length)
     }else {
       this.snackbar.open("Keine weiteren Fragen mehr!", "", {duration: 1000});
     }
-
   }
-
 }
