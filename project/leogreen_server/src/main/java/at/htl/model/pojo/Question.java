@@ -18,4 +18,7 @@ public class Question implements Serializable {
         this.answers = answers;
         this.correctAnswer = correctAnswer;
     }
+
+    public Question() {
+    }
 }

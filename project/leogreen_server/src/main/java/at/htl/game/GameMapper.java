@@ -24,6 +24,10 @@ public interface GameMapper {
     @Mapping(source = "quiz", target = "quiz", qualifiedByName = "quizFromEntity")
     Game gameFromEntity(GameEntity ge);
 
+    @Mapping(source = "users", target = "users", qualifiedByName = "usersListToEntity")
+    @Mapping(source = "quiz", target = "quiz", qualifiedByName = "quizToEntity")
+    GameEntity gameToEntity(Game g);
+
 
     @Named("usersListFromEntity")
     static List<User> usersListFromEntity(List<UserEntity> users) {
@@ -33,5 +37,15 @@ public interface GameMapper {
     @Named("quizFromEntity")
     static Quiz quizFromEntity(QuizEntity qe) {
         return QuizMapper.INSTANCE.quizFromEntity(qe);
+    }
+
+    @Named("usersListToEntity")
+    static List<UserEntity> usersListToEntity(List<User> users) {
+        return users.stream().map(UserMapper.INSTANCE::userToEntity).collect(Collectors.toList());
+    }
+
+    @Named("quizToEntity")
+    static QuizEntity quizToEntity(Quiz q) {
+        return QuizMapper.INSTANCE.quizToEntity(q);
     }
 }

@@ -8,5 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class GameRepo implements PanacheRepository<GameEntity> {
 
-
+    public GameEntity merge(GameEntity game) {
+        return getEntityManager().merge(game);
+    }
 }

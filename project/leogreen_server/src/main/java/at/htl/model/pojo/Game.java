@@ -3,10 +3,7 @@ package at.htl.model.pojo;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 public class Game implements Serializable {
@@ -20,6 +17,9 @@ public class Game implements Serializable {
         this.state = state;
         this.users = users;
         this.quiz = quiz;
+    }
+
+    public Game() {
     }
 }
 

@@ -15,4 +15,7 @@ public class User implements Serializable {
         this.name = name;
         this.points = points;
     }
+
+    public User() {
+    }
 }

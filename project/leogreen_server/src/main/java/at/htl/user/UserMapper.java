@@ -10,4 +10,6 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     User userFromEntity(UserEntity ue);
+
+    UserEntity userToEntity(User u);
 }

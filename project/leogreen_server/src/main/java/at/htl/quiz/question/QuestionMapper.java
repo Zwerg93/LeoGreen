@@ -21,6 +21,10 @@ public interface QuestionMapper {
     @Mapping(source = "correctAnswer", target = "correctAnswer", qualifiedByName = "correctAnswerFromEntity")
     Question questionFromEntity(QuestionEntity qe);
 
+    @Mapping(source = "answers", target = "answers", qualifiedByName = "answersListToEntity")
+    @Mapping(source = "correctAnswer", target = "correctAnswer", qualifiedByName = "correctAnswerToEntity")
+    QuestionEntity questionToEntity(Question q);
+
     @Named("answersListFromEntity")
     static List<Answer> answersListFromEntity(List<AnswerEntity> answers) {
         return answers.stream().map(AnswerMapper.INSTANCE::answerFromEntity).collect(Collectors.toList());
@@ -29,6 +33,16 @@ public interface QuestionMapper {
     @Named("correctAnswerFromEntity")
     static Answer correctAnswerFromEntity(AnswerEntity answer) {
         return AnswerMapper.INSTANCE.answerFromEntity(answer);
+    }
+
+    @Named("answersListToEntity")
+    static List<AnswerEntity> answersListToEntity(List<Answer> answers) {
+        return answers.stream().map(AnswerMapper.INSTANCE::answerToEntity).collect(Collectors.toList());
+    }
+
+    @Named("correctAnswerToEntity")
+    static AnswerEntity correctAnswerToEntity(Answer answer) {
+        return AnswerMapper.INSTANCE.answerToEntity(answer);
     }
 
 }

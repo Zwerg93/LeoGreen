@@ -10,4 +10,6 @@ public interface AnswerMapper {
     AnswerMapper INSTANCE = Mappers.getMapper(AnswerMapper.class);
 
     Answer answerFromEntity(AnswerEntity ae);
+
+    AnswerEntity answerToEntity(Answer a);
 }

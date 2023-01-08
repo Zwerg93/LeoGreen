@@ -8,4 +8,7 @@ import java.io.Serializable;
 public class Answer implements Serializable {
     Long id;
     String answer;
+
+    public Answer() {
+    }
 }

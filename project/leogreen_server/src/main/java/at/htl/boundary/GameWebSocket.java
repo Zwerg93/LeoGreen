@@ -3,29 +3,25 @@ package at.htl.boundary;
 import at.htl.game.GameDecoder;
 import at.htl.game.GameEncoder;
 import at.htl.game.GameMapper;
+import at.htl.game.GameRepo;
+import at.htl.model.entity.AnswerEntity;
 import at.htl.model.entity.GameEntity;
 import at.htl.model.entity.UserEntity;
-import at.htl.game.GameRepo;
+import at.htl.model.pojo.Game;
 import at.htl.user.UserRepo;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ServerEndpoint(value = "/quiz-game-websocket/{gameId}/{name}",
-        encoders = {GameEncoder.class},
-        decoders = {GameDecoder.class})
+        encoders = {GameEncoder.class})
 @ApplicationScoped
 public class GameWebSocket {
 
@@ -56,11 +52,12 @@ public class GameWebSocket {
     Map<Long, Map<String, Session>> sessionByNameAndGameId = new ConcurrentHashMap<>();
 
     public GameWebSocket() {
-        //Testing
-        sessionByNameAndGameId.put(1L, new ConcurrentHashMap<>());
     }
 
     public void startGame(Long gameId) {
+        if (sessionByNameAndGameId.containsKey(gameId)) {
+            return;
+        }
         sessionByNameAndGameId.put(gameId, new ConcurrentHashMap<>());
     }
 
@@ -99,30 +96,29 @@ public class GameWebSocket {
             return;
         }
 
+        log(String.format("onOpen> %s has connected to game#%o", name, gameId));
+        this.sessionByNameAndGameId.get(gameId).put(name, session);
+
         if (name.equals("admin")) {
             handleAdminOpen(session, gameId);
             return;
         }
 
-        log(String.format("onOpen> %s has connected to game#%o", name, gameId));
-        this.sessionByNameAndGameId.get(gameId).put(name, session);
-
-        UserEntity user = UserEntity.create("name", 0L, game);
+        UserEntity user = UserEntity.create(name, 0L, game);
         this.userRepo.persist(user);
 
-        this.sendAdminUserList(gameId);
+        this.sendAdminGameState(gameId);
     }
 
-    private void sendAdminUserList(Long gameId) {
-        Session adminSession = this.sessionByNameAndGameId.get(gameId).get("Admin");
+    private void sendAdminGameState(Long gameId) {
+        Session adminSession = this.sessionByNameAndGameId.get(gameId).get("admin");
 
         if (adminSession == null) {
             this.logErr("No admin present in the game");
             this.closeGame(gameId);
         }
-        List<String> playerNameList = this.userRepo.list("gameId", gameId).stream().map(UserEntity::getName).toList();
 
-        adminSession.getAsyncRemote().sendText(playerNameList.toString());
+        adminSession.getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(gameRepo.findById(gameId)));
     }
 
     @OnClose
@@ -137,22 +133,48 @@ public class GameWebSocket {
     }
 
     @OnMessage
-    public void onMessage(String message, @PathParam("gameId") Long gameId, @PathParam("name") String name) {
+    @Transactional
+    public void onMessage(String message,
+                          @PathParam("gameId") Long gameId,
+                          @PathParam("name") String name,
+                          Session session) {
         log(String.format("onMessage> User#%s in game#%o has send: %s", name, gameId, message));
-        if (name.equals("admin")) {
-            handleAdmin(message, gameId);
+        GameDecoder decoder = new GameDecoder();
+        if (name.equals("admin") && decoder.willDecode(message)) {
+            try {
+                handleAdmin(decoder.decode(message), gameId);
+            } catch (DecodeException e) {
+                throw new RuntimeException(e);
+            }
             return;
         }
 
-        // TODO handle player
+        GameEntity game = gameRepo.findById(gameId);
+        var question = game.getQuiz().getQuestions().get(game.getState());
+        if (question
+                .getAnswers()
+                .stream()
+                .map(AnswerEntity::getAnswer)
+                .anyMatch(a -> a.equals(message))) {
+            // TODO add score
+            session.getAsyncRemote().sendText("voted");
+            if (question.getCorrectAnswer().getAnswer().equals(message)) {
+                session.getAsyncRemote().sendText("correct");
+            } else {
+                session.getAsyncRemote().sendText("wrong");
+            }
+        } else {
+            session.getAsyncRemote().sendText("vote invalid");
+        }
     }
 
     private void updateGameState() {
 
     }
 
-    private void handleAdmin(String message, Long gameId) {
-
+    private void handleAdmin(Game game, Long gameId) {
+        game.setId(gameId);
+        GameEntity gameEntity = gameRepo.merge(GameMapper.INSTANCE.gameToEntity(game));
     }
 
     private void handleAdminOpen(Session session, Long gameId) {

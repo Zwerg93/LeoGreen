@@ -16,4 +16,7 @@ public class Quiz implements Serializable {
         this.topic = topic;
         this.questions = questions;
     }
+
+    public Quiz() {
+    }
 }
