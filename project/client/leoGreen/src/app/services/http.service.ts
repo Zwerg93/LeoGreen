@@ -25,4 +25,8 @@ export class HttpService {
     return this.http.get<Lesson[]>('/api/lesson/getAll')
   }
 
+  postStartGame(gameId: number):Observable<number>{
+    return this.http.post<number>(`api/game/start/${gameId}`, {})
+  }
+
 }

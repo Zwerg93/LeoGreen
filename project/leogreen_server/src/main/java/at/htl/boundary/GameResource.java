@@ -35,7 +35,7 @@ public class GameResource {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
-        GameEntity game = GameEntity.create(0, quiz);
+        GameEntity game = GameEntity.create(-1, quiz);
         this.gameRepo.persist(game);
         this.webSocket.startGame(game.getId());
 
