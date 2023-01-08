@@ -39,7 +39,7 @@ export class LessonComponent implements OnInit {
   }
 
   loadImages() {
-    this.http.getAllIMGS().subscribe(
+    this.http.getAllImages().subscribe(
       (c: Image[]) => {
         console.log(c)
         this.images = c;

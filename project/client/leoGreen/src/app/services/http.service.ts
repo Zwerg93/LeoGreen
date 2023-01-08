@@ -10,20 +10,19 @@ import {Lesson} from "../model/lesson.model";
   providedIn: 'root'
 })
 export class HttpService {
-  SERVERURL = 'http://localhost:8080/'
 
   constructor(private http : HttpClient, private data: DataService) { }
 
   getAllCards(): Observable<Card[]> {
-    return this.http.get<Card[]>(this.SERVERURL + 'lesson/card/all')
+    return this.http.get<Card[]>('/api/lesson/card/all')
   }
 
-  getAllIMGS(): Observable<Image[]> {
-    return this.http.get<Image[]>(this.SERVERURL + 'picture/getAll')
+  getAllImages(): Observable<Image[]> {
+    return this.http.get<Image[]>('/api/picture/getAll')
   }
 
   getAllLessons():Observable<Lesson[]>{
-    return this.http.get<Lesson[]>(this.SERVERURL + 'lesson/getAll')
+    return this.http.get<Lesson[]>('/api/lesson/getAll')
   }
 
 }
