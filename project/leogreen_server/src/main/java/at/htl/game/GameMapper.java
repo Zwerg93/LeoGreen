@@ -25,8 +25,8 @@ public interface GameMapper {
     Game gameFromEntity(GameEntity ge);
 
 
-    @Named("answersListFromEntity")
-    static List<User> answersListFromEntity(List<UserEntity> users) {
+    @Named("usersListFromEntity")
+    static List<User> usersListFromEntity(List<UserEntity> users) {
         return users.stream().map(UserMapper.INSTANCE::userFromEntity).collect(Collectors.toList());
     }
 

@@ -2,6 +2,7 @@ package at.htl.boundary;
 
 import at.htl.game.GameDecoder;
 import at.htl.game.GameEncoder;
+import at.htl.game.GameMapper;
 import at.htl.model.entity.GameEntity;
 import at.htl.model.entity.UserEntity;
 import at.htl.game.GameRepo;
@@ -100,6 +101,7 @@ public class GameWebSocket {
 
         if (name.equals("admin")) {
             handleAdminOpen(session, gameId);
+            return;
         }
 
         log(String.format("onOpen> %s has connected to game#%o", name, gameId));
@@ -154,7 +156,7 @@ public class GameWebSocket {
     }
 
     private void handleAdminOpen(Session session, Long gameId) {
-        session.getAsyncRemote().sendObject(null);
+        session.getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(gameRepo.findById(gameId)));
     }
 
 
