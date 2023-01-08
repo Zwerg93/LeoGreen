@@ -19,12 +19,12 @@ public class QuizEntity {
     String topic;
     @OneToMany(mappedBy = "quiz")
     @ToString.Exclude
-    List<QuestionEntity> questionList = new ArrayList<>();
+    List<QuestionEntity> questions = new ArrayList<>();
 
-    public QuizEntity(Long id, String topic, List<QuestionEntity> questionList) {
+    public QuizEntity(Long id, String topic, List<QuestionEntity> questions) {
         this.id = id;
         this.topic = topic;
-        this.questionList = questionList;
+        this.questions = questions;
     }
 
     public QuizEntity() {

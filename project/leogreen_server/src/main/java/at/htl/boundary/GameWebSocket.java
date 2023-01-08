@@ -1,5 +1,7 @@
 package at.htl.boundary;
 
+import at.htl.game.GameDecoder;
+import at.htl.game.GameEncoder;
 import at.htl.model.entity.GameEntity;
 import at.htl.model.entity.UserEntity;
 import at.htl.game.GameRepo;
@@ -7,6 +9,7 @@ import at.htl.user.UserRepo;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -19,13 +22,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static java.util.Objects.requireNonNull;
-
-@ServerEndpoint(value = "/quiz-game-websocket/{gameId}/{name}")
+@ServerEndpoint(value = "/quiz-game-websocket/{gameId}/{name}",
+        encoders = {GameEncoder.class},
+        decoders = {GameDecoder.class})
 @ApplicationScoped
 public class GameWebSocket {
 
-    /** TODO List
+    /**
+     * TODO List
      *  - Rollensystem
      *  - Auf Keywords horchen (z.B. "Start Game", "Next Question")
      *  - Variable
@@ -47,17 +51,19 @@ public class GameWebSocket {
     GameRepo gameRepo;
     @Inject
     UserRepo userRepo;
-    
+
     Map<Long, Map<String, Session>> sessionByNameAndGameId = new ConcurrentHashMap<>();
 
     public GameWebSocket() {
         //Testing
         sessionByNameAndGameId.put(1L, new ConcurrentHashMap<>());
     }
-    public void startGame(Long gameId){
+
+    public void startGame(Long gameId) {
         sessionByNameAndGameId.put(gameId, new ConcurrentHashMap<>());
     }
-    public void removeGame(Long gameId){
+
+    public void removeGame(Long gameId) {
         //remove Player
         sessionByNameAndGameId.get(gameId).values().forEach(session -> {
             try {
@@ -70,14 +76,14 @@ public class GameWebSocket {
         sessionByNameAndGameId.remove(gameId);
     }
 
-    private void closeGame(Long gameId){
+    private void closeGame(Long gameId) {
         this.removeGame(gameId);
         this.gameRepo.deleteById(gameId);
     }
 
-
     @OnOpen
-    public void onOpen(Session session,@PathParam("gameId") Long gameId , @PathParam("name") String name) {
+    @Transactional
+    public void onOpen(Session session, @PathParam("gameId") Long gameId, @PathParam("name") String name) {
         GameEntity game = this.gameRepo.findById(gameId);
 
         if (game == null
@@ -92,7 +98,11 @@ public class GameWebSocket {
             return;
         }
 
-        print(String.format("onOpen> %s has connected to game#%o", name, gameId));
+        if (name.equals("admin")) {
+            handleAdminOpen(session, gameId);
+        }
+
+        log(String.format("onOpen> %s has connected to game#%o", name, gameId));
         this.sessionByNameAndGameId.get(gameId).put(name, session);
 
         UserEntity user = UserEntity.create("name", 0L, game);
@@ -104,8 +114,8 @@ public class GameWebSocket {
     private void sendAdminUserList(Long gameId) {
         Session adminSession = this.sessionByNameAndGameId.get(gameId).get("Admin");
 
-        if (adminSession == null){
-            this.printErr("No admin present in the game");
+        if (adminSession == null) {
+            this.logErr("No admin present in the game");
             this.closeGame(gameId);
         }
         List<String> playerNameList = this.userRepo.list("gameId", gameId).stream().map(UserEntity::getName).toList();
@@ -114,26 +124,45 @@ public class GameWebSocket {
     }
 
     @OnClose
-    public void onClose(Session session, @PathParam("gameId") Long gameId , @PathParam("name") String name) {
+    public void onClose(Session session, @PathParam("gameId") Long gameId, @PathParam("name") String name) {
         sessionByNameAndGameId.get(gameId).remove(name, session);
-        print(String.format("onClose> %s has disconnected the game#%o", name, gameId));
+        log(String.format("onClose> %s has disconnected the game#%o", name, gameId));
     }
 
     @OnError
-    public void onError(Session session,@PathParam("gameId") Long gameId , @PathParam("name") String name, Throwable throwable) {
-        printErr(String.format("onError> User#%s in game#%o thrown error: "+throwable, name, gameId));
+    public void onError(Session session, @PathParam("gameId") Long gameId, @PathParam("name") String name, Throwable throwable) {
+        logErr(String.format("onError> User#%s in game#%o thrown error: " + throwable, name, gameId));
     }
 
     @OnMessage
-    public void onMessage(String message, @PathParam("gameId") Long gameId , @PathParam("name") String name) {
-        print(String.format("onMessage> User#%s in game#%o has send: %s", name, gameId, message));
+    public void onMessage(String message, @PathParam("gameId") Long gameId, @PathParam("name") String name) {
+        log(String.format("onMessage> User#%s in game#%o has send: %s", name, gameId, message));
+        if (name.equals("admin")) {
+            handleAdmin(message, gameId);
+            return;
+        }
+
+        // TODO handle player
+    }
+
+    private void updateGameState() {
+
+    }
+
+    private void handleAdmin(String message, Long gameId) {
+
+    }
+
+    private void handleAdminOpen(Session session, Long gameId) {
+        session.getAsyncRemote().sendObject(null);
     }
 
 
-    private void print(String s){
+    private void log(String s) {
         System.out.println("quiz-game-websocket: ".concat(s));
     }
-    private void printErr(String s) {
+
+    private void logErr(String s) {
         System.err.println("quiz-game-websocket: ".concat(s));
     }
 }

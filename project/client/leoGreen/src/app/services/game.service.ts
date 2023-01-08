@@ -137,11 +137,14 @@ export class GameService {
     currentQuestion: 0
   };
 
-  socket$: WebSocketSubject<any> = webSocket("ws://localhost:8080/quiz-game-websocket/{gameId}/{name}")
+  socket$: WebSocketSubject<any> | undefined;
   game$: BehaviorSubject<any> = new BehaviorSubject<any>(this.initialState);
 
-  constructor() {
-    //TODO this.socket$.subscribe(this.onMessage)
+  constructor() {}
+
+  public startWebsocket(gameId: number) {
+    this.socket$ = webSocket(`ws://localhost:8080/quiz-game-websocket/${gameId}/admin`)
+    this.socket$.subscribe(this.onMessage)
   }
 
   private onMessage(value: any) {
@@ -153,6 +156,6 @@ export class GameService {
       ...this.game$.value,
       ...changes
     });
-    //TODO this.socket$.next(this.game$.value);
+    this.socket$?.next(this.game$.value);
   }
 }
