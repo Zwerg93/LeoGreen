@@ -13,9 +13,8 @@ const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home'},
   {path: 'home', component: HomeComponent},
   {path: 'lesson/:id', component: LessonComponent},
-  {path: 'quiz', component: QuizComponent},
   {path: 'statistic', component: StatisticComponent},
-  {path: 'quiz/host', component: QuizHostComponent},
+  {path: 'quiz/host/:id', component: QuizHostComponent},
   {path: 'quiz/client', component: QuizClientJoinPageComponent},
     {path: 'quiz/client-answer', component: QuizClientAnswerPageComponent},
   {path: '*', component: NotFoundComponent}

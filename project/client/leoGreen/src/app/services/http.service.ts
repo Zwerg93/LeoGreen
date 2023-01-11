@@ -29,4 +29,7 @@ export class HttpService {
     return this.http.post<number>(`api/game/start/${gameId}`, {})
   }
 
+  getIsGameActive(gameId: number): Observable<boolean>{
+    return this.http.get<boolean>(`api/game/active/${gameId}`)
+  }
 }

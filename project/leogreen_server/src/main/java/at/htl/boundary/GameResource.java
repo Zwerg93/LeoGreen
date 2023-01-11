@@ -3,6 +3,7 @@ package at.htl.boundary;
 import at.htl.model.entity.GameEntity;
 import at.htl.model.entity.QuizEntity;
 import at.htl.game.GameRepo;
+import at.htl.model.pojo.Game;
 import at.htl.quiz.QuizRepo;
 
 import javax.inject.Inject;
@@ -49,5 +50,12 @@ public class GameResource {
         }
         this.webSocket.removeGame(gameId);
         return Response.status(Response.Status.ACCEPTED).build();
+    }
+
+    @GET
+    @Path("/active/{gameId}")
+    public Response isActive(@PathParam("gameId") Long gameId){
+        GameEntity game = this.gameRepo.findById(gameId);
+        return Response.ok(game != null).build();
     }
 }
