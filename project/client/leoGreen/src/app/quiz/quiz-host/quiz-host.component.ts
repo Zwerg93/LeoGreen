@@ -4,6 +4,7 @@ import {HttpService} from "../../services/http.service";
 import {Quiz} from "../../model/quiz";
 import {Game} from "../../model/game";
 import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-quiz-host',
@@ -13,29 +14,24 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class QuizHostComponent implements OnInit {
 
+  subscription ?: Subscription
   game?: Game;
   qrCodeSize: number = window.innerWidth / 7;
 
   constructor(private http: HttpService, private quizService: GameService, private aRoute: ActivatedRoute) {
     if (aRoute.snapshot.paramMap.get("id")) {
       let quizId = Number(aRoute.snapshot.paramMap.get("id"))
-      let gameId = this.quizService.getActiveGameId();
-      console.log(gameId)
-      if (gameId){
-        this.quizService.startWebsocket(gameId).subscribe(value => {this.game = value})
-      }else{
-        this.http.postStartGame(quizId).subscribe( gameId => {this.quizService.setActiveGameId(gameId); this.quizService.startWebsocket(gameId).subscribe(value => {this.game = value})})
-      }
+        this.http.postStartGame(quizId).subscribe( gameId => {this.quizService.startWebsocket(gameId).subscribe(value => {
+          this.game = value
+          console.log(value)
+        })})
     }
   }
-
-
 
   ngOnInit(): void {
   }
 
   startGame() {
-    if (!this.quizService.game$.value) return
-    this.quizService.updateGameState({state: 0});
+    this.quizService.startGame()
   }
 }

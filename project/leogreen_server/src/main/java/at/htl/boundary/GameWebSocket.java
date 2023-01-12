@@ -86,9 +86,11 @@ public class GameWebSocket {
 
         if (game == null
                 || !this.sessionByNameAndGameId.containsKey(gameId)
-                || this.sessionByNameAndGameId.get(gameId).containsKey(name)) {
+                || this.sessionByNameAndGameId.get(gameId).containsKey(name)
+                || (!this.sessionByNameAndGameId.get(gameId).containsKey("admin") && !name.equals("admin"))
+        ) {
             try {
-                session.getAsyncRemote().sendText("User with name already exists");
+                this.logErr(String.format("onOpen> Entry-Condition wasn't met", name));
                 session.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -107,18 +109,16 @@ public class GameWebSocket {
         UserEntity user = UserEntity.create(name, 0L, game);
         this.userRepo.persist(user);
 
-        this.sendAdminGameState(gameId);
+        if (!name.equals("admin")){
+            sendAdminGameState(gameId);
+        }
     }
 
     private void sendAdminGameState(Long gameId) {
         Session adminSession = this.sessionByNameAndGameId.get(gameId).get("admin");
 
-        if (adminSession == null) {
-            this.logErr("No admin present in the game");
-            this.closeGame(gameId);
-        }
-
-        adminSession.getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(gameRepo.findById(gameId)));
+        GameEntity gameEntity = gameRepo.findById(gameId);
+        adminSession.getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(gameEntity));
     }
 
     @OnClose
@@ -149,7 +149,7 @@ public class GameWebSocket {
             return;
         }
 
-        GameEntity game = gameRepo.findById(gameId);
+        /*GameEntity game = gameRepo.findById(gameId);
         var question = game.getQuiz().getQuestions().get(game.getState());
         if (question
                 .getAnswers()
@@ -165,7 +165,7 @@ public class GameWebSocket {
             }
         } else {
             session.getAsyncRemote().sendText("vote invalid");
-        }
+        }*/
     }
 
     private void updateGameState() {

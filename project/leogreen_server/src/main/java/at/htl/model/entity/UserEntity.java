@@ -36,8 +36,6 @@ public class UserEntity {
         user.setPoints(points);
         user.setGame(game);
 
-        game.addToUserList(user);
-
         return user;
     }
 }

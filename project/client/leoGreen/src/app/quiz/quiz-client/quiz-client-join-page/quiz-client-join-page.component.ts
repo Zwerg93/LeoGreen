@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from "@angular/router";
 import {GameService} from "../../../services/game.service";
+import {Subscriber, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-quiz-client-join-page',
@@ -10,6 +11,8 @@ import {GameService} from "../../../services/game.service";
   styleUrls: ['./quiz-client-join-page.component.scss']
 })
 export class QuizClientJoinPageComponent {
+
+  subscriber ?: Subscription
 
   beitretenForm = new FormGroup(
     {
@@ -25,8 +28,15 @@ export class QuizClientJoinPageComponent {
   }
 
   join() {
-    if (this.beitretenForm.controls.quizId.value == "11111") {
-      this.router.navigate(['/quiz/client-answer'])
+    if (this.beitretenForm.valid) {
+      //this.subscriber?.unsubscribe()
+      this.subscriber = this.gameService.startWebsocket(Number(this.beitretenForm.value.quizId), this.beitretenForm.value.username!).subscribe(
+        value => {
+          console.log(value)
+          if(value){
+          this.router.navigate(['/quiz/client-answer'])
+        }}
+      )
     } else {
       this.snackBar.open("Quiz room could not be found", undefined, {
           duration: 5 * 1000

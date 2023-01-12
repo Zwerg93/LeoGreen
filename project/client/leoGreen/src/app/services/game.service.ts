@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Subject} from "rxjs";
 import {webSocket, WebSocketSubject} from "rxjs/webSocket";
 import {Game} from "../model/game";
+import {HttpService} from "./http.service";
+import * as http from "http";
+import {numbers} from "@material/snackbar";
 
 @Injectable({
   providedIn: 'root'
@@ -9,39 +12,55 @@ import {Game} from "../model/game";
 export class GameService {
 
   activeGameIdKey = "activeGameId"
+  activeGameNameKey = "activeGameName"
   socket$?: WebSocketSubject<Game>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
 
 
-  constructor() {
+  constructor(private http : HttpService) {
   }
 
-  setActiveGameId(gameId: number){
+  /*private setActiveGame(gameId: number, name: string){
     sessionStorage.setItem(this.activeGameIdKey, gameId.toString())
+    sessionStorage.setItem(this.activeGameNameKey, name)
   }
 
-  getActiveGameId(): number | undefined{
-    return (sessionStorage.getItem(this.activeGameIdKey) != null) ? Number(sessionStorage.getItem(this.activeGameIdKey)) : undefined;
+  getActiveGame(): {gameId: number | null, name: string | null}{
+    let gameId: number | null = Number(sessionStorage.getItem(this.activeGameIdKey))
+    const name = sessionStorage.getItem(this.activeGameNameKey)
+    gameId = (isNaN(gameId)) ? null : gameId
+    return {gameId, name}
   }
 
-  endGame(){
+  isActiveGame(): boolean{
+    const game = this.getActiveGame()
+    return game.gameId != null && game.name != null;
+  }
+
+  private cleanActiveGameSessionStorage(){
     sessionStorage.removeItem(this.activeGameIdKey)
-  }
+    sessionStorage.removeItem(this.activeGameNameKey)
+  }*/
 
   public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined>{
+    console.log(`GameService#startwebsocket(${gameId}, ${name})`)
     this.socket$ = webSocket(`ws://localhost:8080/quiz-game-websocket/${gameId}/${name}`)
     this.socket$.subscribe(value => {
+      //if (!this.isActiveGame()){this.setActiveGame(gameId, name)}
       this.onMessage(value, this.game$)
     })
     return this.game$
   }
 
   private onMessage(value: Game, game$: BehaviorSubject<Game | undefined>):void {
-    console.log(value)
     game$.next(value)
+    if (value?.state == -2){
+      this.socket$?.complete()
+      //this.cleanActiveGameSessionStorage()
+    }
   }
 
-  public updateGameState(changes: any) {
+  private updateGameState(changes: any) {
     if (!this.game$.value) return
 
     this.game$.next({
@@ -56,5 +75,9 @@ export class GameService {
     if (!this.game$.value || this.game$.value.state+1 >= this.game$.value.quiz.questions.length) return false
     this.updateGameState({state: this.game$.value.state+1})
     return true
+  }
+
+  startGame() {
+    this.updateGameState({state: 0});
   }
 }
