@@ -13,6 +13,7 @@ export class GameService {
 
   activeGameIdKey = "activeGameId"
   activeGameNameKey = "activeGameName"
+  name ?: string;
   socket$?: WebSocketSubject<Game>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
 
@@ -44,6 +45,7 @@ export class GameService {
 
   public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined>{
     console.log(`GameService#startwebsocket(${gameId}, ${name})`)
+    this.name = name;
     this.socket$ = webSocket(`ws://localhost:8080/quiz-game-websocket/${gameId}/${name}`)
     this.socket$.subscribe(value => {
       //if (!this.isActiveGame()){this.setActiveGame(gameId, name)}

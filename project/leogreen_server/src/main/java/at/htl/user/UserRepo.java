@@ -7,4 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class UserRepo implements PanacheRepository<UserEntity> {
+    public void merge(UserEntity user) {
+        this.getEntityManager().merge(user);
+    }
 }

@@ -30,7 +30,7 @@ export class QuizClientJoinPageComponent {
   join() {
     if (this.beitretenForm.valid) {
       //this.subscriber?.unsubscribe()
-      this.subscriber = this.gameService.startWebsocket(Number(this.beitretenForm.value.quizId), this.beitretenForm.value.username!).subscribe(
+      this.gameService.startWebsocket(Number(this.beitretenForm.value.quizId), this.beitretenForm.value.username!).subscribe(
         value => {
           console.log(value)
           if(value){

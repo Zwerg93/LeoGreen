@@ -4,7 +4,6 @@ import at.htl.game.GameDecoder;
 import at.htl.game.GameEncoder;
 import at.htl.game.GameMapper;
 import at.htl.game.GameRepo;
-import at.htl.model.entity.AnswerEntity;
 import at.htl.model.entity.GameEntity;
 import at.htl.model.entity.UserEntity;
 import at.htl.model.pojo.Game;
@@ -110,8 +109,13 @@ public class GameWebSocket {
         this.userRepo.persist(user);
 
         if (!name.equals("admin")){
+            handlePlayerOpen(session, gameId);
             sendAdminGameState(gameId);
         }
+    }
+
+    private void handlePlayerOpen(Session session, Long gameId) {
+        session.getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(gameRepo.findById(gameId)));
     }
 
     private void sendAdminGameState(Long gameId) {
@@ -175,6 +179,15 @@ public class GameWebSocket {
     private void handleAdmin(Game game, Long gameId) {
         game.setId(gameId);
         GameEntity gameEntity = gameRepo.merge(GameMapper.INSTANCE.gameToEntity(game));
+
+        // Update Players
+        updatePlayer(game, gameId);
+    }
+
+    private void updatePlayer(Game game, Long gameId) {
+        this.sessionByNameAndGameId.get(gameId).values().forEach(session -> {
+            session.getAsyncRemote().sendObject(game);
+        });
     }
 
     private void handleAdminOpen(Session session, Long gameId) {
@@ -188,5 +201,17 @@ public class GameWebSocket {
 
     private void logErr(String s) {
         System.err.println("quiz-game-websocket: ".concat(s));
+    }
+
+    public void playerVoted(Long gameId, String name, boolean correct) {
+        this.sessionByNameAndGameId.get(gameId).get(name).
+    }
+
+    public void updateAll() {
+    }
+
+    public void updateGame(Long gameId) {
+        this.updateGame(gameId);
+        //TODO - Admin Id has to be saved somewhere so we can update them here (but we could also say that game state only has to be changed when he updates so maybe we don't need it)
     }
 }

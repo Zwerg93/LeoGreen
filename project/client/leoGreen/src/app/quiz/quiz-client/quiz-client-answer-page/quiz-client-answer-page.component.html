@@ -1,6 +1,6 @@
-<div class="main-container" xmlns="http://www.w3.org/1999/html">
+<div class="main-container" xmlns="http://www.w3.org/1999/html" *ngIf="name && game && game.state != -1; else showWaiting">
   <section class="score">
-    <p>Your score: {{score}}</p>
+    <p>Your score: {{game.users[getArrayPositionOfUser()].points ?? 0}}</p>
   </section>
 
   <section class="elements">
@@ -15,6 +15,13 @@
     </div>
   </section>
   <section class="username">
-    <p>Logged ins as {{username}}</p>
+    <p>Logged ins as {{name}}</p>
   </section>
 </div>
+
+
+<ng-template #showWaiting>
+  <div class="main-container">
+    <h1>Waiting for the beginning of the game</h1>
+  </div>
+</ng-template>
