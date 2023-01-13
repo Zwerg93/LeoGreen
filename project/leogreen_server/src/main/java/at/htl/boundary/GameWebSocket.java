@@ -203,10 +203,6 @@ public class GameWebSocket {
         System.err.println("quiz-game-websocket: ".concat(s));
     }
 
-    public void playerVoted(Long gameId, String name, boolean correct) {
-        this.sessionByNameAndGameId.get(gameId).get(name).
-    }
-
     public void updateAll() {
     }
 

@@ -3,15 +3,12 @@
     <p>Your score: {{game.users[getArrayPositionOfUser()].points ?? 0}}</p>
   </section>
 
-  <section class="elements">
-    <div class="twocolumns">
-      <div (click)="checkAnswer('A')" class="rectangle"><img [src]="'assets/' + shapes[0] + '.svg'" [alt]="shapes[0]" class="shape"></div>
-      <div (click)="checkAnswer('B')" class="rectangle"><img [src]="'assets/' + shapes[1] + '.svg'" [alt]="shapes[1]" class="shape"></div>
+  <section class="elements" *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index">
+    <div class="twocolumns" *ngIf="i <= 2">
+      <div (click)="checkAnswer(answer.answer)" class="rectangle"><img [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape"></div>
     </div>
-
-    <div class="twocolumns">
-      <div (click)="checkAnswer('C')" class="rectangle"><img [src]="'assets/' + shapes[2] + '.svg'" [alt]="shapes[2]" class="shape"></div>
-      <div (click)="checkAnswer('D')" class="rectangle"><img [src]="'assets/' + shapes[3] + '.svg'" [alt]="shapes[3]" class="shape"></div>
+    <div class="twocolumns" *ngIf="i > 2">
+      <div (click)="checkAnswer(answer.answer)" class="rectangle"><img [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape"></div>
     </div>
   </section>
   <section class="username">
