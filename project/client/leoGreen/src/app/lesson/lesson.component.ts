@@ -11,7 +11,7 @@ import {Lesson} from "../model/lesson.model";
 })
 export class LessonComponent implements OnInit {
 
-  images?: Image[];
+  images: Image[] = [];
   lessons?: Lesson[];
   id = ""
   summary?: String;
