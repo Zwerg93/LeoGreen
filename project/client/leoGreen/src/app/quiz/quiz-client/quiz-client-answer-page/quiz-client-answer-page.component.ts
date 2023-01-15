@@ -4,6 +4,7 @@ import {Game} from "../../../model/game";
 import {Router} from "@angular/router";
 import {HttpService} from "../../../services/http.service";
 import {GuessModel} from "../../../model/guess.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-quiz-client-answer-page',
@@ -17,8 +18,8 @@ export class QuizClientAnswerPageComponent implements OnInit {
   userId?: number;
   userName?: String;
   guess?: GuessModel;
-  score?:number;
-
+  score: number = 0;
+  tmp?:number;
 
   shapes = [
     "triangle",
@@ -27,7 +28,7 @@ export class QuizClientAnswerPageComponent implements OnInit {
     "diamond"
   ];
 
-  constructor(gameService: GameService, route: Router, private http: HttpService) {
+  constructor(gameService: GameService, route: Router, private http: HttpService,  private snackbar: MatSnackBar) {
     gameService.game$.subscribe(value => {
       if (value) {
         this.game = value;
@@ -39,7 +40,7 @@ export class QuizClientAnswerPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("init ")
+
   }
 
   checkAnswer(answer: String) {
@@ -48,14 +49,18 @@ export class QuizClientAnswerPageComponent implements OnInit {
       userId: this.userId!,
       guess: answer
     }
-    console.table(this.guess)
+    console.table(this.game!.quiz.questions[this.game!.state].answers)
 
 
     this.http.checkAnswer(this.game!.id, this.guess!).subscribe((c => {
       this.score = c;
+      if(c < 1 ){
+        this.snackbar.open("Wrong Answer", "", {duration: 1000});
+
+      }
       console.log(c);
     }))
-    //alert("You choose the Answer: " + answer);
+
   }
 
   getArrayPositionOfUser(): number {

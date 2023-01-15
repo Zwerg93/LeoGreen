@@ -27,6 +27,7 @@ export class QuizHostQuestionComponent implements OnInit {
   nextQuestion() {
     if ( !this.gameService.increaseGameState()) {
       this.snackbar.open("Keine weiteren Fragen mehr!", "", {duration: 1000});
+
     }
   }
 }

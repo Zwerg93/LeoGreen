@@ -1,15 +1,22 @@
-<div class="main-container" xmlns="http://www.w3.org/1999/html" *ngIf="name && game && game.state != -1; else showWaiting">
+<div class="main-container" xmlns="http://www.w3.org/1999/html"
+     *ngIf="name && game && game.state != -1; else showWaiting">
   <section class="score">
-    <p>Your score: {{game.users[getArrayPositionOfUser()].points ?? 0}}</p>
+    <!--    <p>Your score: {{game.users[getArrayPositionOfUser()].points ?? 0}}</p>-->
+    <p>Your score: {{score}}</p>
+
   </section>
 
-  <section class="elements" >
-    <div class="twocolumns" *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index" >
-      <div  *ngIf="i <= 2" (click)="checkAnswer(answer.answer)" class="rectangle"><img [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape"></div>
+  <section class="elements">
+    <div class="twocolumns">
+      <div *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index">
+        <div *ngIf="i < 2" (click)="checkAnswer(answer.answer)" class="rectangle"><img
+          [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape"></div>
+
+        <div *ngIf="i >=2" (click)="checkAnswer(answer.answer)" class="rectangle"><img
+          [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape"></div>
+      </div>
     </div>
-    <div class="twocolumns" *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index" >
-      <div  *ngIf="i > 2" (click)="checkAnswer(answer.answer)" class="rectangle"><img [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape"></div>
-    </div>
+
   </section>
   <section class="username">
     <p>Logged ins as {{name}}</p>
