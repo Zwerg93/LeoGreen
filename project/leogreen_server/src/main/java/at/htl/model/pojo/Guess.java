@@ -7,5 +7,6 @@ import java.io.Serializable;
 @Data
 public class Guess implements Serializable {
     Long userId;
-    String quess;
+    String guess;
+
 }

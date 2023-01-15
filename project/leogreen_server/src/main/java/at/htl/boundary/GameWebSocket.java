@@ -206,8 +206,8 @@ public class GameWebSocket {
     public void updateAll() {
     }
 
-    public void updateGame(Long gameId) {
-        this.updateGame(gameId);
+    public void updateGame(Long gameId, GameEntity game) {
+        //this.updatePlayer(game, gameId);
         //TODO - Admin Id has to be saved somewhere so we can update them here (but we could also say that game state only has to be changed when he updates so maybe we don't need it)
     }
 }
