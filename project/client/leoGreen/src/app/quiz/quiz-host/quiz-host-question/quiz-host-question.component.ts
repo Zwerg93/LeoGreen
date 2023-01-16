@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../../services/game.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Game} from "../../../model/game";
 
 @Component({
   selector: 'app-quiz-host-question',
@@ -9,7 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class QuizHostQuestionComponent implements OnInit {
 
-  game: any;
+  game?: Game;
   shapes = [
     "triangle",
     "square",
@@ -17,24 +18,16 @@ export class QuizHostQuestionComponent implements OnInit {
     "diamond"
   ];
 
-  constructor(private quizService: GameService, private snackbar: MatSnackBar) {
-    quizService.game$.subscribe(value => this.game = value);
+  constructor(private gameService: GameService, private snackbar: MatSnackBar) {
+    this.gameService.game$.subscribe(value => this.game = value);
   }
 
-  ngOnInit(): void {
-    console.log(this.game, this.game.currentQuestion)
-  }
-
+  ngOnInit(): void {}
 
   nextQuestion() {
-    if (this.game.questions.length > this.game.currentQuestion + 1) {
-      this.game.currentQuestion += 1;
-      console.log(this.game.currentQuestion)
-      console.log(this.game.questions.length)
-    }else {
+    if ( !this.gameService.increaseGameState()) {
       this.snackbar.open("Keine weiteren Fragen mehr!", "", {duration: 1000});
+
     }
-
   }
-
 }

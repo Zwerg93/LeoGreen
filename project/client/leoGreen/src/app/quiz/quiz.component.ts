@@ -7,14 +7,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent implements OnInit {
-  game: any;
+export class QuizComponent {
 
-  constructor(private quizService: GameService, private snackbar: MatSnackBar) {
-    quizService.game$.subscribe(value => this.game = value);
-  }
-
-  ngOnInit(): void {
-  }
+  constructor() {}
 
 }
