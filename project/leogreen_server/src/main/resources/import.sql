@@ -19,13 +19,41 @@ insert into answer(id, answer, question_id)
 values (6, 'HTL Leonding', 2);
 
 
+insert into question(id, title, quiz_id)
+    values (3, "Wie viele Quadratkilometer wurden 2022 im Amazonasgebiet abgeholzt?", 1)
+insert into answer(id, answer, question_id)
+       values (7, '11500', 3),
+           (8, '5200', 3),
+           (9, '43000', 3),
+           (10, '760', 3);
 
+update question
+    set correct_answer = 7
+    where id = 3;
 
+insert into question(id, title, quiz_id)
+values (4, "Wie viele Stunden könnte man eine Glühbirne leuchten lassen mit der Energie einer recycelten Glasflasche?", 1)
+    insert into answer(id, answer, question_id)
+values (11, '7', 4),
+    (12, '0', 4),
+    (13, '4', 4),
+    (14, '10', 4);
 
+update question
+set correct_answer = 13
+where id = 4;
 
+insert into question(id, title, quiz_id)
+values (5, "Wie oft kann ein Blatt - Papier recycelt werden?", 1)
+    insert into answer(id, answer, question_id)
+values (15, '2', 5),
+    (16, '30', 5),
+    (17, '0', 5),
+    (18, '6', 5);
 
-
-
+update question
+set correct_answer = 18
+where id = 5;
 
 insert into lesson(id, content, description, summary, title)
 values (1,
@@ -82,6 +110,6 @@ update question
 set correct_answer = 6
 where id = 2;
 
-alter sequence quiz_id_seq restart with 2;
-alter sequence question_id_seq restart with 2;
-alter sequence answer_id_seq restart with 3;
+alter sequence quiz_id_seq restart with 100;
+alter sequence question_id_seq restart with 100;
+alter sequence answer_id_seq restart with 100;
