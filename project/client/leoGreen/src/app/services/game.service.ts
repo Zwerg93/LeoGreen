@@ -1,143 +1,85 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
+import {webSocket, WebSocketSubject} from "rxjs/webSocket";
+import {Game} from "../model/game";
+import {HttpService} from "./http.service";
+import * as http from "http";
+import {numbers} from "@material/snackbar";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  private initialState: any = {
-    name: 'Starterquiz',
-    code: '123456',
-    started: false,
-    players: [
-      {
-        name: 'Fabian'
-      },
-      {
-        name: 'Lorenz'
-      },
-      {
-        name: 'Dominik'
-      },
-      {
-        name: 'Marcel'
-      },
-      {
-        name: 'ThisIsAVeryLongName'
-      },
-      {
-        name: 'Marcel'
-      },
-      {
-        name: 'Marcel'
-      },
-      {
-        name: 'Marcel'
-      },
-      {
-        name: 'Marcel'
-      },
-      {
-        name: 'Marcel'
-      },
-      {
-        name: 'Marcel'
-      },
-      {
-        name: 'Marcel'
-      },
+  activeGameIdKey = "activeGameId"
+  activeGameNameKey = "activeGameName"
+  name ?: string;
+  socket$?: WebSocketSubject<Game>
+  game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
 
 
-    ],
-    sections: [{name: "CO2 Ausstoß", id: 1}],
-    questions: [
-      {
-        header: "Wie viel CO2 Ausstoss entsteht in einem Jahr auf der ganzen Welt?",
-        answers: [{
-          text: "30 kg",
-          validAnswer: false
-        },
-          {
-            text: "4.000 kg",
-            validAnswer: false
-          },
-          {
-            text: "2 kg",
-            validAnswer: false
-          },
-          {
-            text: "165.000 kg",
-            validAnswer: true
-          }
-        ]
-      },
-      {
-        header: "Wie viele Autos waren 2021 in privaten Besitz?",
-        answers: [{
-          text: "3.4 Millionen",
-          validAnswer: false
-        },
-          {
-            text: "6.4 Millionen",
-            validAnswer: false
-          },
-          {
-            text: "5.1 Millionen",
-            validAnswer: true
-          },
-          {
-            text: "7 Millionen",
-            validAnswer: false
-          }
-        ]
-      },
-      {
-        header: "Wie viele Flüge flogen 2021 von Österreichs Flunghäfen ab?",
-        answers: [{
-          text: "62.000",
-          validAnswer: true
-        },
-          {
-            text: "16.0000",
-            validAnswer: false
-          },
-          {
-            text: "64.000",
-            validAnswer: true
-          },
-          {
-            text: "140.000",
-            validAnswer: false
-          }
-        ]
-      },
-      {
-        header: "Was ist die coolste Umweltquiz App?",
-        answers: [{
-          text: "Leogreen",
-          validAnswer: true
-        },
-          {
-            text: "Qumwelt",
-            validAnswer: false
-          },
-          {
-            text: "Leotopia",
-            validAnswer: true
-          },
-          {
-            text: "Kahoot",
-            validAnswer: false
-          }
-        ]
-      }
-    ],
-    currentQuestion: 0
-  };
+  constructor(private http : HttpService) {
+  }
 
-  game$: BehaviorSubject<any> = new BehaviorSubject<any>(this.initialState);
+  /*private setActiveGame(gameId: number, name: string){
+    sessionStorage.setItem(this.activeGameIdKey, gameId.toString())
+    sessionStorage.setItem(this.activeGameNameKey, name)
+  }
 
-  constructor() {
+  getActiveGame(): {gameId: number | null, name: string | null}{
+    let gameId: number | null = Number(sessionStorage.getItem(this.activeGameIdKey))
+    const name = sessionStorage.getItem(this.activeGameNameKey)
+    gameId = (isNaN(gameId)) ? null : gameId
+    return {gameId, name}
+  }
+
+  isActiveGame(): boolean{
+    const game = this.getActiveGame()
+    return game.gameId != null && game.name != null;
+  }
+
+  private cleanActiveGameSessionStorage(){
+    sessionStorage.removeItem(this.activeGameIdKey)
+    sessionStorage.removeItem(this.activeGameNameKey)
+  }*/
+
+  public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined>{
+    console.log(`GameService#startwebsocket(${gameId}, ${name})`)
+    this.name = name;
+    this.socket$ = webSocket(`ws://localhost:8080/quiz-game-websocket/${gameId}/${name}`)
+    this.socket$.subscribe(value => {
+      //if (!this.isActiveGame()){this.setActiveGame(gameId, name)}
+      this.onMessage(value, this.game$)
+    })
+    return this.game$
+  }
+
+  private onMessage(value: Game, game$: BehaviorSubject<Game | undefined>):void {
+    game$.next(value)
+    if (value?.state == -2){
+      this.socket$?.complete()
+      //this.cleanActiveGameSessionStorage()
+    }
+  }
+
+  private updateGameState(changes: any) {
+    if (!this.game$.value) return
+
+    this.game$.next({
+      ...this.game$.value,
+      ...changes
+    });
+
+    this.socket$?.next(this.game$.value);
+  }
+
+  increaseGameState() {
+    if (!this.game$.value || this.game$.value.state+1 >= this.game$.value.quiz.questions.length) return false
+    this.updateGameState({state: this.game$.value.state+1})
+    return true
+  }
+
+  startGame() {
+    this.updateGameState({state: 0});
   }
 }

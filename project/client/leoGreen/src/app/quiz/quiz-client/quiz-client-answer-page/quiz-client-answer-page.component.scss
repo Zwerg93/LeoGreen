@@ -21,11 +21,14 @@ p {
 }
 
 .twocolumns {
+
   justify-content: center;
   width: 100%;
   display: flex;
 
 }
+
+
 
 .rectangle {
   margin: 2vh;
@@ -33,7 +36,8 @@ p {
   width: 15vh;
   background-color: $leoGreen-button;
   padding: 2vh;
-
+  justify-content: center;
+  flex-direction: row;
   border-radius: 2vh;
 }
 

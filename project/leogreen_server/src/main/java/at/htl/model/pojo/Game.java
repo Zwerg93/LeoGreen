@@ -1,22 +1,25 @@
 package at.htl.model.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
+@Data
 public class Game implements Serializable {
-    Integer code;
-    Boolean started;
-    List<Player> players;
-    List<Question> questions;
-    Integer currentQuestion;
+    Long id;
+    Integer state;
+    List<User> users;
+    Quiz quiz;
 
-    public Game(Integer code, Boolean started, List<Player> players, List<Question> questions, Integer currentQuestion) {
-        this.code = code;
-        this.started = started;
-        this.players = players;
-        this.questions = questions;
-        this.currentQuestion = currentQuestion;
+    public Game(Long id, Integer state, List<User> users, Quiz quiz) {
+        this.id = id;
+        this.state = state;
+        this.users = users;
+        this.quiz = quiz;
+    }
+
+    public Game() {
     }
 }
 

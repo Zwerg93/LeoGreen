@@ -1,13 +1,14 @@
 package at.htl.model.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class Answer implements Serializable {
-    String text;
-    Boolean validAnswer;
+    Long id;
+    String answer;
 
-    public Answer(String text, Boolean validAnswer) {
-        this.text = text;
-        this.validAnswer = validAnswer;
+    public Answer() {
     }
 }

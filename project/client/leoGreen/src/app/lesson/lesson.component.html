@@ -1,21 +1,19 @@
 <div class="main-container container">
   <div class="row">
     <h1 class="col col-25">Info {{id}}</h1>
-    <p class="col col-75 text">In diesem Quiz geht es um die Wichtigkeit von Umweltschutz. Alle nötigen Informationen,
-      die dich über dieses Thema
-      wissen musst, findest du hier. Wenn du aber noch mehr wissen möchtest, klicke gerne andere Inhalte an.</p>
+    <p class="col col-75 text">{{summary}}</p>
   </div>
   <div class="row">
     <div class="col col-80 col-img">
-      <img class="vertical" src="assets/img_1.png" alt="fancy placeholder">
+      <img  class="vertical" src="{{images[0].name}}" alt="{{images[0].altText}}">
     </div>
     <div class="col col-20 col-img">
-      <img class="horizontal" src="assets/img_1.png" alt="fancy placeholder">
+      <img class="horizontal" src="{{images[0].name}}" alt="{{images[0].altText}}">
     </div>
   </div>
   <div class="row">
     <div class="col col-20 col-img">
-      <img class="horizontal" src="assets/img_1.png" alt="fancy placeholder">
+      <img class="horizontal" src="{{images[0].name}}" alt="{{images[0].altText}}">
     </div>
     <div class="col col-80 text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
       invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores

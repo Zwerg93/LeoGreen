@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
-import { fromEvent, Observable, Subscription } from "rxjs";
+import {HttpService} from "../../services/http.service";
+import {Quiz} from "../../model/quiz";
+import {Game} from "../../model/game";
+import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs";
+
 @Component({
   selector: 'app-quiz-host',
   templateUrl: './quiz-host.component.html',
@@ -9,27 +14,24 @@ import { fromEvent, Observable, Subscription } from "rxjs";
 })
 export class QuizHostComponent implements OnInit {
 
+  subscription ?: Subscription
+  game?: Game;
+  qrCodeSize: number = window.innerWidth / 7;
 
-  game: any;
-  qrCodeSize: number = window.innerWidth/7;
-
-
-  constructor(private quizService: GameService) {
-    quizService.game$.subscribe(value => this.game = value);
+  constructor(private http: HttpService, private quizService: GameService, private aRoute: ActivatedRoute) {
+    if (aRoute.snapshot.paramMap.get("id")) {
+      let quizId = Number(aRoute.snapshot.paramMap.get("id"))
+        this.http.postStartGame(quizId).subscribe( gameId => {this.quizService.startWebsocket(gameId).subscribe(value => {
+          this.game = value
+          console.log(value)
+        })})
+    }
   }
 
   ngOnInit(): void {
-    //this.game.started = false;
-    console.log(this.game)
   }
 
   startGame() {
-    this.quizService.game$.next({
-      ...this.quizService.game$.value,
-      started: true
-    });
+    this.quizService.startGame()
   }
-
-
-
 }

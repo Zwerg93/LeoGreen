@@ -1,18 +1,19 @@
 <div class="main" xmlns="http://www.w3.org/1999/html">
-  <ng-container *ngIf="!game.started; else Question">
+  <ng-container *ngIf="game">
+    <ng-container *ngIf="game.state == -1; else Question">
       <header>
-        <h1 id="gamecode">Pin: {{game.code}} </h1>
+        <h1 id="gamecode">Pin: {{game.id}} </h1>
       </header>
       <section class="players">
-        <h2>Spieler: {{game.players.length}}</h2>
+        <h2>Spieler: {{game.users.length}}</h2>
         <div class="p-list">
-          <div class="player" *ngFor="let player of game.players">
+          <div class="player" *ngFor="let player of game.users">
             <p class="p-name"> {{player.name}} </p>
           </div>
         </div>
       </section>
       <section class="qr-code">
-        <qr-code [size]="qrCodeSize" [value]="'http://localhost:4200/quiz/client?code=' + game.code"></qr-code>
+        <qr-code [size]="qrCodeSize" [value]="'http://localhost:4200/quiz/client?code=' + game.id"></qr-code>
       </section>
       <div class="footer">
         <p>Waiting for Players...</p>
@@ -20,7 +21,9 @@
       <section class="start">
         <button id="startbutton" mat-raised-button color="primary" (click)="startGame()">Quiz starten</button>
       </section>
+    </ng-container>
   </ng-container>
+
 
   <ng-template #Question>
     <app-quiz-host-question style="width: 100%"></app-quiz-host-question>
