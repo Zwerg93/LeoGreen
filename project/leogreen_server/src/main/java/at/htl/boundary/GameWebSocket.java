@@ -105,7 +105,7 @@ public class GameWebSocket {
             return;
         }
 
-        UserEntity user = UserEntity.create(name, 0L, game);
+        UserEntity user = UserEntity.create(name, 0L, game, false);
         this.userRepo.persist(user);
 
         if (!name.equals("admin")){
@@ -177,6 +177,11 @@ public class GameWebSocket {
     }
 
     private void handleAdmin(Game game, Long gameId) {
+        // if game state changed - all user can vote again
+        if (!game.getState().equals(gameRepo.findById(gameId).getState())){
+            userRepo.setRefreshVoteRights(gameId);
+        }
+
         game.setId(gameId);
         GameEntity gameEntity = gameRepo.merge(GameMapper.INSTANCE.gameToEntity(game));
 
@@ -206,8 +211,7 @@ public class GameWebSocket {
     public void updateAll() {
     }
 
-    public void updateGame(Long gameId, GameEntity game) {
-        //this.updatePlayer(game, gameId);
-        //TODO - Admin Id has to be saved somewhere so we can update them here (but we could also say that game state only has to be changed when he updates so maybe we don't need it)
+    public void updateAdmin(Long gameId, GameEntity game){
+        this.sessionByNameAndGameId.get(gameId).get("admin").getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(game));
     }
 }

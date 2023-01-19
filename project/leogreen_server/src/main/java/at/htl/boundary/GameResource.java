@@ -68,28 +68,31 @@ public class GameResource {
     @POST
     @Transactional
     @Path("/{gameId}/guess")
-    public Long quizGuess(@PathParam("gameId") Long gameId, Guess guess){
-
-        System.out.println(guess.getUserId() + "userid");
+    public Response quizGuess(@PathParam("gameId") Long gameId, Guess guess){
+        log(String.format("QuizGuess User#%d in Game#%d tries to voted #%s", guess.getUserId(), gameId, guess.getGuess()));
         GameEntity game = this.gameRepo.findById(gameId);
         UserEntity user = this.userRepo.find("game.id = :gameId and id = :id", Parameters.with("gameId", gameId).and("id", guess.getUserId())).stream().findFirst().orElse(null);
 
-       // System.out.println(user.getName());
-
-
-        if (game == null || user == null){
-
-            //return Response.status(Response.Status.BAD_REQUEST).build();
+        if (game == null || user == null || user.getHasVoted()){
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
-        System.out.println(game.getQuiz().getQuestions().get(game.getState()).getCorrectAnswer().getAnswer());
-        // TODO - Users has to be blocked for the question when he guess so he can't always guess
-        if (guess.getGuess().equals(game.getQuiz().getQuestions().get(game.getState()).getCorrectAnswer().getAnswer())){
+
+        boolean isRightAnswer = guess.getGuess().equals(game.getQuiz().getQuestions().get(game.getState()).getCorrectAnswer().getAnswer());
+        user.setHasVoted(true);
+        
+        if (isRightAnswer){
             user.setPoints(user.getPoints() + 100);
-            System.out.println("Correct Answer " );
-            this.userRepo.merge(user);
         }
-        //this.webSocket.updateGame(gameId, game);
-        System.out.println(user.getPoints());
-        return user.getPoints();
+        this.userRepo.merge(user);
+        if (isRightAnswer){
+            this.webSocket.updateAdmin(gameId, game);
+        }
+
+        return Response.ok().build();
+    }
+
+
+    private void log(String str){
+        System.out.println("GameService: ".concat(str));
     }
 }

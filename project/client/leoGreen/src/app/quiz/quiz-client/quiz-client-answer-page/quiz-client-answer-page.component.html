@@ -2,7 +2,7 @@
      *ngIf="name && game && game.state != -1; else showWaiting">
   <section class="score">
     <!--    <p>Your score: {{game.users[getArrayPositionOfUser()].points ?? 0}}</p>-->
-    <p>Your score: {{score}}</p>
+    <p>Your score: {{game.users[getArrayPositionOfUser()].points}}</p>
 
   </section>
 

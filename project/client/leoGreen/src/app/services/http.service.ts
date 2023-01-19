@@ -34,9 +34,8 @@ export class HttpService {
     return this.http.get<boolean>(`api/game/active/${gameId}`)
   }
 
-  checkAnswer(gameId: number, guess: GuessModel): Observable<number> {
-    return this.http.post<number>(`/api/game/${gameId}/guess`, guess);
+  checkAnswer(gameId: number, guess: GuessModel): Observable<any> {
+    return this.http.post(`/api/game/${gameId}/guess`, guess);
   }
-
 
 }

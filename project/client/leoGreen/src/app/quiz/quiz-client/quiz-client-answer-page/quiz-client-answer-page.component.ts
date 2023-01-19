@@ -18,7 +18,6 @@ export class QuizClientAnswerPageComponent implements OnInit {
   userId?: number;
   userName?: String;
   guess?: GuessModel;
-  score: number = 0;
   tmp?:number;
 
   shapes = [
@@ -33,6 +32,8 @@ export class QuizClientAnswerPageComponent implements OnInit {
       if (value) {
         this.game = value;
         this.name = gameService.name;
+
+        console.log(value)
       } else {
         route.navigate(["/quiz/client"])
       }
@@ -49,24 +50,20 @@ export class QuizClientAnswerPageComponent implements OnInit {
       userId: this.userId!,
       guess: answer
     }
-    console.table(this.game!.quiz.questions[this.game!.state].answers)
 
-
-    this.http.checkAnswer(this.game!.id, this.guess!).subscribe((c => {
-      this.score = c;
-      if(c < 1 ){
-        this.snackbar.open("Wrong Answer", "", {duration: 1000});
-
-      }
-      console.log(c);
-    }))
-
+    this.http.checkAnswer(this.game!.id, this.guess!).subscribe(
+      value => {
+        this.snackbar.open("Successfully Voted", "", {duration: 500})
+      },
+      error => {
+        this.snackbar.open("Already Voted", "", {duration: 500})
+      });
   }
+
 
   getArrayPositionOfUser(): number {
     if (this.name && this.game) {
       return this.game.users.findIndex(value => {
-
         this.userId = value.id;
         this.userName == this.name
         return value.name == this.name

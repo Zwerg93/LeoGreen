@@ -10,4 +10,11 @@ public class UserRepo implements PanacheRepository<UserEntity> {
     public void merge(UserEntity user) {
         this.getEntityManager().merge(user);
     }
+
+    public void setRefreshVoteRights(Long gameId) {
+        this.getEntityManager().createQuery("""
+                update UserEntity u set u.hasVoted = false where u.game.id = :gameId
+            """).setParameter("gameId", gameId)
+                .executeUpdate();
+    }
 }
