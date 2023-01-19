@@ -1,14 +1,21 @@
 insert into quiz(id, topic)
 values (1, 'TestQuiz');
+
 insert into question(id, title, quiz_id)
 values (1, 'What is the best quiz website?', 1);
+
 insert into answer(id, answer, question_id)
 values (1, 'Leogreen', 1);
 insert into answer(id, answer, question_id)
 values (2, 'Kahoot', 1);
 
+update question
+set correct_answer = 1
+where id = 1;
+
 insert into question(id, title, quiz_id)
 values (2, 'What is the best School?', 1);
+
 insert into answer(id, answer, question_id)
 values (3, 'Khevenhüller', 2);
 insert into answer(id, answer, question_id)
@@ -18,9 +25,12 @@ values (5, 'HAK', 2);
 insert into answer(id, answer, question_id)
 values (6, 'HTL Leonding', 2);
 
+update question
+set correct_answer = 6
+where id = 2;
 
 insert into question(id, title, quiz_id)
-    values (3, "Wie viele Quadratkilometer wurden 2022 im Amazonasgebiet abgeholzt?", 1)
+    values (3, 'Wie viele Quadratkilometer wurden 2022 im Amazonasgebiet abgeholzt?', 1);
 insert into answer(id, answer, question_id)
        values (7, '11500', 3),
            (8, '5200', 3),
@@ -32,7 +42,7 @@ update question
     where id = 3;
 
 insert into question(id, title, quiz_id)
-values (4, "Wie viele Stunden könnte man eine Glühbirne leuchten lassen mit der Energie einer recycelten Glasflasche?", 1)
+values (4, 'Wie viele Stunden könnte man eine Glühbirne leuchten lassen mit der Energie einer recycelten Glasflasche?', 1);
     insert into answer(id, answer, question_id)
 values (11, '7', 4),
     (12, '0', 4),
@@ -44,7 +54,7 @@ set correct_answer = 13
 where id = 4;
 
 insert into question(id, title, quiz_id)
-values (5, "Wie oft kann ein Blatt - Papier recycelt werden?", 1)
+values (5, 'Wie oft kann ein Blatt - Papier recycelt werden?', 1);
     insert into answer(id, answer, question_id)
 values (15, '2', 5),
     (16, '30', 5),
@@ -100,15 +110,6 @@ values (7,
 
 
 insert into picture (name, altText) values ('http://localhost:8080/picture/get/img_1.png', 'Placeholder');
-
-
-update question
-set correct_answer = 1
-where id = 1;
-
-update question
-set correct_answer = 6
-where id = 2;
 
 alter sequence quiz_id_seq restart with 100;
 alter sequence question_id_seq restart with 100;
