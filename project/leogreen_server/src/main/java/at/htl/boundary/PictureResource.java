@@ -79,14 +79,8 @@ public class PictureResource {
             try {
                 MultivaluedMap<String, String> header = inputPart.getHeaders();
                 fileName = getFileName(header);
-
-
                 InputStream inputStream = inputPart.getBody(InputStream.class, null);
                 System.out.println(fileName);
-
-                //postURL = "/api/uploadFile/download/" + fileName;
-                //postURL = "http://localhost:8080/uploadFile/download/" + fileName;
-
                 postURL = "http://localhost:8080/picture/get/" + fileName;
                 System.out.println(postURL);
                 PictureEntity picture = new PictureEntity(postURL, "");

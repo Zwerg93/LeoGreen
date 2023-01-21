@@ -1,5 +1,5 @@
 insert into quiz(id, topic)
-values (1, 'TestQuiz');
+values (1, 'Quiz about some hot topics');
 
 insert into question(id, title, quiz_id)
 values (1, 'What is the best quiz website?', 1);
@@ -64,6 +64,61 @@ values (15, '2', 5),
 update question
 set correct_answer = 18
 where id = 5;
+
+
+
+insert into question(id, title, quiz_id)
+values (6, 'Wie viele Tonnen CO2 werden jährlich durch den Verkehr ausgestoßen?', 1);
+insert into answer(id, answer, question_id)
+values (19, '10 Millionen Tonnen', 6),
+       (20, '50 Millionen Tonnen', 6),
+       (21, '100 Millionen Tonnen', 6),
+       (22, '500 Millionen Tonnen', 6);
+
+update question
+set correct_answer = 22
+where id = 6;
+
+insert into question(id, title, quiz_id)
+values (7, 'Welches Land ist der größte Verursacher von Treibhausgasemissionen?', 1);
+insert into answer(id, answer, question_id)
+values (23, 'USA', 7),
+       (24, 'China', 7),
+       (25, 'Kanada', 7),
+       (26, 'Deutschland', 7);
+
+update question
+set correct_answer = 24
+where id = 7;
+
+insert into question(id, title, quiz_id)
+values (8, 'Wie viele Bäume müssen pro Jahr gepflanzt werden, um den CO2-Ausstoß auszugleichen?', 1);
+insert into answer(id, answer, question_id)
+values (27, '100', 8),
+       (28, '1.000', 8),
+       (29, '10.000', 8),
+       (30, '100.000', 8);
+
+update question
+set correct_answer = 29
+where id = 8;
+
+insert into question(id, title, quiz_id)
+values (9, 'Welche Art von Energie ist die umweltfreundlichste?', 1);
+insert into answer(id, answer, question_id)
+values (31, 'Kohle', 9),
+       (32, 'Erdgas', 9),
+       (33, 'Solar', 9),
+       (34, 'Kernenergie', 9);
+
+update question
+set correct_answer = 33
+where id = 9;
+
+
+
+
+
 
 insert into lesson(id, content, description, summary, title)
 values (1,
