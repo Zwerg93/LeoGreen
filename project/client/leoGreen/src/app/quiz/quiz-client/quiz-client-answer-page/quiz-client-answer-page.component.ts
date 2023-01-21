@@ -53,10 +53,10 @@ export class QuizClientAnswerPageComponent implements OnInit {
 
     this.http.checkAnswer(this.game!.id, this.guess!).subscribe(
       value => {
-        this.snackbar.open("Successfully Voted", "", {duration: 500})
+        this.snackbar.open("Successfully Voted", "", {duration: 1500})
       },
       error => {
-        this.snackbar.open("Already Voted", "", {duration: 500})
+        this.snackbar.open("Already Voted", "", {duration: 1500})
       });
   }
 

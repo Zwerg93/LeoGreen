@@ -11,10 +11,15 @@
       <div *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index">
         <div *ngIf="i < 2" (click)="checkAnswer(answer.answer)" class="rectangle"><img
           [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape"></div>
-
+      </div>
+    </div>
+    <div class="twocolumns">
+      <div *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index">
         <div *ngIf="i >=2" (click)="checkAnswer(answer.answer)" class="rectangle"><img
           [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape"></div>
       </div>
+
+
     </div>
 
   </section>
