@@ -17,7 +17,7 @@ export class QuizHostComponent implements OnInit {
 
   subscription ?: Subscription
   game?: Game;
-  qrCodeSize: number = window.innerWidth / 7;
+  qrCodeSize: number = window.innerHeight / 10;
   qrCodeLink?: string;
 
   constructor(private http: HttpService, private quizService: GameService,
