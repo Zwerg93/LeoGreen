@@ -81,7 +81,8 @@ public class GameResource {
         user.setHasVoted(true);
         
         if (isRightAnswer){
-            user.setPoints(user.getPoints() + 100);
+            long points = userRepo.calcPoints(gameId);
+            user.setPoints(user.getPoints() + points);
         }
         this.userRepo.merge(user);
         if (isRightAnswer){
