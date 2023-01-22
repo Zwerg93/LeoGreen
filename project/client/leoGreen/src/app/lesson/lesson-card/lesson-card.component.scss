@@ -4,7 +4,7 @@
   height: calc(10vh + 10rem);
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  background-color: $leoGreen-button;
+  background-color: $leogreen-button;
   border: 0 solid;
   border-radius: 1rem;
 
@@ -20,6 +20,10 @@
     overflow-y: hidden;
     overflow-x: hidden;
 
+    > h1 {
+      font-weight: 800;
+    }
+
     > p {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -27,6 +31,11 @@
       -webkit-line-clamp: 3;
       line-clamp: 3;
       -webkit-box-orient: vertical;
+    }
+
+    > button {
+      width: 100%;
+      background-color: $leogreen-button-accent;
     }
   }
 }

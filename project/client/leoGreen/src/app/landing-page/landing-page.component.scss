@@ -1,33 +1,37 @@
 @import "src/styles";
 
-.landing-page-container{
-  background-color: $leoGreen-button;
+.landing-page-container {
+  background-color: $leogreen-background;
   height: 100%;
+  box-sizing: border-box;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.landing-page-nav{
+.landing-page-nav {
   display: flex;
   justify-content: space-between;
 
-  > p{
+  > p {
     margin: 0;
-    font-size: calc(.7vw + 1rem);
+    font-size: 1.8rem;
+    line-height: 2rem;
   }
 
-  > img{
+  > img {
     height: 10vh;
   }
 }
 
-.leogreen-main-header{
+.leogreen-main-header {
   align-self: center;
-  > div{
+
+  > div {
     display: flex;
     align-items: baseline;
+
     > * {
       font-size: 10vh;
       height: 6.5vh;
@@ -35,41 +39,48 @@
     }
   }
 
-  h2{
+  h2 {
     font-size: 3vh;
   }
 }
 
-.landing-page-footer{
+.landing-page-footer {
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 
-  > h5{
-    font-size: 4vh;
+  > h5 {
+    font-size: 2.5rem;
+    font-weight: 800;
     margin: 0;
   }
 
-  > .landing-page-statistics{
+  > .landing-page-subpages {
     display: flex;
     align-items: center;
-    > *{
+    justify-content: center;
+
+    > * {
       margin: 0;
-      font-size: 5vh;
-      height: 5vh;
+      font-size: 2rem;
+    }
+
+    > h6 {
+      font-weight: 700;
+      margin: 0 2rem 0 .5rem;
     }
   }
 }
 
 @media only screen and (max-width: 500px) {
-  .landing-page-footer{
+  .landing-page-footer {
     flex-direction: column;
   }
 
-  .landing-page-nav > p{
-      font-size: calc(.5vw + .7rem);
-    }
+  .landing-page-nav > p {
+    font-size: calc(.5vw + .7rem);
+  }
 
   .leogreen-main-header > div > * {
     font-size: 5vh;
@@ -77,11 +88,12 @@
   }
 
   .landing-page-footer {
-    h5{
+    h5 {
       font-size: 2vh;
       margin-bottom: 1vh;
     }
-    > .landing-page-statistics > * {
+
+    > .landing-page-subpages > * {
       font-size: 2.5vh;
       height: 2.5vh;
     }

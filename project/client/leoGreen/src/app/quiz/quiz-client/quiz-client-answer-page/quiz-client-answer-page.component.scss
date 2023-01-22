@@ -5,15 +5,19 @@ p {
   color: #fff;
 }
 
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+}
+
 .elements {
   margin-top: 20vh;
 
 }
 
 .score {
-  text-align: right;
-  margin-right: 5vw;
-
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .score p {
@@ -21,20 +25,16 @@ p {
 }
 
 .twocolumns {
-
   justify-content: center;
   width: 100%;
   display: flex;
-
 }
-
-
 
 .rectangle {
   margin: 2vh;
   height: 15vh;
   width: 15vh;
-  background-color: $leoGreen-button;
+  background-color: $leogreen-button;
   padding: 2vh;
   justify-content: center;
   flex-direction: row;
@@ -46,13 +46,16 @@ p {
   aspect-ratio: 1/1;
   object-fit: contain;
 }
-.username {
 
-}
-.username p{
+.username {
   position: absolute;
   bottom: 1%;
-  font-size: 2vh;
-  text-align: left;
-  margin-left: 1vh;
+  left: 0;
+  right: 0;
+}
+
+.username p {
+  font-size: 1.2rem;
+  line-height: 1.32rem;
+  text-align: center;
 }

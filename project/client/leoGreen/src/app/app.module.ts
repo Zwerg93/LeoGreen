@@ -28,6 +28,7 @@ import {MatIconModule} from "@angular/material/icon";
 import { NavOverlayPointsComponent } from './navbar/nav-overlay-points/nav-overlay-points.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from "@angular/common/http";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -47,22 +48,23 @@ import {HttpClientModule} from "@angular/common/http";
     LessonCardComponent,
     NavOverlayPointsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NoopAnimationsModule,
-    MatButtonModule,
-    QRCodeModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatIconModule,
-    MatTooltipModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NoopAnimationsModule,
+        MatButtonModule,
+        QRCodeModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatCheckboxModule,
+        MatMenuModule,
+        MatIconModule,
+        MatTooltipModule,
+        HttpClientModule,
+        MatProgressSpinnerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
