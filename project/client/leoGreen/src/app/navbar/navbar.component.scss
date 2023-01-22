@@ -1,24 +1,29 @@
 @import "src/styles";
 
-.nav-container{
+.nav-container {
   height: $navbar-height;
-  background-color: $leogreen-button;
+  background-color: $leogreen-background-accent;
   padding: 0 2rem;
-  color: $leogreen-color;
+  color: $leogreen-color-accent;
+  font-weight: 600;
   display: flex;
   align-self: center;
 
-  .inside-nav-container{
-    display: flex; align-items: baseline;margin: auto 0;
+  .inside-nav-container {
+    display: flex;
+    align-items: baseline;
+    margin: auto 0;
+
     * {
       margin-right: calc(2rem + 2vw)
     }
   }
-  #leogreenLogo{
+
+  #leogreenLogo {
     height: $navbar-height * .7;
   }
 
-  .right-aligned{
+  .right-aligned {
     margin-left: auto;
     align-self: center;
   }
@@ -27,11 +32,13 @@
     margin: 0;
   }
 
-  .active{
+  h1 {
+    font-weight: 700;
+  }
+
+  .active {
     @extend .drop-shadow;
 
-    background: linear-gradient(180deg, #33FF00 0%, #00E0FF 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
 }

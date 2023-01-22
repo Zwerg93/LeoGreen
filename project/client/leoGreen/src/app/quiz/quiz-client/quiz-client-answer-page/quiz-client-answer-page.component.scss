@@ -21,14 +21,10 @@ p {
 }
 
 .twocolumns {
-
   justify-content: center;
   width: 100%;
   display: flex;
-
 }
-
-
 
 .rectangle {
   margin: 2vh;
@@ -46,10 +42,12 @@ p {
   aspect-ratio: 1/1;
   object-fit: contain;
 }
+
 .username {
 
 }
-.username p{
+
+.username p {
   position: absolute;
   bottom: 1%;
   font-size: 2vh;

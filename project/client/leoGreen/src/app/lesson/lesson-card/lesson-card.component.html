@@ -1,9 +1,9 @@
 <div class="lesson-card-container">
   <img src="assets/img_1.png">
-  <div class="custom-navbar">
+  <div class="custom-scrollbar">
     <h1>{{title}}</h1>
     <p>{{description}}</p>
-    <button mat-raised-button color="accent" style="width: 100%" [routerLink]="['../lesson/'.concat(((id)? id : 0).toString())]">Ansehen</button>
+    <button mat-raised-button [routerLink]="['../lesson/'.concat(((id)? id : 0).toString())]">Ansehen</button>
 
   </div>
 </div>

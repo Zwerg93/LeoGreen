@@ -20,6 +20,10 @@
     overflow-y: hidden;
     overflow-x: hidden;
 
+    > h1 {
+      font-weight: 800;
+    }
+
     > p {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -27,6 +31,11 @@
       -webkit-line-clamp: 3;
       line-clamp: 3;
       -webkit-box-orient: vertical;
+    }
+
+    > button {
+      width: 100%;
+      background-color: $leogreen-button-accent;
     }
   }
 }

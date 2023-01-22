@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -41,13 +40,24 @@ $leogreen-theme: mat.define-dark-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%;}
-$leogreen-background: #8EA4D2;
+html, body {
+  height: 100%;
+}
+
+$leogreen-background: #323478;
+$leogreen-background-accent: #ffffff;
 $leogreen-color: #f8eae0;
-$leogreen-button: #323478;
+$leogreen-color-accent: #323478;
+$leogreen-button: #666AD0;
+$leogreen-button-accent: #2A65E1;
 $mobileWidth: 768px;
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $leogreen-background; color: $leogreen-color;}
+body {
+  margin: 0;
+  font-weight: 500;
+  background-color: $leogreen-background;
+  color: $leogreen-color;
+}
 
 $navbar-height: 10vh;
 $container-margin-size: calc(4vw + 4rem);
@@ -63,18 +73,19 @@ $container-margin-size: calc(4vw + 4rem);
   padding-right: $container-margin-size;
 }
 
-.drop-shadow{
+.drop-shadow {
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
 }
 
-.display-none{
+.display-none {
   display: none;
 }
 
-.hideIfSmall{
+.hideIfSmall {
   display: none;
 }
-.showIfBig{
+
+.showIfBig {
   display: inherit;
 }
 
@@ -84,32 +95,32 @@ $container-margin-size: calc(4vw + 4rem);
     padding-right: calc($container-margin-size * 2);
   }
 
-  .hideIfSmall{
+  .hideIfSmall {
     display: inherit;
   }
 
-  .showIfBig{
+  .showIfBig {
     display: none;
   }
 }
 
-.center{
+.center {
   display: block;
   margin-right: auto;
   margin-left: auto;
 }
 
-.center-inner{
+.center-inner {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.btn-disabled{
+.btn-disabled {
   filter: grayscale(.7);
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
@@ -119,11 +130,12 @@ $container-margin-size: calc(4vw + 4rem);
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                   supported by Chrome, Edge, Opera and Firefox */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
 }
 
-.custom-navbar{
+.custom-scrollbar {
   &::-webkit-scrollbar {
     width: .5rem;
   }
@@ -145,6 +157,6 @@ $container-margin-size: calc(4vw + 4rem);
 }
 
 // Override AngularMaterial
-.mat-form-field-appearance-outline .mat-form-field-outline{
+.mat-form-field-appearance-outline .mat-form-field-outline {
   color: $leogreen-color;
 }
