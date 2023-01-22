@@ -50,6 +50,7 @@ export class QuizClientAnswerPageComponent implements OnInit {
       userId: this.userId!,
       guess: answer
     }
+    console.log(this.game?.state + " state")
 
     this.http.checkAnswer(this.game!.id, this.guess!).subscribe(
       value => {
