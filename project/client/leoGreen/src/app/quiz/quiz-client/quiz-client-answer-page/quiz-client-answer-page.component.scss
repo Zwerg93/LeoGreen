@@ -5,15 +5,19 @@ p {
   color: #fff;
 }
 
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+}
+
 .elements {
   margin-top: 20vh;
 
 }
 
 .score {
-  text-align: right;
-  margin-right: 5vw;
-
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .score p {
@@ -44,13 +48,14 @@ p {
 }
 
 .username {
-
+  position: absolute;
+  bottom: 1%;
+  left: 0;
+  right: 0;
 }
 
 .username p {
-  position: absolute;
-  bottom: 1%;
-  font-size: 2vh;
-  text-align: left;
-  margin-left: 1vh;
+  font-size: 1.2rem;
+  line-height: 1.32rem;
+  text-align: center;
 }
