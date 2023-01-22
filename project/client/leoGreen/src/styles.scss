@@ -1,48 +1,63 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
 
+$font-level: mat.define-typography-config(
+  // Specify "Poppins" as the default font family for all levels.
+  $font-family: 'Poppins'
+);
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat.core($font-level);
 
 // Define the palettes for your thseme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$leoGreen-primary: mat.define-palette(mat.$indigo-palette);
-$leoGreen-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$leogreen-primary: mat.define-palette(mat.$indigo-palette);
+$leogreen-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 
 // The warn palette is optional (defaults to red).
-$leoGreen-warn: mat.define-palette(mat.$red-palette);
+$leogreen-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$leoGreen-theme: mat.define-light-theme((
+$leogreen-theme: mat.define-dark-theme((
   color: (
-    primary: $leoGreen-primary,
-    accent: $leoGreen-accent,
-    warn: $leoGreen-warn,
+    primary: $leogreen-primary,
+    accent: $leogreen-accent,
+    warn: $leogreen-warn,
   )
 ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($leoGreen-theme);
+@include mat.all-component-themes($leogreen-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%;}
-$leogreen-background: #8EA4D2;
+html, body {
+  height: 100%;
+}
+
+$leogreen-background: #323478;
+$leogreen-background-accent: #ffffff;
 $leogreen-color: #f8eae0;
-$leoGreen-button: #323478;
+$leogreen-color-accent: #323478;
+$leogreen-button: #666AD0;
+$leogreen-button-accent: #2A65E1;
 $mobileWidth: 768px;
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $leogreen-background; color: $leogreen-color;}
+body {
+  margin: 0;
+  font-weight: 500;
+  background-color: $leogreen-background;
+  color: $leogreen-color;
+}
 
 $navbar-height: 10vh;
 $container-margin-size: calc(4vw + 4rem);
@@ -58,18 +73,19 @@ $container-margin-size: calc(4vw + 4rem);
   padding-right: $container-margin-size;
 }
 
-.drop-shadow{
+.drop-shadow {
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
 }
 
-.display-none{
+.display-none {
   display: none;
 }
 
-.hideIfSmall{
+.hideIfSmall {
   display: none;
 }
-.showIfBig{
+
+.showIfBig {
   display: inherit;
 }
 
@@ -79,32 +95,32 @@ $container-margin-size: calc(4vw + 4rem);
     padding-right: calc($container-margin-size * 2);
   }
 
-  .hideIfSmall{
+  .hideIfSmall {
     display: inherit;
   }
 
-  .showIfBig{
+  .showIfBig {
     display: none;
   }
 }
 
-.center{
+.center {
   display: block;
   margin-right: auto;
   margin-left: auto;
 }
 
-.center-inner{
+.center-inner {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.btn-disabled{
+.btn-disabled {
   filter: grayscale(.7);
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
@@ -114,11 +130,12 @@ $container-margin-size: calc(4vw + 4rem);
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                   supported by Chrome, Edge, Opera and Firefox */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
 }
 
-.custom-navbar{
+.custom-scrollbar {
   &::-webkit-scrollbar {
     width: .5rem;
   }
@@ -140,6 +157,6 @@ $container-margin-size: calc(4vw + 4rem);
 }
 
 // Override AngularMaterial
-.mat-form-field-appearance-outline .mat-form-field-outline{
+.mat-form-field-appearance-outline .mat-form-field-outline {
   color: $leogreen-color;
 }

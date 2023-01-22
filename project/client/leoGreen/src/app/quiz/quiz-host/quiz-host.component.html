@@ -2,24 +2,35 @@
   <ng-container *ngIf="game">
     <ng-container *ngIf="game.state == -1; else Question">
       <header>
-        <h1 id="gamecode">Pin: {{game.id}} </h1>
+        <h1>Quiz Beitreten</h1>
+        <div class="right">
+          <h1 id="gamecode">Pin: {{game.id}} </h1>
+          <qr-code [size]="qrCodeSize" *ngIf="qrCodeLink" [value]="qrCodeLink"></qr-code>
+        </div>
       </header>
+      <section class="start">
+        <div>
+          <div class="player-count">
+            <h2>Spieler: {{game.users.length}}</h2>
+          </div>
+        </div>
+        <h2>{{game.quiz.topic}}</h2>
+        <div class="button-div">
+          <button id="startbutton" mat-raised-button color="primary" (click)="startGame()">Starten</button>
+        </div>
+      </section>
       <section class="players">
-        <h2>Spieler: {{game.users.length}}</h2>
         <div class="p-list">
           <div class="player" *ngFor="let player of game.users">
             <p class="p-name"> {{player.name}} </p>
           </div>
         </div>
       </section>
-      <section class="qr-code">
-        <qr-code [size]="qrCodeSize" *ngIf="qrCodeLink" [value]="qrCodeLink"></qr-code>
-      </section>
       <div class="footer">
-        <p>Waiting for Players...</p>
+        <mat-icon aria-hidden="false" aria-label="progress spinner" fontIcon="autorenew"></mat-icon>
+        <p>Warten auf andere Spieler</p>
       </div>
       <section class="start">
-        <button id="startbutton" mat-raised-button color="primary" (click)="startGame()">Quiz starten</button>
       </section>
     </ng-container>
   </ng-container>

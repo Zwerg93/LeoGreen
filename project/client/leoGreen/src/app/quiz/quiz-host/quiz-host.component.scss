@@ -1,22 +1,78 @@
+@import "src/styles";
+
 .main {
-  display: grid;
-  grid-template-areas:
-    "header side"
-    "players side"
-    "footer footer"
-    "bottom bottom";
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1fr 5fr 1fr 1fr;
-  max-height: 80vh;
+  position: relative;
+  height: 70vh;
   padding: 5vh 10vw;
 }
 
 header {
   grid-area: header;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  h1 {
+    font-weight: 800;
+    font-size: 3rem;
+
+    &#gamecode {
+      font-size: 2rem;
+    }
+  }
+
+  > .right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    > h1 {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.start {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+
+  h2 {
+    font-weight: 700;
+    font-size: 2rem;
+  }
+
+  > * {
+    width: 30vw;
+  }
+
+  .button-div {
+    text-align: end;
+
+    button {
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 0.3vh 0.5vw;
+      border-radius: 0.9rem;
+      background-color: $leogreen-button;
+      color: $leogreen-color;
+    }
+  }
+
+  .player-count {
+    text-align: start;
+  }
 }
 
 .players {
-  grid-area: players;
+  margin-top: 2rem;
+  max-height: 65vh;
   overflow: hidden;
 }
 
@@ -28,10 +84,11 @@ header {
 
 .p-list > .player {
   flex: 1 0 calc(33% - 1rem);
-  padding-left: 1rem;
 }
+
 .p-name {
   font-size: 1.8rem;
+  line-height: 2rem;
 }
 
 .qr-code {
@@ -42,17 +99,23 @@ header {
   grid-area: footer;
 }
 
-.start {
+.footer {
   display: flex;
-  grid-area: bottom;
-  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   align-items: center;
   justify-content: center;
+  > p {
+    margin: 0 .5rem;
+  }
+  > mat-icon {
+    animation: spin 1s linear infinite;
+  }
 }
 
-.start > button {
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 1rem 5rem;
-  border-radius: .75rem;
+@keyframes spin {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
 }
