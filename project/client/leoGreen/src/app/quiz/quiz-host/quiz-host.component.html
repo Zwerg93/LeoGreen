@@ -13,7 +13,7 @@
         </div>
       </section>
       <section class="qr-code">
-        <qr-code [size]="qrCodeSize" [value]="'http://localhost:4200/quiz/client?code=' + game.id"></qr-code>
+        <qr-code [size]="qrCodeSize" *ngIf="qrCodeLink" [value]="qrCodeLink"></qr-code>
       </section>
       <div class="footer">
         <p>Waiting for Players...</p>
