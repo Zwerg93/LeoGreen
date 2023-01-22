@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appsrv
-          image: ghcr.io/zwerg93/webpack-demo:latest
+          image: ghcr.io/zwerg93/leogreen-server:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

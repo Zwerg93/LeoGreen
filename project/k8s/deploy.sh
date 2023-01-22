@@ -3,8 +3,8 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-docker image tag zwerg93/webpack-demo:1.0.0-SNAPSHOT ghcr.io/zwerg93/webpack-demo:latest
-docker push ghcr.io/zwerg93/webpack-demo:latest
+docker image tag zwerg93/leogreen-server:1.0-SNAPSHOT ghcr.io/zwerg93/leogreen-server:latest
+docker push ghcr.io/zwerg93/leogreen-server:latest
 kubectl delete -f appsrv.yaml
 kubectl delete -f busybox-job.yaml
 kubectl apply -f namespace.yaml

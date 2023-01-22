@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-pushd backend
+pushd leogreen_server
 mvn clean package install
 popd
 
