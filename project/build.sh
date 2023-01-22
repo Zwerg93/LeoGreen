@@ -4,7 +4,7 @@ pushd leogreen_server
 mvn clean package install
 popd
 
-pushd www
+pushd client/leoGreen
 npm install
 npm run build
 popd
@@ -13,6 +13,6 @@ pushd k8s
 ./deploy.sh
 popd
 
-pushd www
+pushd client/leoGreen
 ./deploy.sh
 popd
