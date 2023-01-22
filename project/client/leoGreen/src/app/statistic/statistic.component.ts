@@ -1,50 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {GameService} from "../services/game.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
+import {Game} from "../model/game";
+import {User} from "../model/user";
 
 @Component({
   selector: 'app-statistic',
   templateUrl: './statistic.component.html',
   styleUrls: ['./statistic.component.scss']
 })
-export class StatisticComponent implements OnInit {
-  selectetFile: any;
-  constructor(private http: HttpClient) { }
+export class StatisticComponent implements OnInit, AfterViewInit {
+  game?: Game;
+  topUsers?: User[];
+  constructor(private gameService: GameService, private snackbar: MatSnackBar, private router: Router) {
+    this.gameService.game$.subscribe(value => this.game = value);
+  }
 
   ngOnInit(): void {
-  }
-  // @ts-ignore
-  onFIleSelected(event) {
-    console.log(event)
-    this.selectetFile = <File>event.target.files[0];
+    this.topUsers = this.game?.users
+      .sort((a, b) => b.points - a.points)
+      .slice(0, 3);
   }
 
-  onUpload() {
-    var output =this.selectetFile.name.replace(/[\[\]']+/g,'');
-
-    const fd = new FormData();
-
-    fd.append('uploadedFile', this.selectetFile, output);
-
-    this.http.post('http://localhost:8080/picture/upload', fd).subscribe(
-      result => {
-      },
-      error => {
-        // @ts-ignore
-        this.errors = error;
-        document.getElementById("showresult")!.innerHTML = "<fieldset>\n" +
-          "    <div >\n" +
-          "<p>Error. Pls try again!</p>" +
-          "    </div>\n" +
-          "  </fieldset>"
-      },
-      () => {
-        document.getElementById("showresult")!.innerHTML = "<fieldset>\n" +
-          "    <div >\n" +
-          "<p>Succes!</p>" +
-          "    </div>\n" +
-          "  </fieldset>"
-      }
-    );
+  ngAfterViewInit(): void {
   }
+
+
 
 }
