@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {HttpService} from "../../services/http.service";
-import {Quiz} from "../../model/quiz";
 import {Game} from "../../model/game";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {PlatformLocation} from "@angular/common";
 

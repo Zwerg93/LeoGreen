@@ -27,13 +27,16 @@ export class QuizClientAnswerPageComponent implements OnInit {
     "diamond"
   ];
 
-  constructor(gameService: GameService, route: Router, private http: HttpService,  private snackbar: MatSnackBar) {
+  constructor(gameService: GameService, route: Router, private http: HttpService,  private snackbar: MatSnackBar, private router: Router) {
     gameService.game$.subscribe(value => {
       if (value) {
         this.game = value;
         this.name = gameService.name;
 
-        console.log(value)
+        if(this.game.state == -3){
+          this.router.navigate(['/statistic'])
+        }
+
       } else {
         route.navigate(["/quiz/client"])
       }
