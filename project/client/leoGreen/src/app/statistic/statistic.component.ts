@@ -12,7 +12,12 @@ import {User} from "../model/user";
 })
 export class StatisticComponent implements OnInit, AfterViewInit {
   game?: Game;
-  topUsers?: User[];
+  topUsers?: User[] = [
+    new User(-1, 'Fabian', 2222),
+    new User(-2, 'Lorens', 1),
+    new User(-3, 'Parcel', 0)
+  ];
+
   constructor(private gameService: GameService, private snackbar: MatSnackBar, private router: Router) {
     this.gameService.game$.subscribe(value => this.game = value);
   }
@@ -25,7 +30,5 @@ export class StatisticComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
   }
-
-
 
 }

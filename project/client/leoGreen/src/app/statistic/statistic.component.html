@@ -1,0 +1,22 @@
+<div class="main-container">
+  <div class="card">
+    <h1>Statistik</h1>
+    <div class="leaderboard" *ngIf="topUsers">
+      <div class="placement second" *ngIf="topUsers[1]">
+        <p>Platz 2</p>
+        <p>{{topUsers[1].name}}</p>
+        <p>Punkte: {{topUsers[1].points}}</p>
+      </div>
+      <div class="placement first" *ngIf="topUsers[0]">
+        <p>Platz 1</p>
+        <p>{{topUsers[0].name}}</p>
+        <p>Punkte: {{topUsers[0].points}}</p>
+      </div>
+      <div class="placement third" *ngIf="topUsers[2]">
+        <p>Platz 3</p>
+        <p>{{topUsers[2].name}}</p>
+        <p>Punkte: {{topUsers[2].points}}</p>
+      </div>
+    </div>
+  </div>
+</div>
