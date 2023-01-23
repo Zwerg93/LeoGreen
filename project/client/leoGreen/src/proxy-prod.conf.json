@@ -1,6 +1,6 @@
 {
-  "/api/*": {
-    "target": "http://localhost:8080/",
+  "/m.pouget/api/*": {
+    "target": "http://quarkus:8080/m.pouget/",
     "pathRewrite": {
       "^/api" : ""
     },

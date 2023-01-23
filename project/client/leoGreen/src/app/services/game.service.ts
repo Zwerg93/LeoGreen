@@ -44,7 +44,7 @@ export class GameService {
   public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined>{
     console.log(`GameService#startwebsocket(${gameId}, ${name})`)
     this.name = name;
-    this.socket$ = webSocket(`ws://localhost:8080/quiz-game-websocket/${gameId}/${name}`)
+    this.socket$ = webSocket(`ws://api/quiz-game-websocket/${gameId}/${name}`)
     this.socket$.subscribe(value => {
       //if (!this.isActiveGame()){this.setActiveGame(gameId, name)}
       this.onMessage(value, this.game$)
