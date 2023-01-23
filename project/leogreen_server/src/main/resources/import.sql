@@ -1,33 +1,7 @@
 insert into quiz(id, topic)
 values (1, 'Quiz about some hot topics');
 
-insert into question(id, title, quiz_id)
-values (1, 'What is the best quiz website?', 1);
 
-insert into answer(id, answer, question_id)
-values (1, 'Leogreen', 1);
-insert into answer(id, answer, question_id)
-values (2, 'Kahoot', 1);
-
-update question
-set correct_answer = 1
-where id = 1;
-
-insert into question(id, title, quiz_id)
-values (2, 'What is the best School?', 1);
-
-insert into answer(id, answer, question_id)
-values (3, 'Khevenhüller', 2);
-insert into answer(id, answer, question_id)
-values (4, 'HTL 1', 2);
-insert into answer(id, answer, question_id)
-values (5, 'HAK', 2);
-insert into answer(id, answer, question_id)
-values (6, 'HTL Leonding', 2);
-
-update question
-set correct_answer = 6
-where id = 2;
 
 insert into question(id, title, quiz_id)
     values (3, 'Wie viele Quadratkilometer wurden 2022 im Amazonasgebiet abgeholzt?', 1);

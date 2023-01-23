@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {webSocket, WebSocketSubject} from "rxjs/webSocket";
 import {Game} from "../model/game";
 import {HttpService} from "./http.service";
-import * as http from "http";
-import {numbers} from "@material/snackbar";
 
 @Injectable({
   providedIn: 'root'
@@ -74,9 +72,26 @@ export class GameService {
   }
 
   increaseGameState() {
-    if (!this.game$.value || this.game$.value.state+1 >= this.game$.value.quiz.questions.length) return false
-    this.updateGameState({state: this.game$.value.state+1})
-    return true
+
+
+    if (!this.game$.value || this.game$.value.state + 1 >= this.game$.value.quiz.questions.length) {
+      console.log(" no question")
+      this.updateGameState({state: -3})
+      console.log(this.game$.value?.state + " State no question")
+      return false
+    }
+
+    if (this.game$.value.state > -3) {
+      this.updateGameState({state: this.game$.value.state + 1})
+      console.log(this.game$.value?.state + " State increase")
+      return true
+    }
+
+
+    console.log(this.game$.value?.state + " State increase")
+    return false;
+
+
   }
 
   startGame() {
