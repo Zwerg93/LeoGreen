@@ -6,7 +6,7 @@
 
 pushd client/leoGreen
 npm install
-ng build  --base-href /m.pouget/
+ng build --configuration production  --base-href /m.pouget/ 
 popd
 
 pushd k8s

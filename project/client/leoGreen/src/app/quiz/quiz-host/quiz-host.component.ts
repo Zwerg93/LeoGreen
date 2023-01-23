@@ -21,6 +21,7 @@ export class QuizHostComponent implements OnInit {
 
   constructor(private http: HttpService, private quizService: GameService,
               private aRoute: ActivatedRoute, private platformLocation: PlatformLocation) {
+                
     if (aRoute.snapshot.paramMap.get("id")) {
       let quizId = Number(aRoute.snapshot.paramMap.get("id"))
       this.http.postStartGame(quizId).subscribe(gameId => {

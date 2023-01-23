@@ -1,9 +1,6 @@
 {
   "/m.pouget/api/*": {
     "target": "http://quarkus:8080/m.pouget/",
-    "pathRewrite": {
-      "^/api" : ""
-    },
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

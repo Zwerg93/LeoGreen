@@ -6,36 +6,39 @@ import {Card} from "../model/card.model";
 import {Image} from "../model/img.model";
 import {Lesson} from "../model/lesson.model";
 import {GuessModel} from "../model/guess.model";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
+  private API_URL = environment.API_URL;
+
   constructor(private http : HttpClient, private data: DataService) { }
 
   getAllCards(): Observable<Card[]> {
-    return this.http.get<Card[]>('/m.pouget/api/lesson/card/all')
+    return this.http.get<Card[]>(`${this.API_URL}/lesson/card/all`)
   }
 
   getAllImages(): Observable<Image[]> {
-    return this.http.get<Image[]>('/api/picture/getAll')
+    return this.http.get<Image[]>(`${this.API_URL}/picture/getAll`)
   }
 
   getAllLessons():Observable<Lesson[]>{
-    return this.http.get<Lesson[]>('/api/lesson/getAll')
+    return this.http.get<Lesson[]>(`${this.API_URL}/lesson/getAll`)
   }
 
   postStartGame(gameId: number): Observable<number> {
-    return this.http.post<number>(`api/game/start/${gameId}`, {})
+    return this.http.post<number>(`${this.API_URL}/game/start/${gameId}`, {})
   }
 
   getIsGameActive(gameId: number): Observable<boolean> {
-    return this.http.get<boolean>(`api/game/active/${gameId}`)
+    return this.http.get<boolean>(`${this.API_URL}/game/active/${gameId}`)
   }
 
   checkAnswer(gameId: number, guess: GuessModel): Observable<any> {
-    return this.http.post(`/api/game/${gameId}/guess`, guess);
+    return this.http.post(`${this.API_URL}/game/${gameId}/guess`, guess);
   }
 
 }
