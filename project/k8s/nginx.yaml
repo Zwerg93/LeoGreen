@@ -62,14 +62,14 @@ data:
         rewrite_log on;
         error_log /dev/stdout debug;
 
-        location / {
+       
             root /usr/share/nginx/html/demo/leo-green;
             index index.html;
             try_files $uri $uri/ /index.html =404;
-        }
+        
 
-        location /m.pouget/api/ {
-            proxy_pass http://quarkus:8080/;
+        location /api/ {
+            proxy_pass http://quarkus:8080;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header Host $host:$server_port;
