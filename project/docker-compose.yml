@@ -1,0 +1,64 @@
+services:
+
+  postgresdb:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+
+    networks:
+      - backend
+         # ipv4_address:172.24.0.2
+
+  server:
+    build: leogreen_server/
+    image: leogreenbe
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    volumes:
+      - pgadmindata:/var/lib/server
+    #command: bash -c 'do sleep 1; done;'
+    depends_on:
+      - postgresdb
+      
+    #command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
+
+    networks:
+      - backend
+      #ipv4_address:172.24.0.3
+      - frontend
+
+
+  client:
+    build: client/leoGreen/
+    image: leogreenfe
+    ports:
+      - 4200:80
+    expose:
+      - 80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - server
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
+
+
+
+volumes:
+  pgdata:
+  pgadmindata:
