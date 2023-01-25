@@ -1,6 +1,6 @@
 #Maven
 target/
-target/!.asoziales-netzwerk-1.0.0-SNAPSHOT-runner
+target/!.leogreen_server-1.0-SNAPSHOT-runner
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
