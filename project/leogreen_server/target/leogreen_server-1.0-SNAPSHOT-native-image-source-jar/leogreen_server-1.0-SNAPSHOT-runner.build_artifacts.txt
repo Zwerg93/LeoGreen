@@ -1,0 +1,3 @@
+[EXECUTABLE]
+leogreen_server-1.0-SNAPSHOT-runner
+

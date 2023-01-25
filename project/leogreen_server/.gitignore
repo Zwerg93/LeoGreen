@@ -1,5 +1,12 @@
 #Maven
-target/
+target/classes
+target/failsafe-reports
+target/generated-sources
+target/jib
+target/maven-archiver
+target/maven-status
+target/quarkus-app
+
 target/!.leogreen_server-1.0-SNAPSHOT-runner
 pom.xml.tag
 pom.xml.releaseBackup
