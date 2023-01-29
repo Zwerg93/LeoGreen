@@ -30,7 +30,6 @@ export class QuizHostQuestionComponent implements OnInit {
     if ( !this.gameService.increaseGameState()) {
       this.router.navigate(['/statistic'])
       this.snackbar.open("Keine weiteren Fragen mehr!", "", {duration: 1000});
-
     }
   }
 }

@@ -16,7 +16,7 @@ export class GameService {
   name ?: string;
   socket$?: WebSocketSubject<Game>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
-  
+
   private WS_URL = environment.WS_URL;
 
 
@@ -49,7 +49,7 @@ export class GameService {
     console.log(`GameService#startwebsocket(${gameId}, ${name})`)
     this.name = name;
     console.log(this.platformLocation);
-    
+
     this.socket$ = webSocket(`${this.WS_URL}/${gameId}/${name}`)
     this.socket$.subscribe(value => {
       //if (!this.isActiveGame()){this.setActiveGame(gameId, name)}
