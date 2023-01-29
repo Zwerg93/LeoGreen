@@ -23,6 +23,6 @@ public class UserRepo implements PanacheRepository<UserEntity> {
         long players = this.count("game.id = :id", Parameters.with("id", gameId));
         long voters = this.count("hasVoted = true and game.id = :id", Parameters.with("id", gameId));
 
-        return 1000 - (500 / (players - 1)) * (voters - 1);
+        return 1000 - (500 / (players)) * (voters - 1);
     }
 }
