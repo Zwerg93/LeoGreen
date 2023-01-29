@@ -62,6 +62,7 @@ export class QuizClientAnswerPageComponent {
       },
       error => {
         this.snackbar.open("Already Voted", "", {duration: 1500})
+        this.guessed = true
       });
   }
 
