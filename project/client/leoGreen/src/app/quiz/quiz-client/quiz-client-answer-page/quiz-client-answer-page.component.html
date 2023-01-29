@@ -34,22 +34,23 @@
   </ng-container>
 
   <ng-container *ngIf="guessed">
+    <app-guessed-view></app-guessed-view>
     <!-- TODO: Proper guessed design -->
-
-    <div class="main-container center-inner">
-      <div>
-        <h1>Voted Successfully</h1>
-        <p>Are you sure you were right?</p>
-        <p>Genius or dunce</p>
-        <p>Take your time</p>
-      </div>
-    </div>
   </ng-container>
 
   <ng-container *ngIf="isGameEnd && game">
     <!-- TODO: Proper results design -->
-
-    <app-statistic></app-statistic>
+    <div class="center-inner" style="width: 100%; height: 100%">
+        <div>
+          <p>Du hast {{game.users[getArrayPositionOfUser()].points ?? 0}} Punkte und damit den {{getPlatz()}} Platz</p>
+          <p *ngIf="getPlatz() < (game.users.length + 2) / 2; else sry">
+            Herzlichen Glückwunsch
+          </p>
+          <ng-template #sry>
+            <p>Viel Glück beim nächsten Mal</p>
+          </ng-template>
+        </div>
+    </div>
   </ng-container>
 </ng-template>
 

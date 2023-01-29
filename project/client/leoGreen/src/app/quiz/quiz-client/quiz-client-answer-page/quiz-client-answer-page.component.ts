@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {HttpService} from "../../../services/http.service";
 import {GuessModel} from "../../../model/guess.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Quiz} from "../../../model/quiz";
 
 @Component({
   selector: 'app-quiz-client-answer-page',
@@ -61,6 +62,7 @@ export class QuizClientAnswerPageComponent {
       },
       error => {
         this.snackbar.open("Already Voted", "", {duration: 1500})
+        this.guessed = true
       });
   }
 
@@ -74,5 +76,22 @@ export class QuizClientAnswerPageComponent {
       })
     }
     return -1;
+  }
+
+  getPlatz(): number{
+    const tempUsers = [...this.game?.users ?? []]
+
+    console.log(tempUsers)
+    return tempUsers.sort(function (a, b){
+      if(a.points < b.points){
+        return 1
+      }
+      if(a.points > b.points){
+        return -1
+      }
+      return 0
+    }).findIndex(value => {
+      return value.id == this.userId;
+    }) + 1
   }
 }
