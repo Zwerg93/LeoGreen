@@ -47,6 +47,7 @@ import { QuizAnswerLoadingComponent } from './quiz/quiz-client/quiz-client-answe
     QuizHostQuestionComponent,
     LandingPageComponent,
     LessonCardComponent,
+    NavOverlayPointsComponent,
     QuizAnswerLoadingComponent
   ],
     imports: [
