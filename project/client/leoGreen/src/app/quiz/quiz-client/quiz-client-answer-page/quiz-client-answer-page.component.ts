@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {HttpService} from "../../../services/http.service";
 import {GuessModel} from "../../../model/guess.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Quiz} from "../../../model/quiz";
 
 @Component({
   selector: 'app-quiz-client-answer-page',

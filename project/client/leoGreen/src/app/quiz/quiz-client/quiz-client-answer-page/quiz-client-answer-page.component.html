@@ -34,16 +34,8 @@
   </ng-container>
 
   <ng-container *ngIf="guessed">
+    <app-guessed-view></app-guessed-view>
     <!-- TODO: Proper guessed design -->
-
-    <div class="main-container center-inner">
-      <div>
-        <h1>Voted Successfully</h1>
-        <p>Are you sure you were right?</p>
-        <p>Genius or dunce</p>
-        <p>Take your time</p>
-      </div>
-    </div>
   </ng-container>
 
   <ng-container *ngIf="isGameEnd && game">
