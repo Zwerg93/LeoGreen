@@ -77,4 +77,21 @@ export class QuizClientAnswerPageComponent {
     }
     return -1;
   }
+
+  getPlatz(): number{
+    const tempUsers = [...this.game?.users ?? []]
+
+    console.log(tempUsers)
+    return tempUsers.sort(function (a, b){
+      if(a.points < b.points){
+        return 1
+      }
+      if(a.points > b.points){
+        return -1
+      }
+      return 0
+    }).findIndex(value => {
+      return value.id == this.userId;
+    }) + 1
+  }
 }
