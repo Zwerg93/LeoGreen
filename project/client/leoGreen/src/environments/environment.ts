@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  API_URL: '/api'
+  API_URL: '/api',
+  QR_URL:'',
+  WS_URL: 'ws://localhost:8080/quiz-game-websocket'
 };
 
 /*

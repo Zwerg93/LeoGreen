@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-#pushd leogreen_server
-#mvn clean package install
-#popd
+pushd leogreen_server
+mvn clean package install
+popd
 
 pushd client/leoGreen
 npm install

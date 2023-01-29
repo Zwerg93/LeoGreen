@@ -2,6 +2,7 @@ import { PlatformLocation } from '@angular/common';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {webSocket, WebSocketSubject} from "rxjs/webSocket";
+import { environment } from 'src/environments/environment';
 import {Game} from "../model/game";
 import {HttpService} from "./http.service";
 
@@ -15,6 +16,8 @@ export class GameService {
   name ?: string;
   socket$?: WebSocketSubject<Game>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
+  
+  private WS_URL = environment.WS_URL;
 
 
   constructor(private http : HttpService, private platformLocation: PlatformLocation) {
@@ -47,7 +50,7 @@ export class GameService {
     this.name = name;
     console.log(this.platformLocation);
     
-    this.socket$ = webSocket(`ws://${(this.platformLocation as any).location.host}/quiz-game-websocket/${gameId}/${name}`)
+    this.socket$ = webSocket(`${this.WS_URL}/${gameId}/${name}`)
     this.socket$.subscribe(value => {
       //if (!this.isActiveGame()){this.setActiveGame(gameId, name)}
       this.onMessage(value, this.game$)

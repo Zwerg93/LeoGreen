@@ -4,5 +4,12 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+
+  "/m.pouget/websocket/*": {
+    "target": "https://student.cloud.htl-leonding.ac.at/m.pouget/websocket/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

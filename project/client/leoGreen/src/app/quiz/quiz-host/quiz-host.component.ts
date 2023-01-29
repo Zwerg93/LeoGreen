@@ -5,6 +5,7 @@ import {Game} from "../../model/game";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {PlatformLocation} from "@angular/common";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-quiz-host',
@@ -18,6 +19,7 @@ export class QuizHostComponent implements OnInit {
   game?: Game;
   qrCodeSize: number = window.innerHeight / 10;
   qrCodeLink?: string;
+  private QR_URL = environment.QR_URL;
 
   constructor(private http: HttpService, private quizService: GameService,
               private aRoute: ActivatedRoute, private platformLocation: PlatformLocation) {
@@ -28,7 +30,7 @@ export class QuizHostComponent implements OnInit {
         this.quizService.startWebsocket(gameId).subscribe(value => {
           this.game = value
           if (this.game)
-            this.qrCodeLink = `${(platformLocation as any).location.origin}/quiz/client?code=${this.game.id}`;
+            this.qrCodeLink = `${(platformLocation as any).location.origin}${this.QR_URL}/quiz/client?code=${this.game.id}`;
         })
       })
     }
