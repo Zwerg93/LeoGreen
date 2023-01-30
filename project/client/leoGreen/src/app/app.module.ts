@@ -29,6 +29,7 @@ import { NavOverlayPointsComponent } from './navbar/nav-overlay-points/nav-overl
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from "@angular/common/http";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { QuizAnswerLoadingComponent } from './quiz/quiz-client/quiz-client-answer-page/quiz-answer-loading/quiz-answer-loading.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     QuizHostQuestionComponent,
     LandingPageComponent,
     LessonCardComponent,
-    NavOverlayPointsComponent
+    NavOverlayPointsComponent,
+    QuizAnswerLoadingComponent
   ],
     imports: [
         BrowserModule,
