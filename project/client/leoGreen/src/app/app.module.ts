@@ -9,7 +9,7 @@ import { StatisticComponent } from './statistic/statistic.component';
 import { LessonComponent } from './lesson/lesson.component';
 import { QuizHostComponent } from './quiz/quiz-host/quiz-host.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {QRCodeModule} from "angular2-qrcode";
 import { QuizClientAnswerPageComponent } from './quiz/quiz-client/quiz-client-answer-page/quiz-client-answer-page.component';
@@ -53,7 +53,7 @@ import { QuizAnswerLoadingComponent } from './quiz/quiz-client/quiz-client-answe
     imports: [
         BrowserModule,
         AppRoutingModule,
-        NoopAnimationsModule,
+        BrowserAnimationsModule,
         MatButtonModule,
         QRCodeModule,
         MatFormFieldModule,
