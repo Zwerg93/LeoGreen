@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from "@angular/router";
 import {GameService} from "../../../services/game.service";
 import {Subscriber, Subscription} from "rxjs";
+
+const naughtyWordList = require("naughty-words")
 
 @Component({
   selector: 'app-quiz-client-join-page',
@@ -17,7 +19,7 @@ export class QuizClientJoinPageComponent {
   beitretenForm = new FormGroup(
     {
       quizId: new FormControl('', [Validators.required, Validators.pattern(/([0-9])+/)]),
-      username: new FormControl('', [Validators.required])
+      username: new FormControl('', [Validators.required, this.ValidateNaughtyWords])
     }
   );
 
@@ -44,4 +46,16 @@ export class QuizClientJoinPageComponent {
       )
     }
   }
+
+  ValidateNaughtyWords(control: AbstractControl){
+    const naughtyFun = (naughtyWorld: string) => {return naughtyWorld.toLowerCase() == control.value.toLowerCase()}
+
+    if (naughtyWordList != undefined &&
+        (naughtyWordList.en.some(naughtyFun) || naughtyWordList.de.some(naughtyFun))) {
+      return {naughty: true}
+    }
+    return null
+  }
+
 }
+
