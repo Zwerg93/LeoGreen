@@ -1,6 +1,6 @@
 import { PlatformLocation } from '@angular/common';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, concatMap, delay, iif, of, retryWhen, Subscription, tap, throwError} from "rxjs";
 import {webSocket, WebSocketSubject} from "rxjs/webSocket";
 import { environment } from 'src/environments/environment';
 import {Game} from "../model/game";
@@ -13,6 +13,7 @@ export class GameService {
   name ?: string;
   socket$?: WebSocketSubject<Game>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
+  disconnected = true
 
   private WS_URL = environment.WS_URL;
 
@@ -26,10 +27,35 @@ export class GameService {
     console.log(this.platformLocation);
 
     this.socket$ = webSocket(`${this.WS_URL}/${gameId}/${name}`)
-    this.socket$.subscribe(value => {
-      //if (!this.isActiveGame()){this.setActiveGame(gameId, name)}
-      this.onMessage(value, this.game$)
-    })
+    const subscription: Subscription = this.socket$.pipe(
+      retryWhen(errors =>
+        errors.pipe(
+          concatMap((error, i) =>
+            iif(
+              () => environment.webSockets.maxReconnectAttempts !== -1 &&
+                i >= environment.webSockets.maxReconnectAttempts,
+              throwError('WebSocket reconnecting retry limit exceeded!'),
+              of(error).pipe(
+                tap(() => {
+                  this.disconnected = true;
+                  console.warn('Trying to reconnect to WebSocket server...');
+                }),
+                delay(environment.webSockets.reconnectAttemptDelay)
+              )
+            )
+          )
+        )
+      ),  tap(() => {
+          if (this.disconnected) {
+            this.disconnected = false;
+            console.info('Successfully re-connected to the WebSocket server.');
+          }
+        })
+      ).subscribe(
+      (data) => this.onMessage(data, this.game$),
+      (err) => console.error(err),
+      () => console.warn('Connection to the WebSocket server was closed!')
+    );
     return this.game$
   }
 
