@@ -10,9 +10,6 @@ import {HttpService} from "./http.service";
   providedIn: 'root'
 })
 export class GameService {
-
-  activeGameIdKey = "activeGameId"
-  activeGameNameKey = "activeGameName"
   name ?: string;
   socket$?: WebSocketSubject<Game>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
@@ -22,28 +19,6 @@ export class GameService {
 
   constructor(private http : HttpService, private platformLocation: PlatformLocation) {
   }
-
-  /*private setActiveGame(gameId: number, name: string){
-    sessionStorage.setItem(this.activeGameIdKey, gameId.toString())
-    sessionStorage.setItem(this.activeGameNameKey, name)
-  }
-
-  getActiveGame(): {gameId: number | null, name: string | null}{
-    let gameId: number | null = Number(sessionStorage.getItem(this.activeGameIdKey))
-    const name = sessionStorage.getItem(this.activeGameNameKey)
-    gameId = (isNaN(gameId)) ? null : gameId
-    return {gameId, name}
-  }
-
-  isActiveGame(): boolean{
-    const game = this.getActiveGame()
-    return game.gameId != null && game.name != null;
-  }
-
-  private cleanActiveGameSessionStorage(){
-    sessionStorage.removeItem(this.activeGameIdKey)
-    sessionStorage.removeItem(this.activeGameNameKey)
-  }*/
 
   public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined>{
     console.log(`GameService#startwebsocket(${gameId}, ${name})`)
@@ -62,7 +37,6 @@ export class GameService {
     game$.next(value)
     if (value?.state == -2){
       this.socket$?.complete()
-      //this.cleanActiveGameSessionStorage()
     }
   }
 
@@ -78,8 +52,6 @@ export class GameService {
   }
 
   increaseGameState() {
-
-
     if (!this.game$.value || this.game$.value.state + 1 >= this.game$.value.quiz.questions.length) {
       console.log(" no question")
       this.updateGameState({state: -3})
@@ -92,12 +64,8 @@ export class GameService {
       console.log(this.game$.value?.state + " State increase")
       return true
     }
-
-
     console.log(this.game$.value?.state + " State increase")
     return false;
-
-
   }
 
   startGame() {
