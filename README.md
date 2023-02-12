@@ -1,8 +1,8 @@
 # LeoGreen
 
-![Lizens](https://img.shields.io/github/license/Zwerg93/LeoGreen)
-![Issues](https://img.shields.io/github/issues/Zwerg93/LeoGreen)
-![LastCommit](https://img.shields.io/github/last-commit/Zwerg93/LeoGreen)
+[![Lizens](https://img.shields.io/github/license/Zwerg93/LeoGreen)](https://github.com/Zwerg93/LeoGreen/blob/main/LICENSE)
+[![Issues](https://img.shields.io/github/issues/Zwerg93/LeoGreen)](https://github.com/users/Zwerg93/projects/1)
+[![LastCommit](https://img.shields.io/github/last-commit/Zwerg93/LeoGreen)](https://github.com/Zwerg93/LeoGreen/graphs/commit-activity)
 
 ## About
 
