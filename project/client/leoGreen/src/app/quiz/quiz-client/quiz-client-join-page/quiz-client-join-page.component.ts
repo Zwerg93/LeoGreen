@@ -48,7 +48,9 @@ export class QuizClientJoinPageComponent {
   }
 
   ValidateNaughtyWords(control: AbstractControl){
-    const naughtyFun = (naughtyWorld: string) => {return naughtyWorld.toLowerCase() == control.value.toLowerCase()}
+    const naughtyFun = (naughtyWord: string) => {
+      return new RegExp(`(${naughtyWord})|(${naughtyWord[0]}\\*)`, "i").test(control.value)
+    }
 
     if (naughtyWordList != undefined &&
         (naughtyWordList.en.some(naughtyFun) || naughtyWordList.de.some(naughtyFun))) {
