@@ -1,6 +1,6 @@
 # LeoGreen
 
-[![Lizens](https://img.shields.io/github/license/Zwerg93/LeoGreen)](https://github.com/Zwerg93/LeoGreen/blob/main/LICENSE)
+[![Lizenz](https://img.shields.io/github/license/Zwerg93/LeoGreen)](https://github.com/Zwerg93/LeoGreen/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/Zwerg93/LeoGreen)](https://github.com/users/Zwerg93/projects/1)
 [![LastCommit](https://img.shields.io/github/last-commit/Zwerg93/LeoGreen)](https://github.com/Zwerg93/LeoGreen/graphs/commit-activity)
 
@@ -15,9 +15,7 @@ Um das ganze regelmäßig ausliefern zu können, also ein konstantes ci/cd anbie
 
 ## How to use
 
- 
-
-Bis jetzt ist die Anwendung einfach über diesen Link in der Leocloud erreichbar:  
+Bis jetzt ist die Anwendung einfach über diesen Link in der LeoCloud erreichbar:  
 
 
 ### Demo: 
@@ -27,5 +25,6 @@ Man findet auf dieser Version der Seite bereits einige Lessons, auch wenn diese 
 
 
 ## Werbevideo
-[![LeoGreen Werbevideo](https://i3.ytimg.com/vi/zc5xqdta6o4/maxresdefault.jpg)](https://youtu.be/zc5xqdta6o4)
+[![LeoGreen Quizes Werbevideo](https://i3.ytimg.com/vi/zc5xqdta6o4/maxresdefault.jpg)](https://youtu.be/zc5xqdta6o4)
 
+Hier ist das Werbevideo für unser Projekt zu finden, das auch im Rahmen des Tag der offenen Tür der HTL Leonding auf der Schulwebsite zu finden ist.
