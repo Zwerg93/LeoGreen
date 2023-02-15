@@ -6,7 +6,11 @@ export const environment = {
   production: false,
   API_URL: '/api',
   QR_URL:'',
-  WS_URL: 'ws://localhost:8080/quiz-game-websocket'
+  WS_URL: 'ws://localhost:8080/quiz-game-websocket',
+  webSockets: {
+    maxReconnectAttempts: 8,
+    reconnectAttemptDelay: 5000
+  }
 };
 
 /*

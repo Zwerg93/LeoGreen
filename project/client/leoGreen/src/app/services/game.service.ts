@@ -1,6 +1,6 @@
 import { PlatformLocation } from '@angular/common';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, concatMap, delay, iif, of, retryWhen, Subscription, tap, throwError} from "rxjs";
 import {webSocket, WebSocketSubject} from "rxjs/webSocket";
 import { environment } from 'src/environments/environment';
 import {Game} from "../model/game";
@@ -10,12 +10,10 @@ import {HttpService} from "./http.service";
   providedIn: 'root'
 })
 export class GameService {
-
-  activeGameIdKey = "activeGameId"
-  activeGameNameKey = "activeGameName"
   name ?: string;
   socket$?: WebSocketSubject<Game>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
+  disconnected = true
 
   private WS_URL = environment.WS_URL;
 
@@ -23,38 +21,41 @@ export class GameService {
   constructor(private http : HttpService, private platformLocation: PlatformLocation) {
   }
 
-  /*private setActiveGame(gameId: number, name: string){
-    sessionStorage.setItem(this.activeGameIdKey, gameId.toString())
-    sessionStorage.setItem(this.activeGameNameKey, name)
-  }
-
-  getActiveGame(): {gameId: number | null, name: string | null}{
-    let gameId: number | null = Number(sessionStorage.getItem(this.activeGameIdKey))
-    const name = sessionStorage.getItem(this.activeGameNameKey)
-    gameId = (isNaN(gameId)) ? null : gameId
-    return {gameId, name}
-  }
-
-  isActiveGame(): boolean{
-    const game = this.getActiveGame()
-    return game.gameId != null && game.name != null;
-  }
-
-  private cleanActiveGameSessionStorage(){
-    sessionStorage.removeItem(this.activeGameIdKey)
-    sessionStorage.removeItem(this.activeGameNameKey)
-  }*/
-
   public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined>{
     console.log(`GameService#startwebsocket(${gameId}, ${name})`)
     this.name = name;
     console.log(this.platformLocation);
 
     this.socket$ = webSocket(`${this.WS_URL}/${gameId}/${name}`)
-    this.socket$.subscribe(value => {
-      //if (!this.isActiveGame()){this.setActiveGame(gameId, name)}
-      this.onMessage(value, this.game$)
-    })
+    const subscription: Subscription = this.socket$.pipe(
+      retryWhen(errors =>
+        errors.pipe(
+          concatMap((error, i) =>
+            iif(
+              () => environment.webSockets.maxReconnectAttempts !== -1 &&
+                i >= environment.webSockets.maxReconnectAttempts,
+              throwError('WebSocket reconnecting retry limit exceeded!'),
+              of(error).pipe(
+                tap(() => {
+                  this.disconnected = true;
+                  console.warn('Trying to reconnect to WebSocket server...');
+                }),
+                delay(environment.webSockets.reconnectAttemptDelay)
+              )
+            )
+          )
+        )
+      ),  tap(() => {
+          if (this.disconnected) {
+            this.disconnected = false;
+            console.info('Successfully re-connected to the WebSocket server.');
+          }
+        })
+      ).subscribe(
+      (data) => this.onMessage(data, this.game$),
+      (err) => console.error(err),
+      () => console.warn('Connection to the WebSocket server was closed!')
+    );
     return this.game$
   }
 
@@ -62,7 +63,6 @@ export class GameService {
     game$.next(value)
     if (value?.state == -2){
       this.socket$?.complete()
-      //this.cleanActiveGameSessionStorage()
     }
   }
 
@@ -78,8 +78,6 @@ export class GameService {
   }
 
   increaseGameState() {
-
-
     if (!this.game$.value || this.game$.value.state + 1 >= this.game$.value.quiz.questions.length) {
       console.log(" no question")
       this.updateGameState({state: -3})
@@ -92,12 +90,8 @@ export class GameService {
       console.log(this.game$.value?.state + " State increase")
       return true
     }
-
-
     console.log(this.game$.value?.state + " State increase")
     return false;
-
-
   }
 
   startGame() {
