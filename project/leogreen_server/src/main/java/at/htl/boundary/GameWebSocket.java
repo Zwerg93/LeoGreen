@@ -101,7 +101,7 @@ public class GameWebSocket {
             reconnect = true;
         }
 
-        log(String.format("onOpen> User#%s has connected to game#%o", name, gameId));
+        log(String.format("onOpen> User#%s has connected to game#%o, reconnect: %b", name, gameId, reconnect));
         this.sessionByNameAndGameId.get(gameId).put(name, session);
 
         if (name.equals("admin")) {
@@ -131,8 +131,8 @@ public class GameWebSocket {
 
     @OnClose
     public void onClose(Session session, @PathParam("gameId") Long gameId, @PathParam("name") String name) {
-        sessionByNameAndGameId.get(gameId).remove(name, session);
-        log(String.format("onClose> %s has disconnected from the game#%o", name, gameId));
+        sessionByNameAndGameId.get(gameId).replace(name, session, null);
+        log(String.format("onClose> %s has disconnected from the game#%o, %b", name, gameId, sessionByNameAndGameId.get(gameId).containsKey(name)));
     }
 
     @OnError

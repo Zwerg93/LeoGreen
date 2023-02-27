@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameService} from "../../../services/game.service";
 import {Game} from "../../../model/game";
 import {Router} from "@angular/router";
@@ -12,7 +12,7 @@ import {Quiz} from "../../../model/quiz";
   templateUrl: './quiz-client-answer-page.component.html',
   styleUrls: ['./quiz-client-answer-page.component.scss']
 })
-export class QuizClientAnswerPageComponent {
+export class QuizClientAnswerPageComponent implements OnDestroy{
 
   game?: Game;
   name?: string;
@@ -30,7 +30,7 @@ export class QuizClientAnswerPageComponent {
     "diamond"
   ];
 
-  constructor(gameService: GameService, route: Router, private http: HttpService,  private snackbar: MatSnackBar, private router: Router) {
+  constructor(private gameService: GameService, route: Router, private http: HttpService,  private snackbar: MatSnackBar, private router: Router) {
     gameService.game$.subscribe(value => {
       if (value) {
         this.game = value;
@@ -93,5 +93,9 @@ export class QuizClientAnswerPageComponent {
     }).findIndex(value => {
       return value.id == this.userId;
     }) + 1
+  }
+
+  ngOnDestroy(): void {
+    this.gameService.closeSocket();
   }
 }

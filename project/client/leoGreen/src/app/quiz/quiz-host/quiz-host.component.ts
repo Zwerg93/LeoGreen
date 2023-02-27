@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {HttpService} from "../../services/http.service";
 import {Game} from "../../model/game";
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./quiz-host.component.scss'],
 
 })
-export class QuizHostComponent implements OnInit {
+export class QuizHostComponent implements OnInit, OnDestroy {
 
   subscription ?: Subscription
   game?: Game;
@@ -23,7 +23,7 @@ export class QuizHostComponent implements OnInit {
 
   constructor(private http: HttpService, private quizService: GameService,
               private aRoute: ActivatedRoute, private platformLocation: PlatformLocation) {
-                
+
     if (aRoute.snapshot.paramMap.get("id")) {
       let quizId = Number(aRoute.snapshot.paramMap.get("id"))
       this.http.postStartGame(quizId).subscribe(gameId => {
@@ -41,5 +41,9 @@ export class QuizHostComponent implements OnInit {
 
   startGame() {
     this.quizService.startGame()
+  }
+
+  ngOnDestroy(): void {
+    this.quizService.closeSocket()
   }
 }

@@ -97,4 +97,8 @@ export class GameService {
   startGame() {
     this.updateGameState({state: 0});
   }
+
+  closeSocket() {
+    this.socket$?.complete();
+  }
 }
