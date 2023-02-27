@@ -82,10 +82,11 @@ public class GameWebSocket {
     @Transactional
     public void onOpen(Session session, @PathParam("gameId") Long gameId, @PathParam("name") String name) {
         GameEntity game = this.gameRepo.findById(gameId);
+        boolean reconnect = false;
 
         if (game == null
                 || !this.sessionByNameAndGameId.containsKey(gameId)
-                || this.sessionByNameAndGameId.get(gameId).containsKey(name)
+                || (this.sessionByNameAndGameId.get(gameId).containsKey(name) && this.sessionByNameAndGameId.get(gameId).get(name) != null)
                 || (!this.sessionByNameAndGameId.get(gameId).containsKey("admin") && !name.equals("admin"))
         ) {
             try {
@@ -95,9 +96,12 @@ public class GameWebSocket {
                 throw new RuntimeException(e);
             }
             return;
+        } else if (this.sessionByNameAndGameId.get(gameId).containsKey(name) &&
+                this.sessionByNameAndGameId.get(gameId).get(name) != null) {
+            reconnect = true;
         }
 
-        log(String.format("onOpen> %s has connected to game#%o", name, gameId));
+        log(String.format("onOpen> User#%s has connected to game#%o", name, gameId));
         this.sessionByNameAndGameId.get(gameId).put(name, session);
 
         if (name.equals("admin")) {
@@ -105,13 +109,13 @@ public class GameWebSocket {
             return;
         }
 
-        UserEntity user = UserEntity.create(name, 0L, game, false);
-        this.userRepo.persist(user);
-
-        if (!name.equals("admin")){
-            handlePlayerOpen(session, gameId);
-            sendAdminGameState(gameId);
+        if (!reconnect) {
+            UserEntity user = UserEntity.create(name, 0L, game, false);
+            this.userRepo.persist(user);
         }
+
+        handlePlayerOpen(session, gameId);
+        sendAdminGameState(gameId);
     }
 
     private void handlePlayerOpen(Session session, Long gameId) {
@@ -128,12 +132,12 @@ public class GameWebSocket {
     @OnClose
     public void onClose(Session session, @PathParam("gameId") Long gameId, @PathParam("name") String name) {
         sessionByNameAndGameId.get(gameId).remove(name, session);
-        log(String.format("onClose> %s has disconnected the game#%o", name, gameId));
+        log(String.format("onClose> %s has disconnected from the game#%o", name, gameId));
     }
 
     @OnError
     public void onError(Session session, @PathParam("gameId") Long gameId, @PathParam("name") String name, Throwable throwable) {
-        logErr(String.format("onError> User#%s in game#%o thrown error: " + throwable, name, gameId));
+        logErr(String.format("onError> User#%s in game#%o has thrown error: " + throwable, name, gameId));
     }
 
     @OnMessage
@@ -142,7 +146,7 @@ public class GameWebSocket {
                           @PathParam("gameId") Long gameId,
                           @PathParam("name") String name,
                           Session session) {
-        log(String.format("onMessage> User#%s in game#%o has send: %s", name, gameId, message));
+        log(String.format("onMessage> User#%s in game#%o has sent: %s", name, gameId, message));
         GameDecoder decoder = new GameDecoder();
         if (name.equals("admin") && decoder.willDecode(message)) {
             try {
@@ -178,7 +182,7 @@ public class GameWebSocket {
 
     private void handleAdmin(Game game, Long gameId) {
         // if game state changed - all user can vote again
-        if (!game.getState().equals(gameRepo.findById(gameId).getState())){
+        if (!game.getState().equals(gameRepo.findById(gameId).getState())) {
             userRepo.setRefreshVoteRights(gameId);
         }
 
@@ -211,7 +215,7 @@ public class GameWebSocket {
     public void updateAll() {
     }
 
-    public void updateAdmin(Long gameId, GameEntity game){
+    public void updateAdmin(Long gameId, GameEntity game) {
         this.sessionByNameAndGameId.get(gameId).get("admin").getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(game));
     }
 }
