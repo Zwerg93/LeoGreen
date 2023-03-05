@@ -2,3 +2,5 @@ https://javascript-conference.com/blog/real-time-in-angular-a-journey-into-webso
 https://blog.idrsolutions.com/2013/12/websocket-multiple-users-encoders-decoders-dogs/
 https://quarkus.io/blog/resteasy-reactive-smart-dispatch/
 https://stackoverflow.com/questions/68573438/blocking-io-thread-in-quarkus-websocket
+https://www.juliaaano.com/blog/2021/05/14/rise-of-quarkus-github-actions/
+https://stackoverflow.com/questions/26971026/handling-connection-loss-with-websockets

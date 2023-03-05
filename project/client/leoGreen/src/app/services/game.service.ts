@@ -1,6 +1,18 @@
 import { PlatformLocation } from '@angular/common';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, concatMap, delay, iif, of, retryWhen, Subscription, tap, throwError} from "rxjs";
+import {
+  BehaviorSubject,
+  concatMap,
+  delay, filter,
+  iif,
+  interval,
+  of,
+  retryWhen,
+  Subscription,
+  switchMap,
+  tap,
+  throwError
+} from "rxjs";
 import {webSocket, WebSocketSubject} from "rxjs/webSocket";
 import { environment } from 'src/environments/environment';
 import {Game} from "../model/game";
@@ -11,7 +23,7 @@ import {HttpService} from "./http.service";
 })
 export class GameService {
   name ?: string;
-  socket$?: WebSocketSubject<Game>
+  socket$?: WebSocketSubject<Game | Uint8Array>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
   disconnected = true
 
@@ -22,6 +34,12 @@ export class GameService {
   }
 
   public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined>{
+    interval(30000)
+      .subscribe(()=>{
+        console.info("Sending Keepalive Ping Message")
+        this.socket$?.next(new Uint8Array([0x9]))
+      });
+
     console.log(`GameService#startwebsocket(${gameId}, ${name})`)
     this.name = name;
     console.log(this.platformLocation);
@@ -59,10 +77,14 @@ export class GameService {
     return this.game$
   }
 
-  private onMessage(value: Game, game$: BehaviorSubject<Game | undefined>):void {
-    game$.next(value)
-    if (value?.state == -2){
-      this.socket$?.complete()
+  private onMessage(value: any, game$: BehaviorSubject<Game | undefined>):void {
+    console.log("Data recieved maybe a game: ", value)
+    if (value.id !== null){
+      console.log("Data recieved was a game")
+      game$.next(value)
+      if (value?.state == -2){
+        this.socket$?.complete()
+      }
     }
   }
 

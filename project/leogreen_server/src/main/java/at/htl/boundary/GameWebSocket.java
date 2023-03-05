@@ -147,6 +147,11 @@ public class GameWebSocket {
                           @PathParam("name") String name,
                           Session session) {
         log(String.format("onMessage> User#%s in game#%o has sent: %s", name, gameId, message));
+
+        // Check if the message is a Ping frame with opcode 0x9
+
+
+
         GameDecoder decoder = new GameDecoder();
         if (name.equals("admin") && decoder.willDecode(message)) {
             try {
@@ -157,23 +162,6 @@ public class GameWebSocket {
             return;
         }
 
-        /*GameEntity game = gameRepo.findById(gameId);
-        var question = game.getQuiz().getQuestions().get(game.getState());
-        if (question
-                .getAnswers()
-                .stream()
-                .map(AnswerEntity::getAnswer)
-                .anyMatch(a -> a.equals(message))) {
-            // TODO add score
-            session.getAsyncRemote().sendText("voted");
-            if (question.getCorrectAnswer().getAnswer().equals(message)) {
-                session.getAsyncRemote().sendText("correct");
-            } else {
-                session.getAsyncRemote().sendText("wrong");
-            }
-        } else {
-            session.getAsyncRemote().sendText("vote invalid");
-        }*/
     }
 
     private void updateGameState() {
