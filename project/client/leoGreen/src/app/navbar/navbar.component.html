@@ -1,7 +1,7 @@
 <app-landing-page [ngClass]="{'display-none': !headerLeoGreen.className.includes('active')}"></app-landing-page>
 <div class="nav-container" id="nav-container">
   <div class="pointer inside-nav-container">
-    <h1 routerLink="/home" #headerLeoGreen class="pointer noselect" routerLinkActive="active">LeoGreen Quizzes</h1>
+    <h1 routerLink="/home" #headerLeoGreen class="pointer noselect" routerLinkActive="active">{{header_content}}</h1>
     <p routerLink="/statistic" class="pointer noselect hideIfSmall" routerLinkActive="active">Statistics</p>
     <p routerLink="/quiz/client" class="pointer noselect hideIfSmall" routerLinkActive="active">Join Quiz</p>
   </div>
