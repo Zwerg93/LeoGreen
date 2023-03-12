@@ -189,7 +189,7 @@ public class GameWebSocket {
         updatePlayer(game, gameId);
     }
 
-    private void updatePlayer(Game game, Long gameId) {
+    public void updatePlayer(Game game, Long gameId) {
         this.sessionByNameAndGameId.get(gameId).values().forEach(session -> {
             session.getAsyncRemote().sendObject(game);
         });
@@ -208,10 +208,14 @@ public class GameWebSocket {
         System.err.println("quiz-game-websocket: ".concat(s));
     }
 
-    public void updateAll() {
+    public void updateAll(Long gameId, GameEntity game) {
+        System.out.println("sucessfully vode");
+        this.sessionByNameAndGameId.get(gameId).values().forEach(session -> {
+            session.getAsyncRemote().sendObject(game);
+        });
     }
 
-    public void updateAdmin(Long gameId, GameEntity game){
+    public void updateAdmin(Long gameId, GameEntity game) {
         this.sessionByNameAndGameId.get(gameId).get("admin").getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(game));
     }
 }

@@ -88,7 +88,7 @@ public class GameResource {
         if (isRightAnswer){
             this.webSocket.updateAdmin(gameId, game);
         }
-
+        //this.webSocket.updateAll(gameId,game);
         return Response.ok().build();
     }
 
