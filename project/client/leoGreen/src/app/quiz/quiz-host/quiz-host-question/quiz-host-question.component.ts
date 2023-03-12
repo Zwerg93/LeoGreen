@@ -26,7 +26,6 @@ export class QuizHostQuestionComponent implements OnInit {
   ngOnInit(): void {}
 
   nextQuestion() {
-    console.log(this.game)
     if ( !this.gameService.increaseGameState()) {
       this.router.navigate(['/statistic'])
       this.snackbar.open("Keine weiteren Fragen mehr!", "", {duration: 1000});

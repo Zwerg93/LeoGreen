@@ -23,6 +23,7 @@ export class StatisticComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+
     this.topUsers = this.game?.users
       .sort((a, b) => b.points - a.points)
       .slice(0, 3);

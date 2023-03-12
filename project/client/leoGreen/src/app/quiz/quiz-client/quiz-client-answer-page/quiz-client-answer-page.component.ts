@@ -1,11 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {GameService} from "../../../services/game.service";
 import {Game} from "../../../model/game";
 import {Router} from "@angular/router";
 import {HttpService} from "../../../services/http.service";
 import {GuessModel} from "../../../model/guess.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Quiz} from "../../../model/quiz";
 import {NavbarService} from "../../../navbar/navbar.service";
 
 @Component({
@@ -58,8 +57,6 @@ export class QuizClientAnswerPageComponent implements OnDestroy{
       userId: this.userId!,
       guess: answer
     }
-    console.log(this.game?.state + " state")
-
     this.http.checkAnswer(this.game!.id, this.guess!).subscribe(
       value => {
         this.snackbar.open("Successfully Voted", "", {duration: 1500})
