@@ -1,7 +1,9 @@
 package at.htl.model.pojo;
 
+import at.htl.model.entity.TagEntity;
 import lombok.Data;
 
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.List;
 
