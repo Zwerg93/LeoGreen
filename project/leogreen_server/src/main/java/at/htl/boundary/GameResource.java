@@ -96,8 +96,7 @@ public class GameResource {
     @Path("/statistic/{gameId}")
     public Response getStatistics(@PathParam("gameId") long gameId) {
         GameEntity game = this.gameRepo.findById(gameId);
-
-        return Response.ok().build();
+        return Response.ok(gameRepo.getStatistics(game)).build();
     }
 
 

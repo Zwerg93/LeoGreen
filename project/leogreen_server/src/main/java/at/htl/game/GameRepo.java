@@ -16,8 +16,8 @@ public class GameRepo implements PanacheRepository<GameEntity> {
     public List<Statistics> getStatistics(GameEntity game) {
         var q = getEntityManager().createQuery("select new at.htl.model.pojo.Statistics(gs.tag.tag, avg(gs.points)) from GameScoreEntity gs " +
                 "where gs.game.id = :gameId " +
-                "group by gs.game, gs.tag.tag", Statistics.class);
-
+                "group by gs.tag.tag", Statistics.class);
+        q.setParameter("gameId", game.getId());
         return q.getResultList();
     }
 }
