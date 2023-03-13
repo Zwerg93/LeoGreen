@@ -27,6 +27,9 @@ public class QuestionEntity {
     @OneToOne
     @JoinColumn(name = "correct_answer")
     AnswerEntity correctAnswer;
+    @OneToMany(mappedBy = "question")
+    @ToString.Exclude
+    List<TagEntity> tags = new ArrayList<>();
 
     public QuestionEntity(Long id, QuizEntity quiz, String title, List<AnswerEntity> answers, AnswerEntity correctAnswer) {
         this.id = id;

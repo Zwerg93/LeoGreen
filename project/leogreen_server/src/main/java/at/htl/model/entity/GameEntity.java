@@ -23,6 +23,9 @@ public class GameEntity {
     List<UserEntity> users = new ArrayList<>();
     @ManyToOne
     QuizEntity quiz;
+    @OneToMany(mappedBy = "game")
+    @ToString.Exclude
+    List<GameScoreEntity> gameScores = new ArrayList<>();
 
     public GameEntity(Long id, Integer state, List<UserEntity> users, QuizEntity quiz) {
         this.id = id;
@@ -41,7 +44,7 @@ public class GameEntity {
         return game;
     }
 
-    public void addToUserList(UserEntity newUser){
+    public void addToUserList(UserEntity newUser) {
         this.users.add(newUser);
     }
 }

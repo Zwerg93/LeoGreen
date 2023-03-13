@@ -31,6 +31,8 @@ export class StatisticComponent implements OnInit, AfterViewInit {
           range: [0, 50]
         }
       },
+      paper_bgcolor: 'rgba(0,0,0,0)',
+      plot_bgcolor: 'rgba(0,0,0,0)',
       showlegend: false
     },
     config: {
