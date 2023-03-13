@@ -4,24 +4,25 @@ values (1, 'Quiz about some hot topics');
 
 
 insert into question(id, title, quiz_id)
-    values (3, 'Wie viele Quadratkilometer wurden 2022 im Amazonasgebiet abgeholzt?', 1);
+values (3, 'Wie viele Quadratkilometer wurden 2022 im Amazonasgebiet abgeholzt?', 1);
 insert into answer(id, answer, question_id)
-       values (7, '11500', 3),
-           (8, '5200', 3),
-           (9, '43000', 3),
-           (10, '760', 3);
+values (7, '11500', 3),
+       (8, '5200', 3),
+       (9, '43000', 3),
+       (10, '760', 3);
 
 update question
-    set correct_answer = 7
-    where id = 3;
+set correct_answer = 7
+where id = 3;
 
 insert into question(id, title, quiz_id)
-values (4, 'Wie viele Stunden könnte man eine Glühbirne leuchten lassen mit der Energie einer recycelten Glasflasche?', 1);
-    insert into answer(id, answer, question_id)
+values (4, 'Wie viele Stunden könnte man eine Glühbirne leuchten lassen mit der Energie einer recycelten Glasflasche?',
+        1);
+insert into answer(id, answer, question_id)
 values (11, '7', 4),
-    (12, '0', 4),
-    (13, '4', 4),
-    (14, '10', 4);
+       (12, '0', 4),
+       (13, '4', 4),
+       (14, '10', 4);
 
 update question
 set correct_answer = 13
@@ -29,11 +30,11 @@ where id = 4;
 
 insert into question(id, title, quiz_id)
 values (5, 'Wie oft kann ein Blatt - Papier recycelt werden?', 1);
-    insert into answer(id, answer, question_id)
+insert into answer(id, answer, question_id)
 values (15, '2', 5),
-    (16, '30', 5),
-    (17, '0', 5),
-    (18, '6', 5);
+       (16, '30', 5),
+       (17, '0', 5),
+       (18, '6', 5);
 
 update question
 set correct_answer = 18
@@ -91,9 +92,6 @@ where id = 9;
 
 
 
-
-
-
 insert into lesson(id, content, description, summary, title)
 values (1,
         'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
@@ -138,12 +136,19 @@ values (7,
         'Klima');
 
 
-insert into picture (name, altText) values ('http://localhost:8080/picture/get/img_1.png', 'Placeholder');
+insert into picture (name, altText)
+values ('http://localhost:8080/picture/get/img_1.png', 'Placeholder');
 
 
 insert into tag (tag, question_id)
-values ('test', 3),
-       ('test2', 3);
+values ('Energie', 4),
+       ('Recycling', 4),
+       ('Recycling', 5),
+       ('Emissionen', 6),
+       ('Emissionen', 7),
+       ('Emissionen', 8),
+       ('Umwelt', 9),
+       ('Umwelt',3);
 
 insert into game(state, quiz_id)
 values (-2, 1);

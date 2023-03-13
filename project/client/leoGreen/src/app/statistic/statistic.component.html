@@ -18,6 +18,6 @@
         <p>Punkte: {{topUsers[2].points}}</p>
       </div>
     </div>
+    <plotly-plot class="chart" [data]="graph.data" [layout]="graph.layout" [config]="graph.config" [useResizeHandler]="true"></plotly-plot>
   </div>
-  <plotly-plot [data]="graph.data" [layout]="graph.layout" [config]="graph.config"></plotly-plot>
 </div>
