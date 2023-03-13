@@ -1,6 +1,7 @@
 package at.htl.game;
 
 import at.htl.model.entity.GameEntity;
+import at.htl.model.entity.GameScoreEntity;
 import at.htl.model.pojo.Statistics;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
@@ -19,5 +20,9 @@ public class GameRepo implements PanacheRepository<GameEntity> {
                 "group by gs.tag.tag", Statistics.class);
         q.setParameter("gameId", game.getId());
         return q.getResultList();
+    }
+
+    public void addGameScore(GameScoreEntity gameScoreEntity) {
+        getEntityManager().persist(gameScoreEntity);
     }
 }

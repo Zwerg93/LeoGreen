@@ -19,12 +19,12 @@ public class GameScoreEntity {
     GameEntity game;
     @ManyToOne
     TagEntity tag;
-    Short points;
+    Long points;
 
     public GameScoreEntity() {
     }
 
-    public GameScoreEntity(GameEntity game, TagEntity tag, Short points) {
+    public GameScoreEntity(GameEntity game, TagEntity tag, Long points) {
         this.game = game;
         this.tag = tag;
         this.points = points;

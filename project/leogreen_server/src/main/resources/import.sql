@@ -140,6 +140,20 @@ values (7,
 
 insert into picture (name, altText) values ('http://localhost:8080/picture/get/img_1.png', 'Placeholder');
 
+
+insert into tag (tag, question_id)
+values ('test', 3),
+       ('test2', 3);
+
+insert into game(state, quiz_id)
+values (-2, 1);
+
+insert into gamescore (points, game_id, tag_id)
+values (1000, 1, 1),
+       (700, 1, 1),
+       (1000, 1, 2),
+       (0, 1, 2);
+
 alter sequence quiz_id_seq restart with 100;
 alter sequence question_id_seq restart with 100;
 alter sequence answer_id_seq restart with 100;
