@@ -18,8 +18,6 @@
         <p>Punkte: {{topUsers[2].points}}</p>
       </div>
     </div>
-    <!--<plotly-plot class="chart" [data]="graph.data" [layout]="graph.layout" [config]="graph.config" [useResizeHandler]="true"></plotly-plot>
-    -->
     <dx-polar-chart
       class="chart"
       id="chart"
@@ -30,7 +28,7 @@
       [commonAxisSettings]="{width: 3, tick: {visible: false}, grid: {width: 2, color: '#6F72C3'}, label: {
         font: {color: '#FFFFFF'}
       }}"
-    >c
+    >
       <dxo-argument-axis [grid]="{visible: false}">
         <dxo-label [font]="{size: 16, weight: 800}" [indentFromAxis]="15"></dxo-label>
       </dxo-argument-axis>

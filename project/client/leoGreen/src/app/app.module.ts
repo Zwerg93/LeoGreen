@@ -30,11 +30,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from "@angular/common/http";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { QuizAnswerLoadingComponent } from './quiz/quiz-client/quiz-client-answer-page/quiz-answer-loading/quiz-answer-loading.component';
-import * as PlotlyJS from 'plotly.js-dist-min';
-import { PlotlyModule } from 'angular-plotly.js';
 import {DevExtremeModule, DxPolarChartModule} from "devextreme-angular";
 
-PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +66,6 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatTooltipModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    PlotlyModule,
     DxPolarChartModule,
     DevExtremeModule
   ],

@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Game} from "../model/game";
 import {User} from "../model/user";
 import {HttpService} from "../services/http.service";
+import {Statistics} from "../model/statistics";
 
 @Component({
   selector: 'app-statistic',
@@ -18,37 +19,7 @@ export class StatisticComponent implements OnInit, AfterViewInit {
     new User(-2, 'Lorens', 1),
     new User(-3, 'Parcel', 0)
   ];
-  graph = {
-    data: [{
-      type: 'scatterpolar',
-      r: [-1],
-      theta: ['x'],
-      fill: 'toself',
-      mode: 'lines'
-    }],
-    layout: {
-      polar: {
-        radialaxis: {
-          visible: false,
-          range: [0, 1000]
-        }
-      },
-      paper_bgcolor: 'rgba(0,0,0,0)',
-      plot_bgcolor: '#555555',
-      showlegend: false,
-      font: {
-        size: 16,
-        color: '#000'
-      },
-      autosize: false,
-      width: 400,
-      height: 400,
-    },
-    config: {
-      staticPlot: true
-    }
-  };
-  data: any[] = [];
+  data: Statistics[] = [];
   values: string[] = [];
 
   constructor(private http: HttpService, private gameService: GameService) {
