@@ -7,6 +7,7 @@ import {Image} from "../model/img.model";
 import {Lesson} from "../model/lesson.model";
 import {GuessModel} from "../model/guess.model";
 import { environment } from 'src/environments/environment';
+import {Statistics} from "../model/statistics";
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,10 @@ export class HttpService {
 
   checkAnswer(gameId: number, guess: GuessModel): Observable<any> {
     return this.http.post(`${this.API_URL}/game/${gameId}/guess`, guess);
+  }
+
+  getStatistics(gameId: number): Observable<Statistics[]> {
+    return this.http.get<Statistics[]>(`${this.API_URL}/game/statistic/${gameId}`);
   }
 
 }
