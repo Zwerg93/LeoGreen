@@ -16,6 +16,7 @@ import java.util.Map;
 import at.htl.model.entity.LessonEntity;
 import at.htl.model.entity.PictureEntity;
 import at.htl.lesson.LessonRepo;
+import at.htl.model.entity.SectionEntity;
 import at.htl.picture.PictureRepo;
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
@@ -39,12 +40,13 @@ public class PictureResource {
 
 
     @PUT
-    @Path("/addPictureToLesson/{pictureName}/{lessonId}")
+    @Path("/addPictureToLesson/{pictureName}/{sectionId}")
     @Transactional
-    public Response addPic(@PathParam("pictureName") String pictureName, @PathParam("lessonId") long id) {
-        LessonEntity lesson = lessonRepo.findById(id);
+    public Response addPic(@PathParam("pictureName") String pictureName, @PathParam("sectionId") long id) {
+        SectionEntity section = lessonRepo.findSection(id);
         PictureEntity picture = pictureRepo.findById(pictureName);
-        lesson.getPictureList().add(picture);
+        picture.setSection(section);
+        pictureRepo.merge(picture);
         return Response.ok().build();
     }
 
@@ -64,10 +66,10 @@ public class PictureResource {
     }
 
     @POST
-    @Path("/upload")
+    @Path("/upload/{section}")
     @Consumes("multipart/form-data")
     @Transactional
-    public Response uploadFile(MultipartFormDataInput input) {
+    public Response uploadFile(MultipartFormDataInput input, @PathParam("section") long sectionId) {
 
         String fileName = "";
         String postURL;
@@ -83,7 +85,7 @@ public class PictureResource {
                 System.out.println(fileName);
                 postURL = "http://localhost:8080/picture/get/" + fileName;
                 System.out.println(postURL);
-                PictureEntity picture = new PictureEntity(postURL, "");
+                PictureEntity picture = new PictureEntity(postURL, "", lessonRepo.findSection(sectionId));
                 pictureRepo.persist(picture);
 
                 byte[] bytes = IOUtils.toByteArray(inputStream);

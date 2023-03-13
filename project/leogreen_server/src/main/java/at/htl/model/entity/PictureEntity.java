@@ -18,12 +18,13 @@ public class PictureEntity {
     @Column(length = 10000)
     public String altText;
     @ManyToOne
-    @JoinColumn(name = "lesson_id")
-    LessonEntity lesson;
+    @JoinColumn(name = "section_id")
+    SectionEntity section;
 
-    public PictureEntity(String name, String altText) {
+    public PictureEntity(String name, String altText, SectionEntity section) {
         this.name = name;
         this.altText = altText;
+        this.section = section;
     }
 
     public PictureEntity() {

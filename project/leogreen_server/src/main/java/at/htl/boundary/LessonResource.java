@@ -1,9 +1,11 @@
 package at.htl.boundary;
 
+import at.htl.lesson.LessonMapper;
 import at.htl.model.pojo.Card;
 
 import at.htl.model.entity.LessonEntity;
 import at.htl.lesson.LessonRepo;
+import at.htl.model.pojo.Lesson;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -20,28 +22,27 @@ public class LessonResource {
 
     @GET
     @Path("/getAll")
-    public List<LessonEntity> getAllLessons() {
-        return lessonRepo.findAll().stream().toList();
+    public List<Lesson> getAllLessons() {
+        return lessonRepo.findAll().list().stream().map(LessonMapper.INSTANCE::lessonFromEntity).toList();
     }
 
     @GET
     @Path("/{id}")
-    public LessonEntity getLessonById(@PathParam("id") long id) {
-        return lessonRepo.findById(id);
+    public Lesson getLessonById(@PathParam("id") long id) {
+        return LessonMapper.INSTANCE.lessonFromEntity(lessonRepo.findById(id));
     }
 
     @GET
     @Path("/search/{text}")
-    public List<LessonEntity> searchForLesson(@PathParam("text") String text) {
-        return this.lessonRepo.search(text);
+    public List<Lesson> searchForLesson(@PathParam("text") String text) {
+        return this.lessonRepo.search(text).stream().map(LessonMapper.INSTANCE::lessonFromEntity).toList();
     }
 
     @GET
     @Path("/card/all")
-    public List<Card> getAllCards(){
+    public List<Card> getAllCards() {
         return this.lessonRepo.getCards();
     }
-
 
 
 }

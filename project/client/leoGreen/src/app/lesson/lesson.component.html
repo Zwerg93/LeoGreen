@@ -1,27 +1,55 @@
-<div class="main-container container">
+<div class="main-container container" *ngIf="lessons && id && getLesson(id) as lesson">
   <div class="row">
-    <h1 class="col col-25">Info {{id}}</h1>
-    <p class="col col-75 text">{{summary}}</p>
+    <h1 class="col col-25">{{lesson.title}}</h1>
+    <p class="col col-75 text">{{lesson.summary}}</p>
   </div>
-  <div class="row">
-    <div class="col col-80 col-img">
-      <img  class="vertical" src="assets/img_1.png" alt="Placeholder">
+
+  <ng-container *ngIf="lesson.sections && lesson.sections.length > 0; else noSections">
+    <div class="row" *ngFor="let section of lesson.sections">
+      <h2>{{section.header}}</h2>
+      <ng-container [ngSwitch]="section.type">
+        <ng-container *ngSwitchCase="'TEXT'">
+          <div class="col col-100 text">{{section.content}}</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'IMAGE'">
+          <div class="col col-80 col-img">
+            <img class="vertical" [src]="'assets/' + section.images[0] + '.png'" alt="Placeholder">
+          </div>
+          <div class="col col-20 col-img">
+            <img class="horizontal" [src]="'assets/' + section.images[1] + '.png'" alt="Placeholder">
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <div class="col col-20 col-img">
+            <img class="horizontal" [src]="'assets/' + section.images[0] + '.png'" alt="Placeholder">
+          </div>
+          <div class="col col-80 text">{{section.content}}</div>
+        </ng-container>
+      </ng-container>
     </div>
-    <div class="col col-20 col-img">
-      <img class="horizontal" src="assets/img_1.png" alt="Placeholder">
+  </ng-container>
+  <ng-template #noSections>
+    <div class="row">
+      <div class="col col-80 col-img">
+        <img  class="vertical" src="assets/img_1.png" alt="Placeholder">
+      </div>
+      <div class="col col-20 col-img">
+        <img class="horizontal" src="assets/img_1.png" alt="Placeholder">
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col col-20 col-img">
-      <img class="horizontal" src="assets/img_1.png" alt="Placeholder">
+    <div class="row">
+      <div class="col col-20 col-img">
+        <img class="horizontal" src="assets/img_1.png" alt="Placeholder">
+      </div>
+      <div class="col col-80 text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+        et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+        sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+        erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+        sea takimata sanctus est Lorem ipsum dolor sit amet.
+      </div>
     </div>
-    <div class="col col-80 text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-      invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-      et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
-      sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-      erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-      sea takimata sanctus est Lorem ipsum dolor sit amet.
-    </div>
-  </div>
+  </ng-template>
 </div>
+
 <app-quiz></app-quiz>

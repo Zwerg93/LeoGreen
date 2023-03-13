@@ -26,16 +26,14 @@ public class LessonEntity {
     @Column(length = 1000000)
     String content;
     @OneToMany(mappedBy = "lesson")
-    @ToString.Exclude
-    List<PictureEntity> pictureList = new LinkedList<>();
+    List<SectionEntity> sections;
 
-    public LessonEntity(Long id, String title, String description, String summary, String content, List<PictureEntity> pictureList) {
+    public LessonEntity(Long id, String title, String description, String summary, String content) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.summary = summary;
         this.content = content;
-        this.pictureList = pictureList;
     }
 
     public LessonEntity() {
