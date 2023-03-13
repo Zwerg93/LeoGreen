@@ -85,9 +85,7 @@ public class GameResource {
             user.setPoints(user.getPoints() + points);
         }
         this.userRepo.merge(user);
-        if (isRightAnswer){
-            this.webSocket.updateAdmin(gameId, game);
-        }
+        this.webSocket.updatePlayers(gameId, game);
         //this.webSocket.updateAll(gameId,game);
         return Response.ok().build();
     }

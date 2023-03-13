@@ -30,10 +30,10 @@ where id = 4;
 insert into question(id, title, quiz_id)
 values (5, 'Wie oft kann ein Blatt - Papier recycelt werden?', 1);
     insert into answer(id, answer, question_id)
-values (15, '2', 5),
-    (16, '30', 5),
-    (17, '0', 5),
-    (18, '6', 5);
+values (15, '2 Mal', 5),
+    (16, '30 Mal', 5),
+    (17, '0 Mal', 5),
+    (18, '6 Mal', 5);
 
 update question
 set correct_answer = 18
