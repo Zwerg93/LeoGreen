@@ -32,6 +32,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { QuizAnswerLoadingComponent } from './quiz/quiz-client/quiz-client-answer-page/quiz-answer-loading/quiz-answer-loading.component';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
+import {DevExtremeModule, DxPolarChartModule} from "devextreme-angular";
 
 PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
@@ -52,24 +53,26 @@ PlotlyModule.plotlyjs = PlotlyJS;
     NavOverlayPointsComponent,
     QuizAnswerLoadingComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        QRCodeModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatCheckboxModule,
-        MatMenuModule,
-        MatIconModule,
-        MatTooltipModule,
-        HttpClientModule,
-        MatProgressSpinnerModule,
-        PlotlyModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    QRCodeModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    PlotlyModule,
+    DxPolarChartModule,
+    DevExtremeModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

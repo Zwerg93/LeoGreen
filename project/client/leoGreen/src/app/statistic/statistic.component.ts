@@ -24,27 +24,32 @@ export class StatisticComponent implements OnInit, AfterViewInit {
       r: [-1],
       theta: ['x'],
       fill: 'toself',
+      mode: 'lines'
     }],
     layout: {
       polar: {
         radialaxis: {
-          visible: true,
+          visible: false,
           range: [0, 1000]
         }
       },
       paper_bgcolor: 'rgba(0,0,0,0)',
-      plot_bgcolor: 'rgba(0,0,0,1)',
+      plot_bgcolor: '#555555',
       showlegend: false,
       font: {
-        family: 'Poppins, Arial, sans-serif;',
         size: 16,
         color: '#000'
       },
+      autosize: false,
+      width: 400,
+      height: 400,
     },
     config: {
       staticPlot: true
     }
   };
+  data: any[] = [];
+  values: string[] = [];
 
   constructor(private http: HttpService, private gameService: GameService) {
     this.gameService.game$.subscribe(value => {
@@ -65,15 +70,7 @@ export class StatisticComponent implements OnInit, AfterViewInit {
 
   private updateStatistics() {
     this.http.getStatistics(this.game?.id ?? 2).subscribe((data) => {
-      this.graph.data[0].r = [];
-      this.graph.data[0].theta = [];
-      console.log(data);
-      data.forEach(stat => {
-        this.graph.data[0].r.push(stat.avg);
-        this.graph.data[0].theta.push(stat.tag);
-      })
-      this.graph.data[0].r.push(data[0].avg);
-      this.graph.data[0].theta.push(data[0].tag);
+      this.data = data;
     })
   }
 }

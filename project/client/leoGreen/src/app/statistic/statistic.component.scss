@@ -3,7 +3,7 @@
 .card {
   background: $leogreen-background-alternate;
   padding: 3rem;
-  margin-top: 5rem;
+  margin-top: 3rem;
   border-radius: 1rem;
   box-sizing: content-box;
   display: flex;
@@ -38,12 +38,12 @@
 
       &.first {
         background: #FFD007;
-        padding-bottom: 10rem;
+        padding-bottom: 5rem;
       }
 
       &.second {
         background: #C0C0C0;
-        padding-bottom: 5rem;
+        padding-bottom: 2.5rem;
       }
 
       &.third {
@@ -54,5 +54,7 @@
 
   > .chart {
     flex: 1 0 40%;
+    color: black;
+
   }
 }

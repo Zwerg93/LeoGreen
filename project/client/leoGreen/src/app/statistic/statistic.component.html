@@ -18,6 +18,23 @@
         <p>Punkte: {{topUsers[2].points}}</p>
       </div>
     </div>
-    <plotly-plot class="chart" [data]="graph.data" [layout]="graph.layout" [config]="graph.config" [useResizeHandler]="true"></plotly-plot>
+    <!--<plotly-plot class="chart" [data]="graph.data" [layout]="graph.layout" [config]="graph.config" [useResizeHandler]="true"></plotly-plot>
+    -->
+    <dx-polar-chart
+      class="chart"
+      id="chart"
+      [useSpiderWeb]="true"
+      [dataSource]="data"
+      [valueAxis]="{allowDecimals: false, endOnTick: false, axisDivisionFactor: 20, showZero: true, visible: false, label: {visible: false}}"
+      [legend]="{visible: false}"
+      [commonAxisSettings]="{width: 3, tick: {visible: false}, grid: {width: 2, color: '#6F72C3'}, label: {
+        font: {color: '#FFFFFF'}
+      }}"
+    >c
+      <dxo-argument-axis [grid]="{visible: false}">
+        <dxo-label [font]="{size: 16, weight: 800}" [indentFromAxis]="15"></dxo-label>
+      </dxo-argument-axis>
+      <dxi-series valueField="avg" argumentField="tag" name="Average Score" type="area" hoverMode="none" color="#2A65E1"></dxi-series>
+    </dx-polar-chart>
   </div>
 </div>
