@@ -14,7 +14,7 @@
     </div>
 
       <section class="answers">
-        <div class="answer pointer" *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index">
+        <div class="answer pointer" [ngClass]="{isTrue: (voteCount == playerCount && answer.id == game.quiz.questions[game.state].correctAnswer.id), isWrong: (voteCount == playerCount && answer.id != game.quiz.questions[game.state].correctAnswer.id)}" *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index">
           <img [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape">
           <div class="text">{{answer.answer}}</div>
         </div>
