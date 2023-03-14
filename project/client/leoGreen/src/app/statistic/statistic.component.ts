@@ -14,7 +14,11 @@ import {Statistics} from "../model/statistics";
 })
 export class StatisticComponent implements OnInit, AfterViewInit {
   game?: Game;
-  topUsers?: User[] = [];
+  topUsers?: User[] = [
+    new User(-1, 'Fabian', 2222, false),
+    new User(-2, 'Lorens', 1, false),
+    new User(-3, 'Parcel', 0, false)
+  ];
   data: Statistics[] = [];
   values: string[] = [];
 
