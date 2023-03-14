@@ -1,5 +1,6 @@
 package at.htl.lesson;
 
+import at.htl.model.entity.SectionEntity;
 import at.htl.model.pojo.Card;
 
 import at.htl.model.entity.LessonEntity;
@@ -12,7 +13,6 @@ import java.util.List;
 
 @ApplicationScoped
 public class LessonRepo implements PanacheRepository<LessonEntity> {
-
 
     public List<LessonEntity> search(String text) {
         TypedQuery<LessonEntity> query = getEntityManager().createQuery("select l from LessonEntity l " +
@@ -28,5 +28,12 @@ public class LessonRepo implements PanacheRepository<LessonEntity> {
         TypedQuery<Card> query = getEntityManager().createQuery("select new at.htl.model.pojo.Card(c.title, c.description, c.id) from LessonEntity c",
                 Card.class);
         return query.getResultList();
+    }
+
+    public SectionEntity findSection(long id) {
+        TypedQuery<SectionEntity> query = getEntityManager().createQuery("select s from SectionEntity s " +
+                "where s.id = :id", SectionEntity.class);
+        query.setParameter("id", id);
+        return query.getResultStream().findFirst().orElse(null);
     }
 }

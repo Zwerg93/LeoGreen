@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {HttpService} from "../services/http.service";
 import {Image} from "../model/img.model";
-import {Lesson} from "../model/lesson.model";
+import {Lesson, SectionType} from "../model/lesson.model";
 
 @Component({
   selector: 'app-lesson',
@@ -13,7 +13,7 @@ export class LessonComponent implements OnInit {
 
   images: Image[] = [];
   lessons?: Lesson[];
-  id = ""
+  id?: number;
   summary?: String;
 
   constructor(private route: ActivatedRoute, private http: HttpService) {
@@ -23,8 +23,8 @@ export class LessonComponent implements OnInit {
     this.loadLessons();
     this.loadImages();
 
-    this.id = this.route.snapshot.paramMap.get('id') ?? "0"
-    if (this.id) localStorage.setItem('last_topic_id', this.id)
+    this.id = Number.parseInt(this.route.snapshot.paramMap.get('id') ?? "-1")
+    if (this.id) localStorage.setItem('last_topic_id', String(this.id))
 
     console.log(this.id)
   }
@@ -45,5 +45,9 @@ export class LessonComponent implements OnInit {
         this.images = c;
       }
     )
+  }
+
+  getLesson(id: number): Lesson | undefined {
+    return this.lessons?.filter(l => l.id === id).at(0);
   }
 }

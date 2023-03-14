@@ -30,7 +30,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpClientModule} from "@angular/common/http";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { QuizAnswerLoadingComponent } from './quiz/quiz-client/quiz-client-answer-page/quiz-answer-loading/quiz-answer-loading.component';
-
+import {DevExtremeModule, DxPolarChartModule} from "devextreme-angular";
 
 @NgModule({
   declarations: [
@@ -50,23 +50,25 @@ import { QuizAnswerLoadingComponent } from './quiz/quiz-client/quiz-client-answe
     NavOverlayPointsComponent,
     QuizAnswerLoadingComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        QRCodeModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatCheckboxModule,
-        MatMenuModule,
-        MatIconModule,
-        MatTooltipModule,
-        HttpClientModule,
-        MatProgressSpinnerModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    QRCodeModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    DxPolarChartModule,
+    DevExtremeModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

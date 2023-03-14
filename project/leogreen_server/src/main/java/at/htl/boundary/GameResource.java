@@ -1,9 +1,7 @@
 package at.htl.boundary;
 
-import at.htl.model.entity.GameEntity;
-import at.htl.model.entity.QuizEntity;
+import at.htl.model.entity.*;
 import at.htl.game.GameRepo;
-import at.htl.model.entity.UserEntity;
 import at.htl.model.pojo.Game;
 import at.htl.model.pojo.Guess;
 import at.htl.quiz.QuizRepo;
@@ -76,18 +74,34 @@ public class GameResource {
         if (game == null || user == null || user.getHasVoted()){
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
-
-        boolean isRightAnswer = guess.getGuess().equals(game.getQuiz().getQuestions().get(game.getState()).getCorrectAnswer().getAnswer());
+        QuestionEntity question = game.getQuiz().getQuestions().get(game.getState());
+        boolean isRightAnswer = guess.getGuess().equals(question.getCorrectAnswer().getAnswer());
         user.setHasVoted(true);
+
+
         
         if (isRightAnswer){
             long points = userRepo.calcPoints(gameId);
             user.setPoints(user.getPoints() + points);
+            question.getTags().forEach(tag -> {
+                gameRepo.addGameScore(new GameScoreEntity(game, tag, points));
+            });
+        } else {
+            question.getTags().forEach(tag -> {
+                gameRepo.addGameScore(new GameScoreEntity(game, tag, 0L));
+            });
         }
         this.userRepo.merge(user);
         this.webSocket.updatePlayers(gameId, game);
         //this.webSocket.updateAll(gameId,game);
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("/statistic/{gameId}")
+    public Response getStatistics(@PathParam("gameId") long gameId) {
+        GameEntity game = this.gameRepo.findById(gameId);
+        return Response.ok(gameRepo.getStatistics(game)).build();
     }
 
 

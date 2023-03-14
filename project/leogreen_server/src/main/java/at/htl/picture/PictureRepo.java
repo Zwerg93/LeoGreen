@@ -7,4 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class PictureRepo implements PanacheRepositoryBase<PictureEntity, String> {
+    public void merge(PictureEntity picture) {
+        getEntityManager().merge(picture);
+    }
 }
