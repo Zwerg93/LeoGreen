@@ -12,6 +12,8 @@ import {Router} from "@angular/router";
 export class QuizHostQuestionComponent implements OnInit {
 
   game?: Game;
+  playerCount = 0;
+  voteCount = 0;
   shapes = [
     "triangle",
     "square",
@@ -20,13 +22,23 @@ export class QuizHostQuestionComponent implements OnInit {
   ];
 
   constructor(private gameService: GameService, private snackbar: MatSnackBar, private router: Router) {
-    this.gameService.game$.subscribe(value => this.game = value);
+    this.gameService.game$.subscribe(value => {
+      this.game = value
+      this.playerCount = value?.users.length ?? 0
+      this.voteCount = value?.users.filter((user) => {return user.hasVoted}).length ?? 0;
+
+      /*if (this.playerCount != 0 && this.playerCount == this.voteCount){
+        value?.users.forEach((user)=>{
+          user.hasVoted = false;
+        })
+        this.nextQuestion();
+      }*/
+    });
   }
 
   ngOnInit(): void {}
 
   nextQuestion() {
-    console.log(this.game)
     if ( !this.gameService.increaseGameState()) {
       this.router.navigate(['/statistic'])
       this.snackbar.open("Keine weiteren Fragen mehr!", "", {duration: 1000});

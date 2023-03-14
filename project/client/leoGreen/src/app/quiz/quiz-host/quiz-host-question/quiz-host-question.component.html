@@ -7,13 +7,14 @@
     <div class="qheader">
       <section class="text">
         <h1>Frage {{game.state + 1}} - {{game.quiz.topic}}</h1>
+        <h3>Abgestimmt {{voteCount}} / {{playerCount}}</h3>
 
         <h2>{{game.quiz.questions[game.state].title}}</h2>
       </section>
     </div>
 
       <section class="answers">
-        <div class="answer pointer" *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index">
+        <div class="answer pointer" [ngClass]="{isTrue: (voteCount == playerCount && answer.id == game.quiz.questions[game.state].correctAnswer.id), isWrong: (voteCount == playerCount && answer.id != game.quiz.questions[game.state].correctAnswer.id)}" *ngFor="let answer of game.quiz.questions[game.state].answers; let i = index">
           <img [src]="'assets/' + shapes[i] + '.svg'" [alt]="shapes[i]" class="shape">
           <div class="text">{{answer.answer}}</div>
         </div>

@@ -179,6 +179,7 @@ public class GameWebSocket {
     private void handleAdmin(Game game, Long gameId) {
         // if game state changed - all user can vote again
         if (!game.getState().equals(gameRepo.findById(gameId).getState())){
+            System.out.println("##### Votes right should be refreshed");
             userRepo.setRefreshVoteRights(gameId);
         }
 
@@ -186,12 +187,13 @@ public class GameWebSocket {
         GameEntity gameEntity = gameRepo.merge(GameMapper.INSTANCE.gameToEntity(game));
 
         // Update Players
-        updatePlayer(game, gameId);
+        updatePlayers(gameId, gameEntity);
+        updateAdmin(gameId, gameEntity);
     }
 
-    private void updatePlayer(Game game, Long gameId) {
+    public void updatePlayers(Long gameId, GameEntity game) {
         this.sessionByNameAndGameId.get(gameId).values().forEach(session -> {
-            session.getAsyncRemote().sendObject(game);
+            session.getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(game));
         });
     }
 
@@ -208,10 +210,14 @@ public class GameWebSocket {
         System.err.println("quiz-game-websocket: ".concat(s));
     }
 
-    public void updateAll() {
+    public void updateAll(Long gameId, GameEntity game) {
+        System.out.println("sucessfully vode");
+        this.sessionByNameAndGameId.get(gameId).values().forEach(session -> {
+            session.getAsyncRemote().sendObject(game);
+        });
     }
 
-    public void updateAdmin(Long gameId, GameEntity game){
+    public void updateAdmin(Long gameId, GameEntity game) {
         this.sessionByNameAndGameId.get(gameId).get("admin").getAsyncRemote().sendObject(GameMapper.INSTANCE.gameFromEntity(game));
     }
 }

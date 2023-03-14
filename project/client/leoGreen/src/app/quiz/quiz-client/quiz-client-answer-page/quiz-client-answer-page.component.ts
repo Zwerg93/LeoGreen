@@ -1,18 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {GameService} from "../../../services/game.service";
 import {Game} from "../../../model/game";
 import {Router} from "@angular/router";
 import {HttpService} from "../../../services/http.service";
 import {GuessModel} from "../../../model/guess.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Quiz} from "../../../model/quiz";
+import {NavbarService} from "../../../navbar/navbar.service";
 
 @Component({
   selector: 'app-quiz-client-answer-page',
   templateUrl: './quiz-client-answer-page.component.html',
   styleUrls: ['./quiz-client-answer-page.component.scss']
 })
-export class QuizClientAnswerPageComponent {
+export class QuizClientAnswerPageComponent implements OnDestroy{
 
   game?: Game;
   name?: string;
@@ -30,12 +30,16 @@ export class QuizClientAnswerPageComponent {
     "diamond"
   ];
 
-  constructor(gameService: GameService, route: Router, private http: HttpService,  private snackbar: MatSnackBar, private router: Router) {
+  constructor(gameService: GameService, route: Router, private http: HttpService,  private snackbar: MatSnackBar, private router: Router, public nav: NavbarService) {
     gameService.game$.subscribe(value => {
       if (value) {
         this.game = value;
         this.name = gameService.name;
         this.guessed = false
+
+        if (this.game.state >= 0 && this.game.state < this.game.quiz.questions.length){
+          nav.change_nav_header_content("Frage Nr. " + (this.game.state + 1));
+        }
 
         if(this.game.state == -3){
           this.isGameEnd = true
@@ -53,8 +57,6 @@ export class QuizClientAnswerPageComponent {
       userId: this.userId!,
       guess: answer
     }
-    console.log(this.game?.state + " state")
-
     this.http.checkAnswer(this.game!.id, this.guess!).subscribe(
       value => {
         this.snackbar.open("Successfully Voted", "", {duration: 1500})
@@ -93,5 +95,9 @@ export class QuizClientAnswerPageComponent {
     }).findIndex(value => {
       return value.id == this.userId;
     }) + 1
+  }
+
+  ngOnDestroy(): void {
+    this.nav.change_nav_header_content(NavbarService.original_navbar_header)
   }
 }

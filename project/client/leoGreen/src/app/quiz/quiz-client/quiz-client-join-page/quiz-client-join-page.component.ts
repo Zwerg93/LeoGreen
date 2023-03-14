@@ -34,7 +34,6 @@ export class QuizClientJoinPageComponent {
       //this.subscriber?.unsubscribe()
       this.gameService.startWebsocket(Number(this.beitretenForm.value.quizId), this.beitretenForm.value.username!).subscribe(
         value => {
-          console.log(value)
           if(value){
           this.router.navigate(['/quiz/client-answer'])
         }}

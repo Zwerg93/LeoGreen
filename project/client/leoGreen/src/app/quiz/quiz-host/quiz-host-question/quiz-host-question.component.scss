@@ -91,3 +91,17 @@ h1{
 h2{
   font-size: 3.2vw;
 }
+
+
+.isTrue{
+  width: 120%;
+  height: 120%;
+  transition: all ease-in-out 250ms;
+  filter: saturate(1.2);
+}
+.isWrong{
+  width: 90%;
+  height: 90%;
+  transition: all ease-in-out 250ms;
+  filter: opacity(.5);
+}
