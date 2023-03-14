@@ -251,10 +251,10 @@ insert into lesson(id,
                    summary,
                    title)
 values (4,
-        'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-        'Dieses Element ist eine Mischung aus den beiden, hier sind die Elemente so lang, das der Button nur halb sichtbar ist und somit abgeschnitten angezeigt wird. Beispiel',
-        'In diesem Quiz geht es um die Wichtigkeit von Umweltschutz. Alle nötigen Informationen, die dich über dieses Thema wissen musst, findest du hier Wenn du aber noch mehr wissen möchtest, klicke gerne andere Inhalte an.',
-        'Klima');
+        'Energieeffizenz - Das Problem mit dem Strom'
+        '<h1>Energieeffizienz</h1><p>Energieeffizienzbezieht sich auf den effizienten Einsatz von Energie, um Kosten zu senken und die Umweltbelastung zu verringern. Um Energie effizienter zu nutzen, gibt es verschiedene Maßnahmen, die ergriffen werden können. Dazu gehören Energiesparmaßnahmen wie die Verwendung energiesparender Geräte und die Wahl effizienter Produkte. Die Nutzung erneuerbarer Energiequellen, wie Sonne, Wind und Wasser, kann ebenfalls helfen, den Energieverbrauch zu senken. Des Weiteren können energieeffiziente Technologien wie Wärmedämmung und energieeffiziente Beleuchtung eingesetzt werden, um den Energieverbrauch zu verringern. Darüber hinaus kann die Regelung des Energieverbrauchs, z.B. durch die Einführung einer Verbrauchsobergrenze, ebenfalls zu Energieeinsparungen führen. Durch die Umsetzung dieser Maßnahmen können Energieeinsparungen erzielt, die Umweltbelastung gesenkt und die Energieversorgungssicherheit verbessert werden.</p>',
+        '',
+        'Energieeffizienz');
 
 insert into lesson(id,
                    content,
@@ -262,10 +262,10 @@ insert into lesson(id,
                    summary,
                    title)
 values (5,
-        'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-        'Dieses Element ist eine Mischung aus den beiden, hier sind die Elemente so lang, das der Button nur halb sichtbar ist und somit abgeschnitten angezeigt wird. Beispiel',
-        'In diesem Quiz geht es um die Wichtigkeit von Umweltschutz. Alle nötigen Informationen, die dich über dieses Thema wissen musst, findest du hier Wenn du aber noch mehr wissen möchtest, klicke gerne andere Inhalte an.',
-        'Klima');
+        '<h1>Klimawandel</h1><p>Der Klimawandel bezieht sich auf die allmähliche Veränderung des globalen Klimas, die durch anthropogene Aktivitäten verursacht wird. Seine Auswirkungen auf die Umwelt variieren je nach Region und umfassen unter anderem extreme Wetterereignisse, Erosion, Meeresspiegelanstieg, veränderte Niederschlagsmuster und Verlust natürlicher Lebensräume. Um die Auswirkungen des Klimawandels zu begrenzen, müssen Anpassungsstrategien entwickelt werden, um die Widerstandsfähigkeit des Ökosystems zu erhöhen, sowie Maßnahmen zur Verhinderung des Klimawandels ergriffen werden.</p>',
+        'Der Klimawandel und wie wir damit umgehen sollten',
+        '',
+        'Klimawandel - Unaufhaltbares Grausam?');
 
 insert into lesson(id,
                    content,
