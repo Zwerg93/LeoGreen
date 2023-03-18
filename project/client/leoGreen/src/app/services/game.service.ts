@@ -1,8 +1,8 @@
-import { PlatformLocation } from '@angular/common';
+import {PlatformLocation} from '@angular/common';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, concatMap, delay, iif, of, retryWhen, Subscription, tap, throwError} from "rxjs";
+import {BehaviorSubject, concatMap, delay, iif, interval, of, retryWhen, Subscription, tap, throwError} from "rxjs";
 import {webSocket, WebSocketSubject} from "rxjs/webSocket";
-import { environment } from 'src/environments/environment';
+import {environment} from 'src/environments/environment';
 import {Game} from "../model/game";
 import {HttpService} from "./http.service";
 
@@ -11,17 +11,23 @@ import {HttpService} from "./http.service";
 })
 export class GameService {
   name ?: string;
-  socket$?: WebSocketSubject<Game>
+  socket$?: WebSocketSubject<Game | Uint8Array>
   game$: BehaviorSubject<Game | undefined> = new BehaviorSubject<Game | undefined>(undefined);
   disconnected = true
 
   private WS_URL = environment.WS_URL;
 
 
-  constructor(private http : HttpService, private platformLocation: PlatformLocation) {
+  constructor(private http: HttpService, private platformLocation: PlatformLocation) {
   }
 
-  public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined>{
+  public startWebsocket(gameId: number, name: string = "admin"): BehaviorSubject<Game | undefined> {
+    interval(30000)
+      .subscribe(() => {
+        console.info("Sending Keepalive Ping Message")
+        this.socket$?.next(new Uint8Array([0x9]))
+      });
+
     console.log(`GameService#startwebsocket(${gameId}, ${name})`)
     this.name = name;
     console.log(this.platformLocation);
@@ -45,13 +51,13 @@ export class GameService {
             )
           )
         )
-      ),  tap(() => {
-          if (this.disconnected) {
-            this.disconnected = false;
-            console.info('Successfully re-connected to the WebSocket server.');
-          }
-        })
-      ).subscribe(
+      ), tap(() => {
+        if (this.disconnected) {
+          this.disconnected = false;
+          console.info('Successfully re-connected to the WebSocket server.');
+        }
+      })
+    ).subscribe(
       (data) => this.onMessage(data, this.game$),
       (err) => console.error(err),
       () => console.warn('Connection to the WebSocket server was closed!')
@@ -59,10 +65,14 @@ export class GameService {
     return this.game$
   }
 
-  private onMessage(value: Game, game$: BehaviorSubject<Game | undefined>):void {
-    game$.next(value)
-    if (value?.state == -2){
-      this.socket$?.complete()
+  private onMessage(value: any, game$: BehaviorSubject<Game | undefined>): void {
+    console.log("Data recieved maybe a game: ", value)
+    if (value.id !== null) {
+      console.log("Data recieved was a game")
+      game$.next(value)
+      if (value?.state == -2) {
+        this.socket$?.complete()
+      }
     }
   }
 
@@ -96,5 +106,9 @@ export class GameService {
 
   startGame() {
     this.updateGameState({state: 0});
+  }
+
+  closeSocket() {
+    this.socket$?.complete();
   }
 }

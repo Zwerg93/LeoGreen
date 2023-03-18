@@ -17,7 +17,7 @@ export class QuizHostComponent implements OnInit {
 
   subscription ?: Subscription
   game?: Game;
-  qrCodeSize: number = window.innerHeight / 10;
+  qrCodeSize: number = window.innerHeight / 4;
   qrCodeLink?: string;
   private QR_URL = environment.QR_URL;
 
@@ -43,5 +43,9 @@ export class QuizHostComponent implements OnInit {
 
   startGame() {
     this.quizService.startGame()
+  }
+
+  ngOnDestroy(): void {
+    this.quizService.closeSocket()
   }
 }
