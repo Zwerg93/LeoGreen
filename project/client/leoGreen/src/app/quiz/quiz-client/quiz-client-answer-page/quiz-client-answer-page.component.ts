@@ -34,8 +34,10 @@ export class QuizClientAnswerPageComponent implements OnDestroy{
     gameService.game$.subscribe(value => {
       if (value) {
         this.game = value;
+        // updates the user_id and name for the player + gives position_id of array
+        let user_index = this.getArrayPositionOfUser();
         this.name = gameService.name;
-        this.guessed = false
+        this.guessed = (this.game.users[user_index] != undefined) ? this.game.users[user_index].hasVoted : true;
 
         if (this.game.state >= 0 && this.game.state < this.game.quiz.questions.length){
           nav.change_nav_header_content("Frage Nr. " + (this.game.state + 1));
@@ -52,7 +54,6 @@ export class QuizClientAnswerPageComponent implements OnDestroy{
   }
 
   checkAnswer(answer: String) {
-    this.getArrayPositionOfUser();
     this.guess = {
       userId: this.userId!,
       guess: answer
