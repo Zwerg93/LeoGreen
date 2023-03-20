@@ -56,7 +56,10 @@ public class PictureResource {
     @Produces({"image/png"})
     public Response downloadFile(@PathParam("fileName") String fileName) {
 
-        File file = new File("src/main/resources/img/" + fileName);
+        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        String path = (contextClassLoader.getResource("img/" + fileName)).getPath();
+        File file = new File(path);
+
         if (!file.exists()) {
             throw new RuntimeException("File not found: src/main/resources/img/" + fileName);
         }
