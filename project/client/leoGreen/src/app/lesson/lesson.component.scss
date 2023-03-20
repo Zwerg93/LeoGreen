@@ -29,6 +29,15 @@ img {
   flex-wrap: wrap;
   margin-bottom: 4vh;
 
+  &.header-row {
+    align-items: flex-end;
+    margin-bottom: 5vh;
+    > * {
+      line-height: 2.5rem;
+      margin-bottom: 0;
+    }
+  }
+
   > .col {
     flex: 1 0 auto;
     height: 100%;

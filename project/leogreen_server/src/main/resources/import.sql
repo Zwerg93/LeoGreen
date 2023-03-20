@@ -10,10 +10,16 @@ values (1,
         '',
         'Eine Übersicht über das Problem, das CO2 für uns darstellt',
         'Eine Übersicht über das Problem, das CO2 für uns darstellt',
-        'CO2');
+        'CO2'),
+       (2,
+        '',
+        'Ursachen, Auswirkungen und Handlungsoptionen',
+        'Die Ursachen, Auswirkungen des Klimawandels und unsere Handlungsoptionen',
+        'Klimawandel');
 
 insert into section(header, content, type, lesson_id)
-values ('', 'Um zu verstehen, warum CO2 und andere Treibhausgase für unseren Planeten eine wichtige Rolle spielen, kann man sich
+values ('', '', 'IMAGE', 1),
+       ('', 'Um zu verstehen, warum CO2 und andere Treibhausgase für unseren Planeten eine wichtige Rolle spielen, kann man sich
     beispielsweise die Erde ganz ohne Atmosphäre vorstellen.
 
     Unser Mond zum Beispiel hat keine Atmosphäre. Die Sonnenstrahlung heizt die Oberfläche tagsüber auf mehr als 100
@@ -40,61 +46,85 @@ values ('', 'Um zu verstehen, warum CO2 und andere Treibhausgase für unseren Pl
     Entscheidend dafür ist deren Wellenlänge. Die Strahlungsenergie wird aufgenommen und versetzt die Moleküle in
     Bewegungen, konkret in Schwingungen. Bei der Bewegung wiederum wird Energie frei, die etwa als Wärmestrahlung in
     verschiedene Richtung – circa zur Hälfte auch in Richtung Erdoberfläche – abgegeben wird.',
-        'EIGHTY',
+        'TEXT',
         1),
        ('Nur drei- oder mehratomige Moleküle wirken aufs Klima',
-    'Stickstoff und Sauerstoff, die Hauptbestandteile der Atmosphäre, interagieren in höheren Atmosphärenschichten zwar
-    ebenfalls mit Strahlung und führen beispielsweise zu den bekannten Polarlichtern. Mit Wärmestrahlung aus Richtung
-    der Erdoberfläche reagieren sie aber nicht. Nur drei- oder mehratomige Moleküle, wie Kohlenstoffdioxid oder Methan,
-    haben das Potenzial, den Planeten zu erwärmen. Für den Treibhauseffekt spielt der Großteil der Atmosphärengase daher
-    keine Rolle.
+        'Stickstoff und Sauerstoff, die Hauptbestandteile der Atmosphäre, interagieren in höheren Atmosphärenschichten zwar
+        ebenfalls mit Strahlung und führen beispielsweise zu den bekannten Polarlichtern. Mit Wärmestrahlung aus Richtung
+        der Erdoberfläche reagieren sie aber nicht. Nur drei- oder mehratomige Moleküle, wie Kohlenstoffdioxid oder Methan,
+        haben das Potenzial, den Planeten zu erwärmen. Für den Treibhauseffekt spielt der Großteil der Atmosphärengase daher
+        keine Rolle.
 
-    Den größten Effekt auf unsere stabile Temperatur hat der Wasserdampf (Wolken), der zwischen null und vier
-    Volumenprozent ausmacht – an den Polen etwa weniger, in den Tropen mehr. Er trägt daher vor allem zum natürlichen
-    Treibhauseffekt bei. Das Problem: Der Anteil von Wasserdampf in der Atmosphäre hängt von der Temperatur ab. Mehr CO2
-    führt zu steigenden Temperaturen, das führt zu mehr Wasserdampf und verstärkt den Treibhauseffekt – eine positive
-    Rückkopplung, die große Auswirkungen haben kann.
+        Den größten Effekt auf unsere stabile Temperatur hat der Wasserdampf (Wolken), der zwischen null und vier
+        Volumenprozent ausmacht – an den Polen etwa weniger, in den Tropen mehr. Er trägt daher vor allem zum natürlichen
+        Treibhauseffekt bei. Das Problem: Der Anteil von Wasserdampf in der Atmosphäre hängt von der Temperatur ab. Mehr CO2
+        führt zu steigenden Temperaturen, das führt zu mehr Wasserdampf und verstärkt den Treibhauseffekt – eine positive
+        Rückkopplung, die große Auswirkungen haben kann.
 
-    Aus diesem Grund führen höhere Konzentrationen der Treibhausgase, auch wenn sie nur wenige Volumenprozente der
-    Atmosphäre ausmachen, zu sich selbst verstärkenden Effekten – sogenannten Feedback Loops. Daraus berechnen die
-    Forscher eine um bis zu 4,5 Grad höhere Durchschnittstemperatur, wenn sich das CO2 in der Atmosphäre verdoppelt –
-    auch wenn das „nur“ weitere 0,028 Volumenprozent wären. Die Konzentration der Gase allein sagt nichts aus, denn
-    einige wenige Moleküle an CO2 können eine große Wirkung haben, viele Stickstoffmoleküle dagegen für die globale
-    Temperatur bedeutungslos bleiben.', 'EIGHTY', 1),
+        Aus diesem Grund führen höhere Konzentrationen der Treibhausgase, auch wenn sie nur wenige Volumenprozente der
+        Atmosphäre ausmachen, zu sich selbst verstärkenden Effekten – sogenannten Feedback Loops. Daraus berechnen die
+        Forscher eine um bis zu 4,5 Grad höhere Durchschnittstemperatur, wenn sich das CO2 in der Atmosphäre verdoppelt –
+        auch wenn das „nur“ weitere 0,028 Volumenprozent wären. Die Konzentration der Gase allein sagt nichts aus, denn
+        einige wenige Moleküle an CO2 können eine große Wirkung haben, viele Stickstoffmoleküle dagegen für die globale
+        Temperatur bedeutungslos bleiben.', 'TEXT', 1),
        ('Auch Methan schädigt das Klima – stärker und kurzfristiger',
-    'Die Klimawirkung anderer Treibhausgase als CO2 wird oft als ein Vielfaches der Klimawirksamkeit von CO2 angegeben.
-    Man nennt das ihr Treibhausgaspotenzial. Ein Methan-Molekül beispielsweise ist laut Intergovernmental Panel on
-    Climate Change, auch „Weltklimarat“ (IPCC), ungefähr 28-mal wirksamer als CO2. Es verbleibt etwa 12 Jahre in der
-    Atmosphäre. So hat jedes Treibhausgas seine Eigenheiten und Nachteile.
+        'Die Klimawirkung anderer Treibhausgase als CO2 wird oft als ein Vielfaches der Klimawirksamkeit von CO2 angegeben.
+        Man nennt das ihr Treibhausgaspotenzial. Ein Methan-Molekül beispielsweise ist laut Intergovernmental Panel on
+        Climate Change, auch „Weltklimarat“ (IPCC), ungefähr 28-mal wirksamer als CO2. Es verbleibt etwa 12 Jahre in der
+        Atmosphäre. So hat jedes Treibhausgas seine Eigenheiten und Nachteile.
 
-    Mehr zu den Auswirkungen von Methan auf das Klima, erklären wir hier.
+        Mehr zu den Auswirkungen von Methan auf das Klima, erklären wir hier.
 
-    CO2 hingegen kann dort bis zu 500 Jahre oder länger bleiben, bis klimawirksames CO2 über natürliche Prozesse in der
-    Tiefsee landet (ein einzelnes Molekül verweilt tatsächlich nur einige Jahre in der Atmosphäre, anschließend findet
-    ein Austausch mit CO2-Molekülen aus Ozeanen statt. Die jahrhundertelange Verweildauer bezeichnet die Zeitspanne, bis
-    natürliche Prozesse das CO2-Molekül endgültig wieder aus der Atmosphäre holen). Die Einschätzung, wie viele Jahre
-    oder gar Jahrhunderte CO2 die Klimawirkung entfaltet, gehen allerdings auseinander – sie liegen jedoch in der Regel
-    bei über 100 Jahren.', 'TEXT', 1),
+        CO2 hingegen kann dort bis zu 500 Jahre oder länger bleiben, bis klimawirksames CO2 über natürliche Prozesse in der
+        Tiefsee landet (ein einzelnes Molekül verweilt tatsächlich nur einige Jahre in der Atmosphäre, anschließend findet
+        ein Austausch mit CO2-Molekülen aus Ozeanen statt. Die jahrhundertelange Verweildauer bezeichnet die Zeitspanne, bis
+        natürliche Prozesse das CO2-Molekül endgültig wieder aus der Atmosphäre holen). Die Einschätzung, wie viele Jahre
+        oder gar Jahrhunderte CO2 die Klimawirkung entfaltet, gehen allerdings auseinander – sie liegen jedoch in der Regel
+        bei über 100 Jahren.', 'EIGHTY', 1),
        ('Und jetzt? Die CO2-Emissionen müssen langfristig sinken',
-    'Vor der industriellen Revolution war die Konzentration von CO2 deutlich geringer als heute und lag bei etwa 0,028
-    Volumenprozent. In den offiziellen Klimaprognosen berechnen Forscher, was bei bestimmten Szenarien, etwa einer
-    Verdopplung der CO2-Konzentration, in der Atmosphäre passiert. Eine Verdoppelung bis zum Ende dieses Jahrhunderts
-    könnte die Durchschnittstemperatur zwischen 1,5 und 4,5 Grad erhöhen. Auch andere klimarelevante Gase müssen in die
-    Berechnungen und damit auch die Klimadebatten mit einbezogen werden. Große Quellen für Methan können das Klima auch
-    maßgeblich verändern. So kann etwa durch das Entweichen aus Permafrostböden, die Tierhaltung, aber auch durch die
-    Tropen und andere Feuchtgebiete Methan freisetzen. Diese Prozesse müssen in Zukunft noch genauer untersucht werden.', 'TEXT', 1),
+        'Vor der industriellen Revolution war die Konzentration von CO2 deutlich geringer als heute und lag bei etwa 0,028
+        Volumenprozent. In den offiziellen Klimaprognosen berechnen Forscher, was bei bestimmten Szenarien, etwa einer
+        Verdopplung der CO2-Konzentration, in der Atmosphäre passiert. Eine Verdoppelung bis zum Ende dieses Jahrhunderts
+        könnte die Durchschnittstemperatur zwischen 1,5 und 4,5 Grad erhöhen. Auch andere klimarelevante Gase müssen in die
+        Berechnungen und damit auch die Klimadebatten mit einbezogen werden. Große Quellen für Methan können das Klima auch
+        maßgeblich verändern. So kann etwa durch das Entweichen aus Permafrostböden, die Tierhaltung, aber auch durch die
+        Tropen und andere Feuchtgebiete Methan freisetzen. Diese Prozesse müssen in Zukunft noch genauer untersucht werden.',
+        'EIGHTY', 1),
        ('Temperaturanstieg weniger als zwei Grad Celsius',
-    'Die politischen Forderungen, um eine globale Erwärmung möglichst gering zu halten, sind schon seit Jahren klar: Die
-    Emissionen müssen in den nächsten Jahren und Jahrzehnten bedeutend niedriger sein. Laut der UN-Klimakonferenz in
-    Paris haben sich die Länder darauf verständigt, die Emissionen so zu steuern, dass die Temperaturerhöhung weniger
-    als zwei Grad beträgt. Konkret bedeutet das, dass sich die einzelnen Länder ehrgeizige Ziele setzen müssen.
+        'Die politischen Forderungen, um eine globale Erwärmung möglichst gering zu halten, sind schon seit Jahren klar: Die
+        Emissionen müssen in den nächsten Jahren und Jahrzehnten bedeutend niedriger sein. Laut der UN-Klimakonferenz in
+        Paris haben sich die Länder darauf verständigt, die Emissionen so zu steuern, dass die Temperaturerhöhung weniger
+        als zwei Grad beträgt. Konkret bedeutet das, dass sich die einzelnen Länder ehrgeizige Ziele setzen müssen.
 
-    In Deutschland sinken die Emissionen kontinuierlich, müssen aber für die kommenden Jahrzehnte weitaus drastischer
-    reduziert werden.
+        In Deutschland sinken die Emissionen kontinuierlich, müssen aber für die kommenden Jahrzehnte weitaus drastischer
+        reduziert werden.
 
-    Ansatzpunkte dafür sind klimaneutrale Energieerzeugung, weniger Verkehrs- und Industrieabgase, ökologischere Formen
-    der Landwirtschaft und auch ein anderes Konsumverhalten. Immer wieder im Gespräch ist auch eine CO2-Steuer.', 'TEXT', 1);
+        Ansatzpunkte dafür sind klimaneutrale Energieerzeugung, weniger Verkehrs- und Industrieabgase, ökologischere Formen
+        der Landwirtschaft und auch ein anderes Konsumverhalten. Immer wieder im Gespräch ist auch eine CO2-Steuer.',
+        'TEXT', 1);
 
+insert into section(header, content, type, lesson_id)
+values ('', '', 'IMAGE', 2),
+       ('',
+        'Der Klimawandel ist eines der dringendsten und komplexesten Probleme unserer Zeit. Die Erderwärmung und ihre Folgen sind nicht nur in entlegenen Gebieten wie den Polargebieten spürbar, sondern betreffen uns alle direkt. Dürren, Überschwemmungen, Hitzewellen und Naturkatastrophen nehmen weltweit zu und stellen uns vor enorme Herausforderungen. In diesem Artikel möchten wir die Ursachen, Auswirkungen und Handlungsoptionen des Klimawandels beleuchten.',
+        'TEXT',
+        2),
+       ('Ursachen des Klimawandels',
+        'Die Erderwärmung wird durch den Ausstoß von Treibhausgasen verursacht, die hauptsächlich durch menschliche Aktivitäten wie die Verbrennung fossiler Brennstoffe, die Landwirtschaft und die Industrie entstehen. Die wichtigsten Treibhausgase sind Kohlendioxid (CO2), Methan (CH4) und Lachgas (N2O). Die steigenden CO2-Emissionen führen dazu, dass sich die Atmosphäre erwärmt und das Klima verändert. Auch die Abholzung von Wäldern und die Zerstörung von Feuchtgebieten trägt zum Klimawandel bei, da dadurch weniger CO2 aufgenommen wird.',
+        'EIGHTY',
+        2),
+       ('Auswirkungen des Klimawandels',
+        'Die Auswirkungen des Klimawandels sind bereits spürbar und betreffen uns alle. Dazu gehören zunehmende Hitzewellen, Dürren, Waldbrände und Überschwemmungen. Auch der Anstieg des Meeresspiegels und das Schmelzen von Gletschern und Polareis haben weitreichende Auswirkungen auf Ökosysteme und den Lebensraum von Menschen und Tieren. Insbesondere in ärmeren Ländern und Regionen sind die Auswirkungen des Klimawandels besonders gravierend, da sie oft nicht über ausreichende Ressourcen verfügen, um sich anzupassen.',
+        'TEXT',
+        2),
+       ('Handlungsoptionen gegen den Klimawandel',
+        'Um den Klimawandel zu stoppen oder zumindest zu verlangsamen, müssen wir die Ursachen bekämpfen und unsere Lebensweise nachhaltiger gestalten. Dazu gehören Maßnahmen wie der Ausbau erneuerbarer Energien, die Förderung von Elektromobilität, die Verbesserung der Energieeffizienz von Gebäuden und die Umstellung auf eine klimafreundlichere Landwirtschaft. Auch der Schutz von Wäldern und Feuchtgebieten und die Anpassung an den Klimawandel sind wichtige Maßnahmen. In der Bildung spielt die Sensibilisierung für den Klimawandel und die Vermittlung von Handlungsoptionen eine wichtige Rolle. Schulen und Bildungseinrichtungen haben eine Verantwortung, das Bewusstsein für den Klimawandel zu schärfen und Schülerinnen und Schüler zu ermutigen, aktiv zu werden. Die Fridays-for-Future-Bewegung hat gezeigt, dass viele junge Menschen bereit sind, für den Klimaschutz zu kämpfen und politischen Druck auszuüben.',
+        'TEXT',
+        2),
+       ('Fazit',
+        'Zusammenfassend kann gesagt werden, dass der Klimawandel eine der größten Herausforderungen unserer Zeit darstellt und dringende Handlungsbedarf erfordert. Die Ursachen des Klimawandels sind vor allem auf den Ausstoß von Treibhausgasen durch menschliche Aktivitäten zurückzuführen. Die Auswirkungen des Klimawandels sind bereits spürbar und betreffen uns alle, insbesondere jedoch Menschen in ärmeren Ländern und Regionen. Um den Klimawandel zu bekämpfen, sind Maßnahmen wie der Ausbau erneuerbarer Energien, die Förderung von Elektromobilität und die Umstellung auf eine nachhaltigere Landwirtschaft erforderlich. Eine wichtige Rolle spielt auch die Bildung und Sensibilisierung für den Klimawandel. Die Fridays-for-Future-Bewegung zeigt, dass viele junge Menschen bereit sind, für den Klimaschutz zu kämpfen und politischen Druck auszuüben. Es liegt nun an uns allen, gemeinsam und entschlossen zu handeln, um den Klimawandel zu bekämpfen und eine lebenswerte Zukunft für kommende Generationen zu sichern.',
+        'TEXT',
+        2);
 
 insert into question(id, title, quiz_id)
 values (3,
@@ -206,12 +236,21 @@ values ('http://localhost:8080/picture/get/img_1.png',
         'Placeholder');
 
 insert into picture (name, altText, section_id)
-values ('globe.png',
-        'Globus in einer Wiese',
+values ('fabrikschlote.png',
+        'Fabrik',
         1),
+       ('methan.png',
+        'Kuh Methan',
+        4),
+       ('carbon_cycle.png',
+        'CO2 Kreislauf',
+        5),
+       ('globe.png',
+        'Globus in einer Wiese',
+        7),
        ('treibhauseffekt.png',
         'Darstellung Treibhauseffekt',
-        2);
+        9);
 
 insert into tag (tag, question_id)
 values ('Energie', 4),

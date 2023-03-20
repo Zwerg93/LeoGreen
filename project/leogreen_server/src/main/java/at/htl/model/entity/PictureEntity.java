@@ -1,11 +1,13 @@
 package at.htl.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+
 @Entity
 @Table(name = "Picture")
 @Getter
@@ -19,6 +21,7 @@ public class PictureEntity {
     public String altText;
     @ManyToOne
     @JoinColumn(name = "section_id")
+    @JsonIgnore
     SectionEntity section;
 
     public PictureEntity(String name, String altText, SectionEntity section) {

@@ -26,6 +26,7 @@ public class LessonEntity {
     @Column(length = 1000000)
     String content;
     @OneToMany(mappedBy = "lesson")
+    @ToString.Exclude
     List<SectionEntity> sections;
 
     public LessonEntity(Long id, String title, String description, String summary, String content) {
