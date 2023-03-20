@@ -138,10 +138,10 @@ values (3,
         1);
 
 insert into answer(id, answer, question_id)
-values (7, '11500', 3),
-       (8, '5200', 3),
-       (9, '43000', 3),
-       (10, '760', 3);
+values (7, '11500 km²', 3),
+       (8, '5200 km²', 3),
+       (9, '43000 km²', 3),
+       (10, '760 km²', 3);
 
 update question
 set correct_answer = 7
@@ -210,10 +210,10 @@ values (8,
         1);
 
 insert into answer(id, answer, question_id)
-values (27, '100', 8),
-       (28, '1.000', 8),
-       (29, '10.000', 8),
-       (30, '100.000', 8);
+values (27, '100 Bäume', 8),
+       (28, '1.000 Bäume', 8),
+       (29, '10.000 Bäume', 8),
+       (30, '100.000 Bäume', 8);
 
 update question
 set correct_answer = 29
