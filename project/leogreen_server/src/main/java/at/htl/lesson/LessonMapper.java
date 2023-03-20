@@ -17,13 +17,24 @@ public interface LessonMapper {
     LessonMapper INSTANCE = Mappers.getMapper(LessonMapper.class);
 
     @Mapping(source = "sections", target = "sections", qualifiedByName = "sectionsFromEntity")
+    @Mapping(source = "quiz", target = "quizId", qualifiedByName = "quizFromEntity")
     Lesson lessonFromEntity(LessonEntity le);
     Section sectionFromEntity(SectionEntity section);
 
     @Mapping(source = "sections", target = "sections", qualifiedByName = "sectionsToEntity")
+    @Mapping(source = "quizId", target = "quiz", qualifiedByName = "quizToEntity")
     LessonEntity lessonToEntity(Lesson l);
     SectionEntity sectionToEntity(Section section);
 
+
+    @Named("quizFromEntity")
+    static long quizFromEntity(QuizEntity quiz) {
+        return quiz.getId();
+    }
+    @Named("quizToEntity")
+    static QuizEntity quizToEntity(long quizId) {
+        return null;
+    }
 
     @Named("sectionsFromEntity")
     static List<Section> sectionsFromEntity(List<SectionEntity> sectionEntities) {

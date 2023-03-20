@@ -11,4 +11,6 @@ public class Lesson {
     String description;
     String summary;
     List<Section> sections;
+
+    long quizId;
 }
