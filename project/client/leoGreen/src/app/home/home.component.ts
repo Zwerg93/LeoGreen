@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     this.http.getAllCards().subscribe((c:Card[])=>{
       this.data.cards = c;
       this.cards = c;
-      console.log(this.data.cards.length)
+      console.log(this.data.cards)
 
     })
   }

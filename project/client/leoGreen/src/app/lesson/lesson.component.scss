@@ -43,6 +43,15 @@ img {
       flex-basis: calc(25% - $mr);
     }
 
+    &.col-40 {
+      flex-basis: calc(40% - $mr);
+    }
+
+
+    &.col-60 {
+      flex-basis: calc(60% - $mr);
+    }
+
     &.col-75 {
       flex-basis: calc(75% - $mr);
     }

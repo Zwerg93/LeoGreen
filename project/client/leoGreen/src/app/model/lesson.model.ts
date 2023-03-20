@@ -12,7 +12,7 @@ export interface Lesson {
 export interface Section {
   header: string
   content: string
-  images: Image[]
+  pictures: Image[]
   type: SectionType
 }
 

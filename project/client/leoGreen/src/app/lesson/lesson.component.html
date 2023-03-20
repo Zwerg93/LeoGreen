@@ -6,24 +6,24 @@
 
   <ng-container *ngIf="lesson.sections && lesson.sections.length > 0; else noSections">
     <div class="row" *ngFor="let section of lesson.sections">
-      <h2>{{section.header}}</h2>
+      <h2 class="col col-100">{{section.header}}</h2>
       <ng-container [ngSwitch]="section.type">
         <ng-container *ngSwitchCase="'TEXT'">
           <div class="col col-100 text">{{section.content}}</div>
         </ng-container>
         <ng-container *ngSwitchCase="'IMAGE'">
           <div class="col col-80 col-img">
-            <img class="vertical" [src]="'assets/' + section.images[0] + '.png'" alt="Placeholder">
+            <img class="vertical" [src]="url + section.pictures[0].name" [alt]="section.pictures[0].altText">
           </div>
-          <div class="col col-20 col-img">
-            <img class="horizontal" [src]="'assets/' + section.images[1] + '.png'" alt="Placeholder">
+          <div class="col col-20 col-img" *ngIf="section.pictures[1]">
+            <img class="horizontal" [src]="url + section.pictures[1].name" [alt]="section.pictures[1].altText">
           </div>
         </ng-container>
         <ng-container *ngSwitchDefault>
-          <div class="col col-20 col-img">
-            <img class="horizontal" [src]="'assets/' + section.images[0] + '.png'" alt="Placeholder">
+          <div class="col col-60 text">{{section.content}}</div>
+          <div class="col col-40 col-img">
+            <img class="vertical" [src]="url + section.pictures[0].name" [alt]="section.pictures[0].altText">
           </div>
-          <div class="col col-80 text">{{section.content}}</div>
         </ng-container>
       </ng-container>
     </div>

@@ -20,10 +20,14 @@ export class LessonCardComponent implements OnInit {
 
   ngOnInit(): void {
 
+    const card = this.cards?.filter((card) => {
+      return card.id === this.id;
+    }).at(0);
+
     // @ts-ignore
-    this.title = this.cards[this.id-1].title;
+    this.title = card.title;
     // @ts-ignore
-    this.description = this.cards[this.id-1].description;
+    this.description = card.description;
   }
 
 }

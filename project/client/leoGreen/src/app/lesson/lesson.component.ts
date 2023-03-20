@@ -14,12 +14,14 @@ export class LessonComponent implements OnInit {
   images: Image[] = [];
   lessons?: Lesson[];
   id?: number;
-  summary?: String;
+  summary?: string;
+  url: string = '';
 
   constructor(private route: ActivatedRoute, private http: HttpService) {
   }
 
   ngOnInit(): void {
+    this.url = this.http.getImageURL();
     this.loadLessons();
     this.loadImages();
 

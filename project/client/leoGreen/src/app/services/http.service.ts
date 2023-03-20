@@ -46,4 +46,7 @@ export class HttpService {
     return this.http.get<Statistics[]>(`${this.API_URL}/game/statistic/${gameId}`);
   }
 
+  getImageURL(): string {
+    return this.API_URL + '/picture/get/';
+  }
 }
