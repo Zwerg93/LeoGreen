@@ -52,4 +52,4 @@
   </ng-template>
 </div>
 
-<app-quiz></app-quiz>
+<app-quiz *ngIf="lessons && id && getLesson(id) as lesson" [quiz-id]="lesson.quizId"></app-quiz>

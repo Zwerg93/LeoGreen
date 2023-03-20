@@ -1,21 +1,25 @@
 insert into quiz(id, topic)
-values (1, 'CO2-Quiz');
+values (1, 'CO2-Quiz'),
+       (2, 'Klimawandel');
 
 insert into lesson(id,
                    content,
                    description,
                    summary,
-                   title)
+                   title,
+                   quiz_id)
 values (1,
         '',
         'Eine Übersicht über das Problem, das CO2 für uns darstellt',
         'Eine Übersicht über das Problem, das CO2 für uns darstellt',
-        'CO2'),
+        'CO2',
+        1),
        (2,
         '',
         'Ursachen, Auswirkungen und Handlungsoptionen',
         'Die Ursachen, Auswirkungen des Klimawandels und unsere Handlungsoptionen',
-        'Klimawandel');
+        'Klimawandel',
+        2);
 
 insert into section(header, content, type, lesson_id)
 values ('', '', 'IMAGE', 1),
@@ -126,6 +130,8 @@ values ('', '', 'IMAGE', 2),
         'TEXT',
         2);
 
+
+-- QUIZ 1
 insert into question(id, title, quiz_id)
 values (3,
         'Wie viele Quadratkilometer wurden 2022 im Amazonasgebiet abgeholzt?',
@@ -167,8 +173,6 @@ values (15, '2 Mal', 5),
 update question
 set correct_answer = 18
 where id = 5;
-
-
 
 insert into question(id, title, quiz_id)
 values (6,
@@ -231,6 +235,124 @@ set correct_answer = 33
 where id = 9;
 
 
+-- QUIZ 2
+insert into question(id, title, quiz_id)
+values (10,
+        'Was ist der Hauptverursacher des Klimawandels?',
+        2);
+insert into answer(id, answer, question_id)
+values (35, 'Die Sonne', 10),
+       (36, 'Vulkanausbrüche', 10),
+       (37, 'Menschliche Aktivitäten', 10),
+       (38, 'Natürliche Schwankungen', 10);
+update question
+set correct_answer = 37
+where id = 10;
+
+insert into question(id, title, quiz_id)
+values (11,
+        'Welche Folgen hat der Klimawandel auf die Meere?',
+        2);
+insert into answer(id, question_id, answer)
+values (39, 11, 'Erhöhung des pH-Werts'),
+       (40, 11, 'Erhöhung der Salzgehalte'),
+       (41, 11, 'Erhöhung der Artenvielfalt'),
+       (42, 11, 'Erhöhung der Wassertemperaturen');
+update question
+set correct_answer = 42
+where id = 11;
+
+insert into question(id, title, quiz_id)
+values (12,
+        'Was kann man tun, um den Klimawandel zu stoppen?',
+        2);
+insert into answer(id, question_id, answer)
+values (43, 12, 'Mehr Fleisch essen'),
+       (44, 12, 'Öfter fliegen'),
+       (45, 12, 'Auf erneuerbare Energien umsteigen'),
+       (46, 12, 'Weniger Wasser trinken');
+update question
+set correct_answer = 45
+where id = 12;
+
+insert into question(id, title, quiz_id)
+values (13,
+        'Welche Maßnahmen können wir ergreifen, um den CO2-Ausstoß zu reduzieren?',
+        2);
+insert into answer(id, question_id, answer)
+values (47, 13, 'Verzicht auf Plastiktüten'),
+       (48, 13, 'Verwendung von Energiesparlampen'),
+       (49, 13, 'Nutzung von öffentlichen Verkehrsmitteln'),
+       (50, 13, 'Rauchen aufhören');
+update question
+set correct_answer = 49
+where id = 13;
+
+insert into question(id, title, quiz_id)
+values (14,
+        'Was ist das Ziel des Pariser Abkommens von 2015?',
+        2);
+insert into answer(id, question_id, answer)
+values (51, 14, 'Begrenzung der globalen Erwärmung auf unter 1,5 Grad Celsius'),
+       (52, 14, 'Förderung von Kohle als Energiequelle'),
+       (53, 14, 'Reduzierung der erneuerbaren Energien'),
+       (54, 14, 'Verstärkung von Naturkatastrophen');
+update question
+set correct_answer = 51
+where id = 14;
+
+insert into question(id, title, quiz_id)
+values (15,
+        'Was ist die Bedeutung von Bäumen im Kampf gegen den Klimawandel? Sie ...',
+        2);
+insert into answer(id, question_id, answer)
+values (55, 15, 'produzieren Sauerstoff'),
+       (56, 15, 'speichern Kohlenstoff'),
+       (57, 15, 'verstärken den Treibhauseffekt'),
+       (58, 15, 'reduzieren Luftverschmutzung');
+update question
+set correct_answer = 56
+where id = 15;
+
+insert into question(id, title, quiz_id)
+values (16,
+        'Welche Maßnahmen können dazu beitragen, den Klimawandel zu stoppen?',
+        2);
+insert into answer(id, question_id, answer)
+values (59, 16, 'Verzehr von Fleisch'),
+       (60, 16, 'Vermeidung von Plastik'),
+       (61, 16, 'Förderung des Autoverkehrs'),
+       (62, 16, 'Verwendung von Einwegbechern');
+update question
+set correct_answer = 60
+where id = 16;
+
+insert into question(id, title, quiz_id)
+values (17,
+        'Welche Rolle spielen die Meere im Klimawandel? Sie ...',
+        2);
+insert into answer(id, question_id, answer)
+values (63, 17, 'nehmen CO2 auf'),
+       (64, 17, 'heizen sich auf'),
+       (65, 17, 'haben keinen Einfluss'),
+       (66, 17, 'sind nur in geringem Maße beteiligt');
+update question
+set correct_answer = 63
+where id = 17;
+
+insert into question(id, title, quiz_id)
+values (18,
+        'Was sind die Folgen des Klimawandels für die Biodiversität?',
+        2);
+insert into answer(id, question_id, answer)
+values (67, 18, 'keine Auswirkungen'),
+       (68, 18, 'Tier- und Pflanzenarten sterben aus'),
+       (69, 18, 'Sie wird gestärkt'),
+       (70, 18, 'keine Auswirkungen auf die Tierwelt');
+update question
+set correct_answer = 68
+where id = 18;
+
 insert into picture (name, altText)
 values ('http://localhost:8080/picture/get/img_1.png',
         'Placeholder');
@@ -261,6 +383,32 @@ values ('Energie', 4),
        ('Emissionen', 8),
        ('Umwelt', 9),
        ('Umwelt', 3);
+
+insert into tag (tag, question_id)
+values ('Klimawandel', 10),
+       ('Klimawandel', 12),
+       ('Klimawandel', 15),
+       ('Klimawandel', 16),
+       ('Klimawandel', 18),
+       ('Mensch', 10),
+       ('Mensch', 13),
+       ('Mensch', 18),
+       ('Meer', 11),
+       ('Meer', 17),
+       ('Folgen', 11),
+       ('Folgen', 17),
+       ('Folgen', 18),
+       ('Nachhaltigkeit', 12),
+       ('Nachhaltigkeit', 13),
+       ('Nachhaltigkeit', 14),
+       ('Nachhaltigkeit', 16),
+       ('Emissionen', 10),
+       ('Emissionen', 17),
+       ('Emissionen', 15),
+       ('Emissionen', 11),
+       ('Emissionen', 14),
+       ('CO2', 13),
+       ('CO2', 15);
 
 insert into game(state, quiz_id)
 values (-2, 1);

@@ -6,7 +6,8 @@ export interface Lesson {
   description: string,
   summary: string,
   content: String,
-  sections: Section[]
+  sections: Section[],
+  quizId: number
 }
 
 export interface Section {

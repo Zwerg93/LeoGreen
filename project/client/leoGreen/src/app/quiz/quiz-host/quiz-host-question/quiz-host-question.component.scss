@@ -5,8 +5,12 @@
 }
 
 .question {
-  width: 65vw;
-  grid-template-columns: 100% 25%;
+  width: 100%;
+  grid-template-columns: 100%;
+
+  .qheader {
+    width: 65vh;
+  }
 }
 
 .text {
@@ -14,14 +18,14 @@
 
   h1 {
     font-weight: 800;
-    font-size: 3rem;
-    line-height: 3.3rem;
+    font-size: 2rem;
+    line-height: normal;
   }
 
   h2 {
     font-weight: 500;
-    font-size: 2.5rem;
-    line-height: 2.75rem;
+    font-size: 1.5rem;
+    line-height: normal;
     margin-top: 2rem;
   }
 }
@@ -29,9 +33,7 @@
 .answers {
   grid-area: answers;
 }
-.qheader{
-  height: 35vh;
-}
+
 .btnsection{
   width: 90vw;
   height: 10vh;
@@ -67,14 +69,13 @@
 
   > .text {
     display: inline-block;
-    min-font-size: 1.6rem;
     font-weight: bold;
     position: absolute;
-    right: 10%;
-    max-width: 40%;
-    font-size: 2rem;
-    line-height: 2.2rem;
-    text-align: right;
+    right: 8%;
+    width: 50%;
+    font-size: 1.2rem;
+    line-height: normal;
+    text-align: left;
   }
 
   > .shape {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {GameService} from "../services/game.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -8,7 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent {
-
+  @Input('quiz-id') quizId?: number;
   constructor() {}
 
 }

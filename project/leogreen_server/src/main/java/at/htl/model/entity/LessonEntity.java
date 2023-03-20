@@ -8,6 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
+
 @Entity
 @Table(name = "Lesson")
 @Getter
@@ -28,6 +29,10 @@ public class LessonEntity {
     @OneToMany(mappedBy = "lesson")
     @ToString.Exclude
     List<SectionEntity> sections;
+
+    @OneToOne
+    @JoinColumn(name = "quiz_id")
+    QuizEntity quiz;
 
     public LessonEntity(Long id, String title, String description, String summary, String content) {
         this.id = id;
