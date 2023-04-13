@@ -1,6 +1,7 @@
 insert into quiz(id, topic)
 values (1, 'CO2-Quiz'),
-       (2, 'Klimawandel');
+       (2, 'Klimawandel'),
+       (3, 'Project Award');
 
 insert into lesson(id,
                    content,
@@ -19,7 +20,13 @@ values (1,
         'Ursachen, Auswirkungen und Handlungsoptionen',
         'Die Ursachen, Auswirkungen des Klimawandels und unsere Handlungsoptionen',
         'Klimawandel',
-        2);
+        2),
+       (3,
+        '',
+        'Die HTL Leonding und ihre Fakten',
+        'Die Daten, Fakten und Abteilungen der HTL Leonding. Eine Lesson für den Project Award',
+        'Projectaward',
+        3);
 
 insert into section(header, content, type, lesson_id)
 values ('', '', 'IMAGE', 1),
@@ -130,6 +137,30 @@ values ('', '', 'IMAGE', 2),
         'TEXT',
         2);
 
+insert into section(header, content, type, lesson_id)
+values ('', '', 'TEXT', 3),
+       ('Informatik',
+        'Die höhere Abteilung für Informatik vereint eine EDV-technische mit einer betriebswirtschaftlichen Ausbildung. Sie qualifiziert die Absolventen für ein breites Einsatzspektrum in Industrie und Wirtschaft. Zahlreiche Kooperationen mit Unternehmen in Form von Projekten ergänzen die Ausbildung. Die Ausbildung umfasst Fachgebiete wie Software-Engineering, Datenbanken & Informationssysteme, Computer-Architektur, Netzwerksysteme, Betriebssysteme, Projektentwicklung, Betriebswirtschaft und Robotik. Seit dem Schuljahr 2021/22 wurde die Ausbildung um einen Schwerpunkt in den Bereichen Cyber-Security, Data-Science sowie Artificial Intelligence erweitert.',
+        'EIGHTY',
+        3),
+       ('IT-Medientechnik',
+        'Für moderne Computeranwendungen wird multimedialer Inhalt benötigt. Dabei ist aber nicht nur der technische Hintergrund wichtig, sondern auch der gestalterische Aspekt. Im Medientechnik-Zweig werden alle informationstechnischen Kenntnisse, die für die multimediale Computerwelt benötigt werden, gelehrt. Dabei werden der Entwurf und die Erstellung von Bild-, Audio- und Videoproduktionen genauso behandelt wie die Gestaltung von Benutzeroberflächen für Computeranwendungen, 3D-Darstellungen und 3D-Animationen oder die Entwicklung von Computerspielen. Betriebswirtschaftliche und rechtliche Inhalte runden die Ausbildung ab. Seit dem Schuljahr 2021/22 wurde die Ausbildung um einen Schwerpunkt im Bereich der IT-Security erweitert.',
+        'EIGHTY',
+        3),
+       ('Elektronik und Technische Informatik',
+        'Die Ausbildung im Bereich Elektronik und Technische Informatik vereint Hard- und Softwareentwicklung auf breiter Basis. Sie befähigt die Absolventen elektronische Systeme für Industrie und Wirtschaft entwerfen und programmieren zu können. Ab dem vierten Jahrgang werden Projekte aus den unterschiedlichsten Bereichen realisiert. Die Gegenstände der Ausbildung sind praxisnah gehalten. Die Basis bilden elektronische Grundlagen, wesentliche Bauelemente und deren Einsatz in der Schaltungstechnik. Ergänzt wird dies durch eine Ausbildung in den Labors und Werkstätten, wie beispielsweise dem Prototypenbau.',
+        'EIGHTY',
+        3),
+       ('Biomedizin- und Gesundheitstechnik',
+        'Die Biomedizinische Technik ist eine Kombination aus Elektronik, medizinischen Grundlagen und Software. In der Medizintechnik werden sowohl fundierte Kenntnisse in den Bereichen Hardware und Software als auch medizinisches Fachwissen über Aufbau und Funktion des menschlichen Körpers vermittelt. Gesundheitsmechatronik, bildgebende Systeme (z. B. Ultraschall, MR, CT), medizinische Gerätetechnik und Medizininformatik sind dabei tragende Schwerpunkte des Ausbildungszweiges.
+        Zur Anwendung kommt die Medizintechnik in Arztpraxen, Krankenhäusern, Rehabilitationszentren und Labors. Außerdem werden medizintechnische Geräte vermehrt auch im Sport und im Bereich Wellness eingesetzt. Der medizintechnische Bereich weist ein rasantes Wachstum auf und bietet interessante und vielfältige berufliche Einsatzmöglichkeiten.',
+        'EIGHTY',
+        3),
+       ('Geschichte',
+        'Die Schule wurde 1984 eröffnet, anfänglich für den Nachrichtentechnik/Elektronik-Zweig. Seit 1985 besteht der Informatik-Zweig.
+        Aus Platzmangel im Schulgebäude in Leonding mussten erstmals 1997/1998 Schüler disloziert im BRG Traun untergebracht werden. Daraus entstand in weiterer Folge die Expositur und später eigenständige HTBLA Traun. Auch die HTL Perg und die FH Hagenberg entwickelten sich aus der HTL Leonding. Das Stammhaus in Leonding wurde 2001/2002 renoviert und erweitert.',
+        'TEXT',
+        3);
 
 -- QUIZ 1
 insert into question(id, title, quiz_id)
@@ -372,7 +403,23 @@ values ('fabrikschlote.png',
         7),
        ('treibhauseffekt.png',
         'Darstellung Treibhauseffekt',
-        9);
+        9),
+       ('htllogo.png',
+        'HTL-Logo',
+        10),
+       ('Abteilungen_informatik_sse.jpg',
+        'Informatil-Logo',
+        14),
+       ('Abteilungen_Medientechnik_CS.jpg',
+        'Medientchnik-Logo',
+        15),
+       ('medizintechniklogo.png',
+        'Medizintechnik-Logo',
+        17),
+       ('Elektronik.png',
+        'HTL-Logo',
+        16)
+;
 
 insert into tag (tag, question_id)
 values ('Energie', 4),

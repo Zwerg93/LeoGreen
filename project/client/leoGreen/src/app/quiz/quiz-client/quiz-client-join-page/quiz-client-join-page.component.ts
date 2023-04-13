@@ -57,10 +57,10 @@ export class QuizClientJoinPageComponent {
           this.router.navigate(['/quiz/client-answer'])
         } else {
           sessionStorage.removeItem('game');
-          this.snackBar.open("Could not connect to quiz", undefined, {
-              duration: 5 * 1000
-            }
-          )
+          //this.snackBar.open("Could not connect to quiz", undefined, {
+          //    duration: 5 * 1000
+          //  }
+        //  )
         }
       }
     )
